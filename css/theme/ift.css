@@ -14,18 +14,6 @@ body {
   background-color: white; 
 }
 
-.reveal .slides p + p {
-  margin-top: 40px;
-}
-
-.reveal .slides {
-  text-align: start;
-}
-
-.reveal .slides .center {
-  text-align: center;
-}
-
 .reveal {
   font-family: "Nobile", sans-serif;
   font-size: 36px;
@@ -173,3 +161,21 @@ body {
   color: #ff7d00;
 }
 
+.reveal .slides .transition th,
+.reveal .slides .transition td
+{
+  padding:5px 25px;
+}
+
+
+.reveal .slides p + p {
+  margin-top: 40px;
+}
+
+.reveal .slides {
+  text-align: start;
+}
+
+.reveal .slides .center {
+  text-align: center;
+}
