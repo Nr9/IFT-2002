@@ -41,7 +41,7 @@
 				<section class="center">
 					<h2>IFT-2002</h2>
 					<h1>Informatique Théorique</h1>
-					<h4>H14 - cours 2</h4>
+					<h4>H14 - cours 3</h4>
 					<br/>
 					<p>
 						<small>Julien Marcil - <a href="mailto:julien.marcil@ift.ulaval.ca">julien.marcil@ift.ulaval.ca</a></small>
@@ -55,112 +55,14 @@
 				</section>
 
 				<section>
-					<h2>Ensembles dénombrables et non dénombrables</h2>
-					<p>
-						Un ensemble $S$ est <strong>dénombrable</strong> ssi on peut donner une méthode pour énumérer ses éléments de telle sorte que n’importe quel élément soit nommé après un nombre fini d’étapes.					
-					</p>
-					<p>
-						Il existe donc une bijection $ f : \mathbb{N} \to S $. 
-					</p>
-				</section>
-
-				<section>
-					<section>
-						<h3>Théorème</h3>
-						<p>
-							Soit un ensemble $S$ (fini ou infini).
-						</p>
-						<p>
-							$$ \left\vert{S}\right\vert &lt; \left\vert{\mathcal P(S)}\right\vert $$
-						</p>	
-					</section>
-					<section>
-						<h2>Ensemble puissance</h2>
-						<p>
-							L’ensemble puissance de $A$, noté $\mathcal P(A)$, est l’ensemble de tous les sous-ensembles de $A$.
-						</p>
-						<p>
-							$$\mathcal P(A) = \{E \mid E \subseteq A\}$$
-						</p>
-						<p>
-							\[\begin{aligned}
-								\mathcal P(\{0,2,4\}) =  \{ &amp;\emptyset,\{0\},\{2\},\{4\}, \\ 
-														    &amp; \{0,2\},\{2,4\},\{0,4\},\{0,2,4\}\}
-							\end{aligned} \]
-						</p>
-					</section>
-				</section>
-
-				<section>
-					<h2>Langage</h2>
+					<h2>Langage régulier</h2>
 					<p>
 						<b>Définition:</b>
-						Un <strong>langage</strong> sur un alphabet $\Sigma$ est un sous-ensemble de l’ensemble $\Sigma^*$.
-					</p>
-				</section>
-
-				<section>
-					<h2>Langage</h2>
-					<p>
-						Considérons les machines $M$ dont les entrées sont un mot d’un alphabet $\Sigma$ et dont la sortie est $0$&nbsp;ou&nbsp;$1$.
+						Un langage est dit <strong>régulier</strong> s’il existe un automate fini déterministe qui le reconnaît.
 					</p>
 					<p>
-					$$ 
-					\begin{align}
-						\text{Entrée} 
-						\longrightarrow &amp;
-						\boxed{M}&amp;
-						\longrightarrow  &amp;
-						\text{Sortie} \\
-
-						\Sigma^*
-						\longrightarrow &amp;
-						f : \Sigma^* \to \{0,1\} &amp;
-						\longrightarrow &amp;
-						 \{0,1\}
-					\end{align}
-					$$
+						Une façon de montrer qu’un langage est régulier est de construire un automate qui reconnaît ce langage.
 					</p>
-					<p>
-						On peut aussi dire que la machine <strong>accepte</strong> ou <strong>rejette</strong> son entrée.
-					</p>					
-				</section>
-
-				<section>
-					<h2>Langage d'une machine</h2>
-					<p>
-						<b>Définition:</b>
-						L’ensemble des mots acceptés par la machine $M$ est le <strong>langage de $M$</strong> que l’on notera $L(M)$
-					</p>					
-					<p>
-						$$ L(M) \in \mathcal P(\Sigma^*) $$
-					</p>
-				</section>
-
-				<section>
-					<section>
-						<h2>Théorème</h2>
-						<p>
-							Il existe une fonction que votre langage de programmation favori ne peut calculer.
-						</p>
-					</section>
-					<section>
-						<h2>Démonstration</h2>
-						<ul>
-							<li>
-								On va montrer d’une part que le nombre de programmes est infini et dénombrable.
-							</li>
-							<li>
-								Ensuite que le nombre de fonctions $f : \mathbb N \to \{0,1\}$ est non-dénombrable.
-							</li>
-						</ul>
-					</section>
-					<section>
-						<h2>Conclusion</h2>
-						<p>
-							L’ensemble des  programmes que l’on peut écrire est dénombrable. Donc, il existe un nombre infini non-dénombrable de fonctions pour lesquelles il n’existe aucun programme capable de les calculer.
-						</p>
-					</section>	
 				</section>
 
 				<section>
@@ -178,149 +80,19 @@
 					</p>
 				</section>
 
-				<section>
-					<h2>Aujourd'hui</h2>
-					<ul>
-						<li>Langage régulier</li>
-						<li>Automates finis non déterministes</li>
-					</ul>
-				</section>
-
-				<!-- ************************ Langage régulier ************************* -->
-
-				<section class="center" data-background="#007777">
-					<h1 class="title">Langage régulier</h1>
-				</section>
 
 				<section>
-					<h2>Langage régulier</h2>
+					<h2>Opérations</h2>
 					<p>
-						<b>Définition:</b>
-						Un langage est dit <strong>régulier</strong> s’il existe un automate fini déterministe qui le reconnaît.
+						Soit les languages $A$ et $B$. Nous définissons les opérations suivantes:
 					</p>
 					<p>
-						Une façon de montrer qu’un langage est régulier est de construire un automate qui reconnaît ce langage.
+						<ul>
+							<li><strong>Union</strong>&nbsp;: $A \cup B = \{ x \mid x \in A \ \text{ou} \ x \in B\}$</li>
+							<li><strong>Concaténation</strong>&nbsp;: $A \circ B = \{ xy \mid x \in A, \ y \in B\}$</li>
+							<li><strong>Étoile</strong>&nbsp;: $A^* = \{ x_1x_2\dots x_k \mid k \ge 0, \ x_i \in A \}$</li>
+						</ul>
 					</p>
-				</section>
-
-				<section>
-					<section>
-						<h2>Example</h2>
-						<p>
-							Soit l’automate fini déterministe $M$ suivant.
-							<img src="img/fsm7.png" alt="Diagrammes de transitions déterministe">
-						</p>
-						<p>
-							Quel est le langage reconnu par l’automate fini déterministe $M$?
-						</p>
-					</section>
-					<section>
-						<p>
-							Les séquences acceptées ont un ou plusieurs $b$, suivis d’un seul $a$, suivi de zéro ou plusieurs $b$. Donc,
-							$$ L(M) = \{b^mab^n \mid m \in \mathbb N^+, n \in \mathbb N\} $$
-						</p>
-						<p>
-							Ce langage est donc régulier.
-						</p>
-					</section>
-				</section>
-
-				<section>
-					<h2>Exercice</h2>
-					<p>
-						Quel est le langage reconnu par l’automate fini déterministe suivant?
-						<img src="img/fsm8.png" alt="Diagrammes de transitions déterministe">
-					</p>
-					<aside class="notes">
-						$L(M) = {a2, b, aba, abbb,abba}$
-					</aside>
-				</section>
-
-				<section>
-					<h2>Exercice</h2>
-					<p>
-						Soit l ’alphabet $\Sigma = \{b, h, i, o, u\}$. Construire un automate fini déterministe qui accepte le langage $L = \{hibou, hi, bou, hou\}$.
-					</p>
-				</section>
-
-				<section>
-					<h2>Exercice</h2>
-					<p>
-						Soit l ’alphabet $\Sigma = \{a, b\}$. Construire un automate fini déterministe qui accepte le langage $L = \{xa \mid x \in \{a, b\}^*\}$.
-					</p>
-				</section>
-
-				<section>
-					<section>
-						<h2>Théorème</h2>
-						<p>
-							Le complément d’un langage régulier (relativement à $\Sigma^*$) est régulier.
-						</p>
-						<p>
-							$$ L~\text{régulier} \Rightarrow (\Sigma^* - L)~\text{régulier}$$
-						</p>
-					</section>
-					<section>
-						<h2>Démonstration</h2>
-						<p>
-							Montrez comment on peut transformer un automate fini déterministe $M = (S, \Sigma, \delta, \iota, F)$ pour qu’ il accepte $\Sigma^* - L(M)$. 
-						</p>
-						<p>
-							Puisque $M$ est déterministe, une séquence d’entrée conduit $M$ à un état et un seul.
-						</p>
-						<p>
-							La transformation à faire est de rendre finaux les états qui ne l’étaient pas et de rendre non finaux ceux qui l’étaient. Donc
-						</p>
-						<p>
-							$$ L(\,(S, \Sigma, \delta, \iota, S-F)\,) = \Sigma^* - L(M) $$
-						</p>
-						<p>
-							Les séquences qui étaient auparavant acceptées sont maintenant rejetées et celles qui étaient rejetées sont acceptées.
-						</p>
-					</section>
-				</section>
-
-				<section>
-					<section>
-						<h2>Opérations</h2>
-						<p>
-							Soit les languages $A$ et $B$. Nous définissons les opérations suivantes:
-						</p>
-						<p>
-							<ul>
-								<li><strong>Union</strong>&nbsp;: $A \cup B = \{ x \mid x \in A \ \text{ou} \ x \in B\}$</li>
-								<li><strong>Concaténation</strong>&nbsp;: $A \circ B = \{ xy \mid x \in A, \ y \in B\}$</li>
-								<li><strong>Étoile</strong>&nbsp;: $A^* = \{ x_1x_2\dots x_k \mid k \ge 0, \ x_i \in A \}$</li>
-							</ul>
-						</p>
-					</section>
-					<section>
-						<h2>Example d'union</h2>
-						<p>
-							Pour $\Sigma = \{a, b\}$, soit $L_1 = \{aa, bb\}$ et $L_2 = \{\lambda, aba, bab\}$.
-						</p>
-						<p>
-							$$L_1 \cup L_2 = \{\lambda, aa, bb, aba, bab\}$$
-						</p>
-					</section>
-					<section>
-						<h2>Example de concatenation</h2>
-						<p>
-							Pour $\Sigma = \{a, b\}$, soit $L_1 = \{aa, bb\}$ et $L_2 = \{\lambda, aba, bab\}$.
-						</p>
-						<p>
-							$$L_1 \circ L_2 = \{aa, bb, aaaba, aabab, bbaba, bbbab\}$$
-						</p>
-					</section>
-					<section>
-						<h2>Example d'opérateur *</h2>
-						<p>
-							Pour $\Sigma = \{a, b\}$, soit $L = \{aa, bb\}$.
-						</p>
-						<p>
-							$$L^* = \{\lambda, aa, bb, aaaa, aabb, bbaa, bbbb, aaaaaa, \dots \}$$
-						</p>
-					</section>
 				</section>
 
 				<section>
@@ -330,52 +102,19 @@
 					</p>
 				</section>
 
+				<section>
+					<h2>Aujourd'hui</h2>
+					<ul>
+						<li>Automates finis non déterministes</li>
+						<li>Expression Régulière</li>
+					</ul>
+				</section>
+
+
 				<!-- ************************ Automate non déteministe ************************* -->
 
 				<section class="center" data-background="#007777">
 					<h1 class="title">Automates finis non <br>déterministes</h1>
-				</section>
-
-				<section>
-					<section>
-						<h2>Diagramme déterministe</h2>
-						<p>
-							<b>Définition:</b>
-							Un diagramme de transitions avec un alphabet $\Sigma$ est dit <strong>déterministe</strong> si il est <em>complètement défini</em> et <em>non ambigu</em>.
-						</p>
-					</section>
-
-					<section>
-						<h2>Diagramme complètement défini</h2>
-						<p>
-							<b>Définition:</b>
-							Un diagramme de transitions avec un alphabet $\Sigma$ est dit <strong>complètement défini</strong> si, pour chaque symbole $s \in \Sigma$ et chaque état $e$, il y a au moins une transition étiquetée $s$ qui quitte $e$.
-						</p>
-					</section>
-
-					<section>
-						<h2>Diagramme non ambigu</h2>
-						<p>
-							<b>Définition:</b>
-							Un diagramme de transitions avec un alphabet $\Sigma$ est dit <strong>non ambigu</strong> si, pour chaque état et chaque symbole $s \in S$, il existe au plus une transition  quittant $e$ et étiquetée $s$.
-						</p>
-					</section>
-				</section>
-
-				<section>
-					<section>
-						<h3>Diagramme non déterministes</h3>
-						<p>
-							Nous allons lever deux restrictions que nous avons imposées aux automates déterministes: celle d’être <em>complètement définis</em> et celle d’être <em>non ambigus</em>.
-						</p>
-					</section>
-
-					<section>
-						<h2>Exemple</h2>
-						<p>
-							<img src="img/nfa1.png" alt="Diagrammes de transitions non déterministe">
-						</p>
-					</section>
 				</section>
 
 				<section>
@@ -394,48 +133,6 @@
 				</section>
 
 				<section>
-					<h2>fonction de transition $\delta$</h2>
-					<p>
-						Dans les notes de cours, $\delta$ est un sous-ensemble de $S \times \Sigma \times S$. 
-					</p>
-					<p>
-						Un élément de $\delta$ est un triplet $(s, a, t) \in S \times \Sigma \times S$ où $t$ est un état accessible à partir de l’état $s$ à la lecture d’un $a$.
-					</p>
-				</section>
-
-				<section>
-					<h2>Exercice</h2>
-					<p>
-						Donner l’automate non déterministe $M$ correspondant au diagramme de transition ci-dessous.
-					</p>
-					<img src="img/nfa1.png" alt="Diagrammes de transitions non déterministe">
-				</section>
-
-				<section>
-					<h2>Exercice</h2>
-					<p>
-						Donner le diagramme de transitions de l’automate suivant: 
-					</p>
-					<p>
-						$$(\{A, B, C, D, E, F, G, H, I\}, \{0,1\}, \delta, A, \{G, I\})$$ 
-					</p>
-					<p>
-						$$ 
-						\begin{align}
-							\delta = \{ &amp; (A,1,B), (A,1,C), (B,0,E), (C,0,B), \\
-										&amp; (C,0,D), (C,1,F), (D,0,A), (D,0,G), \\
-										&amp; (D,1,C), (D,1,D), (E,0,H), (E,1,I), \\
-										&amp; (F,1,G), (F,1,I), (G,0,F), (G,1,G), \\
-										&amp; (H,0,H), (I,1,H) \ \}
-						\end{align}
-						$$
-					</p>
-					<aside class="notes">
-						<img src="img/nfa2.png" alt="Diagrammes de transitions non déterministe">
-					</aside>
-				</section>
-
-				<section>
 					<h2>$M$ accepte la la séquence $x$</h2>
 					<p>
 						<b>Définition:</b>
@@ -447,39 +144,6 @@
 					<p>
 						<small>Dans le cas contraire, on dit que l’automate <strong>rejette</strong> la séquence.</small>
 					</p>
-				</section>
-
-				<section>
-					<h2>$M$ accepte la la séquence $x$</h2>
-					<p>
-						Une séquence est acceptée s’il est <em>possible</em>, en partant de l’état initial, d’atteindre un état final en lisant la séquence; même s’il y a, en plus, des chemins qui mènent à des états non finaux, la séquence est acceptée.
-					</p>
-					<p>						
-						C’est la même notion d’acceptation que pour les automates finis déterministes. Sauf que pour un automate non déterministe on peut trouver plusieurs chemins avec la même séquence (à cause de l’ambiguïté). 
-					</p>
-				</section>
-
-				<section>
-					<h2>Example d'acceptation</h2>
-					<img src="img/nfa1.png" alt="Diagramme de transitions non déterministe">
-					<aside class="notes">
-						Démonstration pour $abbbaa$
-
-						$\{s_0\} a \{s_1, s_2\} b \{s_3, s_5\} b \{s_4, s_5\} b \{s_5\} a \{s_6\} a \{s_2, s_6\}$
-
-						Démonstration pour $abbbb$
-
-						$\{s_0\} a \{s_1, s_2\} b \{s_3, s_5\} b \{s_4, s_5\} b \{s_5\} b \{s_5\}$
-					</aside>
-				</section>
-
-				<section>
-					<h2>Example d'acceptation</h2>
-					<img src="img/nfa2.png" alt="Diagramme de transitions non déterministe">
-					<aside class="notes">
-						Démonstration pour $10000 \to \{H\}$<br/> 
-						Démonstration pour $10011 \to \{sF, G, H\}$ 
-					</aside>
 				</section>
 
 				<section>
