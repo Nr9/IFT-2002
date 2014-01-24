@@ -25,6 +25,8 @@
 			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
 		</script>
 
+		<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
@@ -506,6 +508,339 @@
 					</p>
 				</section>
 
+				<section>
+					<section>
+						<h2>transition sur $\lambda$</h2>
+						<p>
+							Il est aussi possible de faire des transitions sur $\lambda$. Par example:
+						</p>
+						<p>
+							<img src="img/nfa3.png" alt="Diagramme de transitions non déterministe">
+						</p>
+					</section>
+					<section>
+						<h2>Example</h2>
+						<p>
+							<img src="img/nfa4.png" alt="Diagramme de transitions non déterministe">
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<h3>Automate fini non déterministe (avec transition sur $\lambda$)</h3>
+					<p>
+						<b>Définition:</b>
+						Un <strong>automate fini non déterministe</strong> consiste en un quintuple de la forme $(S, \Sigma, \delta, \iota, F)$ où
+						<ul>
+							<li>$S$ est un <em>ensemble fini d’états</em>.</li>
+							<li>$\Sigma$ est <em>l’alphabet</em>.</li>
+							<li>$\delta : S \times \Sigma_\lambda \to \mathcal P(S)$ est la <em>fonction de transition</em>.</li>
+							<li>$\iota \in S$ est l’<em>état initial</em>.</li>
+							<li>$F \subseteq S$ est l’ensemble des <em>états finaux</em> (ou <em>accepteurs</em> ou <em>acceptants</em>).</li>
+						</ul>
+					</p>
+					<p>
+						où $\Sigma_\lambda = \Sigma \cup \{\lambda\}$
+					</p>
+				</section>
+
+				<section>
+					<h2>Théorème</h2>
+					<p>
+						L'ensemble des languages réguliers est fermé sur les opérations: <em>Union</em>, <em>Concaténation</em> et <em>Étoile</em>.
+					</p>
+				</section>
+
+				<!-- ************************ Expression régulière ************************* -->
+
+				<section class="center" data-background="#007777">
+					<h1 class="title">Expression régulière</h1>
+				</section>
+
+				<section>
+					<h2>Observation</h2>
+					<p>
+						Soit $L = \{b^mab^n \mid m \in \mathbb N^+, n \in \mathbb N\}$. Il est possible de décomposer $L$ en utilisant les opérations: <em>Union</em>, <em>Concaténation</em> et <em>Étoile</em>.
+					</p>
+					<p>
+						$$ L = \{a\} \circ \{a\}^* \circ \{b\} \circ \{a\}^* $$ 
+					</p>
+					<p>
+						En simplifiant, il est possible d'écrire
+					</p>
+					<p>
+						$$aa^*ba^*$$
+					</p>
+				</section>
+
+				<section>
+					<h2>Expression régulière</h2>
+					<p>
+						<b>Définition:</b>
+						$R$ est une <strong>expression régulière</strong> si $R$ est:
+						<ol>
+							<li>$a$, pour tout $a \in \Sigma$</li>
+							<li>$\lambda$</li>
+							<li>$\emptyset$</li>
+							<li>$(R_1)$, pour une <em>expression régulière</em> $R_1$</li>
+							<li>$R_1 \cup R_2$, pour des <em>expressions régulières</em> $R_1$ et $R_2$</li>
+							<li>$R_1 \circ R_2$, pour des <em>expressions régulières</em> $R_1$ et $R_2$</li>
+							<li>$R_1^*$, pour une <em>expression régulière</em> $R_1$</li>
+						</ol>
+					</p>
+					<p>
+						<small>Note: Cette dénition est de nature récursive.</small>
+					</p>
+				</section>
+
+
+
+				<section>
+					<section>				
+						<h2>Observation</h2>
+						<p>
+							L'opération de concaténation est <strong>associative</strong>. Pour tous les langages $L_1$, $L_2$, $L_3$:
+						</p>
+						<p>
+							$$ L_1 \circ (L2 \circ L3) = (L1 \circ L2) \circ L3 $$ 
+						</p>
+						<p>
+							Par conséquent si $r_1$, $r_2$, $r_3$ sont des expressions régulières alors les expressions régulières $r_1 \circ (r_2 \circ r_3)$ et $(r_1 \circ r_2) \circ r_3$ représentent le même langage. 
+						</p>
+					</section>
+					<section>
+						<h2>Notation</h2>
+						<p>
+							Pour alléger la notation, on écrira $r_1r_2$ plutôt que $r_1 \circ r_2$. Donc
+						</p>
+						<p>
+						$$ 
+						\begin{align}
+							r_1r_2r_3 = &amp; r_1 \circ r_2 \circ r_3 \\
+										&amp; r_1 \circ (r_2 \circ r_3) \\
+										&amp; (r_1 \circ r_2) \circ r_3 \\
+						\end{align}
+						$$
+						</p>
+					</section>
+				</section>
+
+				<section>				
+					<h2>Observation</h2>
+					<p>
+						L'opération d'union est <strong>associative</strong>. Pour tous les langages $L_1$, $L_2$, $L_3$:
+					</p>
+					<p>
+						$$ L_1 \cup (L2 \cup L3) = (L1 \cup L2) \cup L3 $$ 
+					</p>
+					<p>
+						Par conséquent si $r_1$, $r_2$, $r_3$ sont des expressions régulières alors les expressions régulières $r_1 \cup (r_2 \cup r_3)$ et $(r_1 \cup r_2) \cup r_3$ représentent le même langage:
+					</p>
+					<p>
+						$$r_1 \cup r_2 \cup r_3$$
+					</p>
+				</section>
+
+				<section>
+					<h2>Règles de priorité</h2>
+					<ol>
+						<li>
+							L'<em>étoile</em> $*$ est prioritaire. C'est à dire que
+							$$ 
+							\begin{align}
+								r_1 \cup r_2^∗  &amp; = r_1 \cup (r_2^∗) \\
+								r_1 \circ r_2^∗ &amp; = r_1 \circ (r_2^*)
+
+							\end{align}
+							$$
+						</li>
+						<br/>
+						<li>
+							La <em>concaténation</em> est prioritaire sur l'<em>union</em>. C'est à dire que
+							$$ 
+							\begin{align}
+								r_1 \cup r_2 \circ r_3 &amp; = r_1 \cup (r_2 \circ r_3) \\
+								r_1 \circ r_2 \cup r_3 &amp; = (r_1 \circ r_2) \cup r_3
+							\end{align}
+							$$
+						</li>
+					</ol>
+				</section>
+
+				<section>
+					<h2>Language repésenté par $R$</h2>
+					<p>
+						<b>Définition:</b>
+						Soit une expression régulière $R$ et un alphabet $\Sigma$. Le <strong>language repésenté par $R$</strong> noté $L(R)$, est défini par les propostions récursive suivantes:
+						<ol>
+							<li>Pour tout $a \in \Sigma$, si $R=a$ alors $L(R) = \{a\}$</li>
+							<li>Si $R=\lambda$ alors $L(R) = \{\lambda\}$</li>
+							<li>Si $R=\emptyset$ alors $L(R) = \{\}$</li>
+							<li>Pour des <em>expressions régulières</em> $R_1$ et $R_2$, si $R = R_1 \cup R_2$, alors $L(R) = L(R_1) \cup L(R_2)$</li>
+							<li>Pour des <em>expressions régulières</em> $R_1$ et $R_2$, si $R = R_1 \circ R_2$, alors $L(R) = L(R_1) \circ L(R_2)$</li>
+							<li>Pour une <em>expression régulière</em> $R_1$, si $R = R_1^*$, alors $L(R) = L(R_1)^*$</li>
+						</ol>
+					</p>
+				</section>
+
+				<section>
+					<h2>Examples</h2>
+					<p>
+						<table class="examples">
+							<tr>
+								<td class="regex">$(ab)^*$</td> 	
+								<td>représente</td>
+								<td class="langage"><p class="fragment roll-in">$\{\lambda, ab, abab, \dots \}$</p></td>
+							</tr>
+							<tr>
+								<td class="regex">$ab^*$</td> 	
+								<td>représente</td>	
+								<td class="langage"><p class="fragment roll-in">$\{a, ab, abb, abbb, \dots \}$</p></td>
+							</tr>
+							<tr>
+								<td class="regex">$a \cup bc$</td> 	
+								<td>représente</td>	
+								<td class="langage"><p class="fragment roll-in">$\{a, bc\}$</p></td>
+							</tr>
+							<tr>
+								<td class="regex">$(a \cup b)c$</td> 	
+								<td>représente</td>	
+								<td class="langage"><p class="fragment roll-in">$\{ac, bc\}$</p></td>
+							</tr>
+							<tr>
+								<td class="regex">$ab \cup bc$</td> 	
+								<td>représente</td>	
+								<td class="langage"><p class="fragment roll-in">$\{ab, bc\}$</p></td>
+							</tr>
+							<tr>
+								<td class="regex">$a(b \cup b)c$</td> 	
+								<td>représente</td>	
+								<td class="langage"><p class="fragment roll-in">$\{abc\}$</p></td>
+							</tr>
+						</table>
+					</p>
+				</section>
+
+				<section>
+					<h2>Examples</h2>
+					<p>
+						<table class="examples">
+							<tr>
+								<td class="regex">$(a \cup \lambda)b^*$</td> 	
+								<td>représente</td>	
+								<td class="langage"><p class="fragment roll-in">$\{ab^n~\text{ou}~b^n \mid n \in \mathbb N \}$</p></td>
+							</tr>
+							<tr>
+								<td class="regex">$(a \cup \lambda)(b \cup \lambda)$</td> 	
+								<td>représente</td>	
+								<td class="langage"><p class="fragment roll-in">$\{\lambda, a, b, ab\}$</p></td>
+							</tr>
+							<tr>
+								<td class="regex">$a^* \emptyset$</td> 	
+								<td>représente</td>	
+								<td class="langage"><p class="fragment roll-in">$\{\}$</p></td>
+							</tr>
+							<tr>
+								<td class="regex">$\emptyset^*$</td> 	
+								<td>représente</td>	
+								<td class="langage"><p class="fragment roll-in">$\{\lambda\}$</p></td>
+							</tr>
+						</table>
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							Soit un alphabet $\Sigma$. Les langages réguliers sur $\Sigma$ sont précisément les langages représentables par les expressions régulières sur $\Sigma$.
+						</p>
+					</section>
+					<section>
+						<h2>Démonstration</h2>
+						<p>
+							La démonstration se divise en deux parties:
+							<ul>
+								<li>Montrer que tout langage représentable par une expression régulière est régulier.</li>
+								<li>Montrer que tout langage régulier est représentable par une expression régulière.</li>
+							</ul>
+						</p>
+					</section>
+					<section>
+						<h2>Partie 1</h2>
+						<p>
+							On voit qu’une <em>expression régulière</em> représente toujours un <em>langage régulier</em>, puisque 
+							<ul>
+								<li>
+								les expressions régulières élémentaires représentent des langages réguliers
+								</li>
+								<li> et que la combinaison d’expressions régulières représentant des langages réguliers est une expression régulière représentant un langage régulier.
+								</li>
+							</ul>
+						</p>
+					</section>
+				</section>
+
+
+				<!-- MORE -->
+
+
+				<section>
+					<h2></h2>
+					<p>
+
+					</p>
+				</section>
+
+				<section>
+					<h2></h2>
+					<p>
+						<b>Définition:</b>
+
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h2></h2>
+						<p>
+						</p>
+					</section>
+
+					<section>
+						<h2>Exemple</h2>
+						<p>
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2></h2>
+						<p>
+						</p>
+					</section>
+
+					<section>
+						<h2>Exemple</h2>
+						<p>
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2></h2>
+						<p>
+						</p>
+					</section>
+
+					<section>
+						<h2>Exemple</h2>
+						<p>
+						</p>
+					</section>
+				</section>
 
 			</div>
 
