@@ -51,7 +51,7 @@
 				<!--Revision -->
 
 				<section class="center" data-background="#007777">
-					<h1 class="title">Cours précédent</h1>
+					<h1 class="title">Cours précédents</h1>
 				</section>
 
 				<section>
@@ -92,13 +92,6 @@
 							<li><strong>Concaténation</strong>&nbsp;: $A \circ B = \{ xy \mid x \in A, \ y \in B\}$</li>
 							<li><strong>Étoile</strong>&nbsp;: $A^* = \{ x_1x_2\dots x_k \mid k \ge 0, \ x_i \in A \}$</li>
 						</ul>
-					</p>
-				</section>
-
-				<section>
-					<h2>Théorème</h2>
-					<p>
-						L'ensemble des languages réguliers est fermé sur les opérations: <em>Union</em>, <em>Concaténation</em> et <em>Étoile</em>.
 					</p>
 				</section>
 
@@ -176,7 +169,7 @@
 					<section>
 						<h2>transition sur $\lambda$</h2>
 						<p>
-							Il est aussi possible de faire des transitions sur $\lambda$. Par exemple:
+							Supposont qu'il soit aussi possible de faire des transitions sur $\lambda$. Par exemple:
 						</p>
 						<p>
 							<img src="img/nfa3.png" alt="Diagramme de transitions non déterministe">
@@ -224,7 +217,7 @@
 				<section>
 					<h2>Observation</h2>
 					<p>
-						Soit $L = \{b^mab^n \mid m \in \mathbb N^+, n \in \mathbb N\}$. Il est possible de décomposer $L$ en utilisant les opérations: <em>Union</em>, <em>Concaténation</em> et <em>Étoile</em>.
+						Soit $L = \{a^mba^n \mid m \in \mathbb N^+, n \in \mathbb N\}$. Il est possible de décomposer $L$ en utilisant les opérations: <em>Union</em>, <em>Concaténation</em> et <em>Étoile</em>.
 					</p>
 					<p>
 						$$ L = \{a\} \circ \{a\}^* \circ \{b\} \circ \{a\}^* $$ 
@@ -309,7 +302,10 @@
 					<h2>Règles de priorité</h2>
 					<ol>
 						<li>
-							L'<em>étoile</em> $*$ est prioritaire. C'est à dire que
+							Les parentèses sont prioritaires sur toutes les autres opérations.
+						</li>
+						<li>
+							L'<em>étoile</em> $*$ est prioritaire sur la <em>concaténation</em> et l'<em>union</em>. C'est à dire que
 							$$ 
 							\begin{align}
 								r_1 \cup r_2^∗  &amp; = r_1 \cup (r_2^∗) \\
@@ -445,34 +441,226 @@
 					</section>
 				</section>
 
+				<section>
+					<h2>Exercice</h2>
+					<p>
+						Convertir ces expressions régulières en automates fini non déterministe: 
+					</p>
+					<ul>
+						<li>
+							$(ab \cup a)^*$
+						</li>
+						<li> 
+							$(a \cup b)^*aba$
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Automate fini non déterministe généralisé</h3>
+					<p>
+						Remplaçons les transition par des <em>expressions régulières</em>:
+						<img src="img/gnfa.png" alt="Diagramme de transitions non déterministe généralisé">
+					</p>
+				</section>
+
+				<section>
+					<h3>Automate fini non déterministe généralisé</h3>
+					<p>
+						<b>Définition:</b>
+						Un <strong>automate fini non déterministe</strong> consiste en un quintuple de la forme $(S, \Sigma, \delta, s_{init}, s_{accepte})$ où
+						<ul>
+							<li>$S$ est un <em>ensemble fini d’états</em>.</li>
+							<li>$\Sigma$ est <em>l’alphabet</em>.</li>
+							<li>$\delta : (S -\{ s_{accepte} \}) \times (S -\{ s_{init} \}) \to R$ où $R$ est une <em>expression régulière</em>, est la <em>fonction de transition</em>.</li>
+							<li>$s_{init} \in S$ est l’<em>état initial</em>.</li>
+							<li>$s_{accepte} \in S$ est l'état accepteur.</li>
+						</ul>
+					</p>
+				</section>
+
+				<section>
+					<h2>Exercice</h2>
+					<p>
+						Convertir cet automate en expression régulière
+						<img src="img/nfa6.png" alt="Diagramme de transitions non déterministe">
+					</p>
+				</section>
+
+				<section class="center" data-background="#007777">
+					<h1 class="title">Regex</h1>
+				</section>
+
+				<section>
+					<h2>Regex</h2>
+					<p>
+						Une expression régulière (Regex) est une suite de caractères typographiques (qu’on appelle plus simplement « <em>motif</em> » ou « <em>pattern</em> » dans sa forme anglaise) décrivant une chaîne de caractères dans le but de la trouver dans un bloc de texte pour lui appliquer un traitement automatisé, comme un ajout, son remplacement ou sa suppression.
+					</p>
+				</section>
 
 				<!-- MORE -->
 
+				<section>
+					<h2>Regex</h2>
+					<p>
+						<table class="exemples">
+							<tr>
+								<td class="regex">abc</td> 	
+								<td class="langage">la chaîne de charactères: abc</td>
+							</tr>
+							<tr>
+								<td class="regex">abc|cba</td> 	
+								<td class="langage">la chaîne de charactères: abc ou cba</td>
+							</tr>
+							<tr>
+								<td class="regex">[abc]</td> 	
+								<td class="langage">un seul charactère: a, b ou c</td>
+							</tr>
+							<tr>
+								<td class="regex">[^abc]</td> 	
+								<td class="langage">n'importe quel charactère sauf a, b ou c</td>
+							</tr>
+							<tr>
+								<td class="regex">[a-z]</td> 	
+								<td class="langage">n'importe quel charactère entre a et z</td>
+							</tr>
+							<tr>
+								<td class="regex">[a-zA-Z]</td> 	
+								<td class="langage">n'importe quel charactère entre a et z ou A et Z</td>
+							</tr>
+							<tr>
+								<td class="regex">.</td> 	
+								<td class="langage">n'importe quel charactère</td>
+							</tr>
+						</table>
+					</p>
+				</section>
 
 				<section>
-					<h2></h2>
+					<h2>Regex</h2>
 					<p>
+						<table class="exemples">
 
+							<tr>
+								<td class="regex">a?</td> 	
+								<td class="langage">zero ou un charactère a</td>
+							</tr>
+							<tr>
+								<td class="regex">a*</td> 	
+								<td class="langage">zero ou plus charactères a</td>
+							</tr>
+							<tr>
+								<td class="regex">a+</td> 	
+								<td class="langage">un ou plus charactères a</td>
+							</tr>
+							<tr>
+								<td class="regex">a{3}</td> 	
+								<td class="langage">exactement 3 charactères a</td>
+							</tr>
+							<tr>
+								<td class="regex">a{3,}</td> 	
+								<td class="langage">trois ou plus charactères a</td>
+							</tr>
+							<tr>
+								<td class="regex">a{3,6}</td> 	
+								<td class="langage">entre 3 et 6 charactères a</td>
+							</tr>
+						</table>
+					</p>
+				</section>
+
+				<section>
+					<h2>Regex</h2>
+					<p>
+						<table class="exemples">
+							<tr>
+								<td class="regex">^</td> 	
+								<td class="langage">le début de la ligne</td>
+							</tr>
+							<tr>
+								<td class="regex">$</td> 	
+								<td class="langage">la fin de la ligne</td>
+							</tr>
+						</table>
 					</p>
 				</section>
 
 				<section>
 					<h2></h2>
 					<p>
-						<b>Définition:</b>
-
+						<table class="exemples">
+						<tr>
+						  <th>POSIX</th>
+						  <th>Description</th>
+						  <th>ASCII</th>
+						  <th></th>
+						</tr>
+						<tr>
+						  <td class="regex"><tt>[:alnum:]</tt></td>
+						  <td>Alphanumeric characters</td>
+						  <td class="regex"><tt>[a-zA-Z0-9]</tt></td>
+						  <td class="regex"></td>
+						</tr>
+						<tr>
+						  <td><tt>[:alpha:]</tt></td>
+						  <td>Alphabetic characters</td>
+						  <td><tt class=regex>[a-zA-Z]</tt></td>
+						  <td></td>
+						</tr>
+						<tr>
+						  <td><tt>[:blank:]</tt></td>
+						  <td>Space and tab</td>
+						  <td><tt class=regex>[ \t]</tt></td>
+						  <td><tt class=regex >\h</tt></td>
+						</tr>
+						<tr>
+						  <td><tt>[:digit:]</tt></td>
+						  <td>Digits</td>
+						  <td><tt class=regex>[0-9]</tt></td>
+						  <td><tt class=regex >\d</tt></td>
+						</tr>
+						<tr>
+						  <td><tt>[:lower:]</tt></td>
+						  <td>Lowercase letters</td>
+						  <td><tt class=regex>[a-z]</tt></td>
+						  <td></td>
+						</tr>
+						<tr>
+						  <td><tt>[:space:]</tt></td>
+						  <td>All whitespace characters, including line breaks</td>
+						  <td><tt class=regex>[ \t\r\n\v\f]</tt></td>
+						  <td><tt class=regex >\s</tt></td>
+						</tr>
+						<tr>
+						  <td><tt>[:upper:]</tt></td>
+						  <td>Uppercase letters</td>
+						  <td><tt class=regex>[A-Z]</tt></td>
+						  <td></td>
+						</tr>
+						<tr>
+						  <td><tt>[:word:]</tt></td>
+						  <td>Word characters (letters, numbers and underscores)</td>
+						  <td><tt class=regex>[A-Za-z0-9_]</tt></td>
+						  <td><tt class=regex >\w</tt></td>
+						</tr>
+						</table>
 					</p>
+				</section>
+
+				<section class="center" data-background="#007777">
+					<h1 class="title">Langage non&nbsp;régulier</h1>
 				</section>
 
 				<section>
 					<section>
-						<h2></h2>
+						<h2>Observation</h2>
 						<p>
+							Soit le langage $L=\{w \mid w \text{ contient le même nombre de 0 et de 1} \}$. Est-ce que $L$ est régulier? 
 						</p>
 					</section>
 
 					<section>
-						<h2>Exemple</h2>
+						<h2></h2>
 						<p>
 						</p>
 					</section>

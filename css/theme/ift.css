@@ -38,6 +38,7 @@ body {
   margin: 0 0 20px 0;
   color: black;
   font-family: "Nobile", Impact, sans-serif;
+
 /*  line-height: 0.9em; */
 /*  letter-spacing: -0.02em;*/
   text-transform: none;
@@ -50,6 +51,7 @@ body {
 .reveal .slides .title 
 {
   color: white;
+  line-height: 145px;
 }
 
 /*********************************************
@@ -170,6 +172,7 @@ body {
 .reveal .slides .exemples td.regex
 {
   padding:5px 50px 5px 0px;
+  white-space: nowrap;
 }
 
 .reveal .slides .exemples td.langage
