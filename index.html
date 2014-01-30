@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Informatique Théorique - Hiver 2014</title>
+		<title>Informatique Théorique - IFT-2002</title>
 
 		<meta name="description" content="Informatique Théorique - Hiver 2014">
 		<meta name="author" content="Julien Marcil">
@@ -14,24 +14,7 @@
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reveal.min.css">
-		<link rel="stylesheet" href="css/theme/ift.css" id="theme">
-
-		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
-
-		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
-		<script>
-			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
-		</script>
-
-		<style type="text/css">
-		body, html {
-			margin: 30px;
-		}
-
-
-		</style>
+		<link rel="stylesheet" href="css/main.css">
 
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
@@ -39,25 +22,44 @@
 	</head>
 
 	<body>
+		<div id='wrap'>
 
-		<div class="reveal">
+			<div class="header-bar"></div>
 
-			<h2>Informatique Théorique</h2>
-			<h3>IFT-2002 - H&nbsp;2014</h3>
+			<div class="ift2002">
 
+				<h2>Informatique Théorique <small>IFT-2002</small></h2>
 
-			<ul>
-				<li><a href="cours1.html">Cours 1</a> - <a href="cours1.pdf">(pdf)</a></li>
-				<li><a href="cours2.html">Cours 2</a> - <a href="cours2.pdf">(pdf)</a></li>
-			</ul>
+			
+				<h4>Diapositives</h4>
+				<ul>
+					<li><a href="cours1.html">Cours 1</a> - <a href="cours1.pdf">(pdf)</a></li>
+					<li><a href="cours2.html">Cours 2</a> - <a href="cours2.pdf">(pdf)</a></li>
+					<li><a href="cours3.html">Cours 3</a> - <a href="cours3.pdf">(pdf)</a></li>
+				</ul>
 
+				<h4>Travaux pratiques</h4>
+				<ul>
+					<li><a href="tp1.pdf">TP 1</a></li>
+					<ul class="document">
+						<li><a href="films-quebecois-2012.txt">films-quebecois-2012.txt</a></li>
+						<li><a href="films-quebecois-2013.txt">films-quebecois-2013.txt</a></li>
+					</ul>
 
+				</ul>
+
+			</div>
+
+			<div id='push'></div>
 		</div>
-
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.min.js"></script>
-
-
-
+		<footer>
+			<div class="pull-right">
+				<h3>H&nbsp;2014</h3>
+			</div>
+           	<address>
+           		<strong>Julien Marcil</strong><br/>
+           		julien.marcil@ift.ulaval.ca
+           	</address>
+        </footer>
 	</body>
 </html>
