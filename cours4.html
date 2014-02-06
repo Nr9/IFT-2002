@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Informatique Théorique - Hiver 2014</title>
+
+		<meta name="description" content="Informatique Théorique - Hiver 2014">
+		<meta name="author" content="Julien Marcil">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/ift.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section class="center">
+					<h2>IFT-2002</h2>
+					<h1>Informatique Théorique</h1>
+					<h4>H14 - cours 4</h4>
+					<br/>
+					<p>
+						<small>Julien Marcil - <a href="mailto:julien.marcil@ift.ulaval.ca">julien.marcil@ift.ulaval.ca</a></small>
+					</p>
+				</section>
+
+				<!--Revision -->
+
+				<section class="center" data-background="#007777">
+					<h1 class="title">Cours précédents</h1>
+				</section>
+
+				<section>
+					<h2>Langage régulier</h2>
+					<p>
+						<b>Définition:</b>
+						Un langage est dit <strong>régulier</strong> s’il existe un automate fini déterministe qui le reconnaît.
+					</p>
+					<p>
+						Une façon de montrer qu’un langage est régulier est de construire un automate qui reconnaît ce langage.
+					</p>
+				</section>
+
+				<section>
+					<h2>Aujourd'hui</h2>
+					<ul>
+						<li>Langage non régulier</li>
+						<li>Grammaire</li>
+					</ul>
+				</section>
+
+
+				<section class="center" data-background="#007777">
+					<h1 class="title">Langage non&nbsp;régulier</h1>
+				</section>
+
+				<section>
+					<h2>Observation</h2>
+					<p>
+						Soit le langage $L=\{w \mid w \text{ contient le même nombre de 0 et de 1} \}$. Est-ce que $L$ est régulier? 
+					</p>
+				</section>
+
+				<section>
+					<h2>Lemme de pompage</h2>
+					<p>
+						Si $L$ est un langage régulier, alors il existe un entier $p \ge 1$ (appelé longueur de pompage) tel que pour tout mot $w \in L$ avec $\lvert w \rvert \ge p$ il existe des mots $x,y,z$ tels que $w = xyz$ et
+						<ol>
+							<li>$\lvert xy \rvert \le p$</li>
+							<li>$\lvert y \rvert > 0$</li>
+							<li>pour tout entier $i \ge 0$ on a $xy^iz \in L$</li>
+						</ol>
+					</p>
+				</section>
+
+				<section>
+					<h2>Preuve qu’un langage $L$ est non régulier </h2>
+					<p>
+						Pour prouver qu’un langage est non régulier, on fait une preuve par contradiction.
+						<ul>
+							<li class="fragment roll-in">
+								On suppose que $L$ est régulier. 
+							</li>
+							<li class="fragment roll-in">
+								Donc il existe $p$ la longueur de pompage de $L$.
+							</li>
+							<li class="fragment roll-in">
+								On <em>choisi</em> un mot $w \in L$, avec $\lvert w \rvert \ge p$ (qu'il ne sera pas possible de pomper).
+							</li>
+							<li class="fragment roll-in">
+								On montre qu'en pompant $w$, on génère des mots qui ne sont pas dans $L$.
+							</li>
+						</ul>
+						 
+
+					</p>
+				</section>
+
+				<section>
+					<h2>Exemple</h2>
+					<p>
+						Prouver que le language $L = \{0^n1^n \mid n \in \mathbb N\}$ n'est pas régulier.
+					</p>
+				</section>
+
+				<section>
+					<h2>Exemple</h2>
+					<p>
+						Prouver que le language $L=\{w \mid w \text{ contient le même nombre de 0 et de 1} \}$ n'est pas régulier.
+					</p>
+				</section>
+
+				<section>
+					<h2>Exemple</h2>
+					<p>
+						Prouver que le language $L = \{0^i1^j \mid i > j \}$ n'est pas régulier.
+					</p>
+				</section>
+
+				<section>
+					<h2>Exemple</h2>
+					<p>
+						Prouver que le language $L = \{0^i1^j \mid i \ne j \}$ n'est pas régulier.
+					</p>
+				</section>
+
+				<section>
+					<h2>Exemple</h2>
+					<p>
+						Prouver que le language $L = \{1^{n^2} \mid n \in \mathbb N \}$ n'est pas régulier.
+					</p>
+					<p class="fragment roll-in">
+						$$L = \{ 1, 1111, 11111111111, ... \}$$
+					<p>
+				</section>
+
+				<section>
+					<h2>Exemple</h2>
+					<p>
+						Est-ce que le language $L = \{w \mid w $ contient le même nombre de sous-chaînes $01$ et $10 \}$ est régulier?
+					</p>
+				</section>
+
+				<section>
+					<h2>Exemple</h2>
+					<p>
+						Soit $\Sigma = \{ 0, 1 \}$ et
+						$$ 
+						\begin{align}
+							A = &amp; \{ 0^ku0^k \mid k \ge 1, u \in \Sigma^* \} \\
+							B =	&amp; \{ 0^k1u0^k \mid k \ge 1, u \in \Sigma^* \}
+						\end{align}
+						$$
+					</p>	
+					<p>
+						<ul>
+							<li class="fragment roll-in">Montrer que $A$ est régulier</li>
+							<li class="fragment roll-in">Montrer que $B$ est non régulier</li>
+						</ul>
+					</p>
+					
+				</section>
+
+				<section class="center" data-background="#007777">
+					<h1 class="title">Grammaire hors contexte</h1>
+				</section>
+
+				<section>
+					<h2>Introduction</h2>
+					<p>
+						Dans cette section, nous verrons un nouvel outil servant à la <em>génération</em> de langages: <strong>les grammaires</strong>.
+					</p>
+					<p>
+						Changement de point de vue: au lieu de considérer des machines qui <em>reconnaissent</em> un langage donné, on construit un ensemble de règles qui servent à <em>construire</em> les mots d’un langage.
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h2>Grammaire</h2>
+						<p>
+							Une grammaire consiste en un ensemble fini de <strong>règles de réécriture</strong> (ou <em>règles de productions</em> ou <em>règles de substitution</em>).
+						</p>
+						<p>
+							$$ 
+							\begin{align}
+								S \rightarrow &amp; 0S1 \\
+								S \rightarrow &amp; B \\
+								B \rightarrow &amp; \lambda 
+							\end{align}
+							$$
+						</p>
+					</section>
+					<section>
+						<h2>Dérivation</h2>
+						<p>
+							Une grammaire <em>génère</em> une séquence par <strong>dérivation</strong>.
+						</p>
+						<p>
+							$$
+							\begin{align}
+								S ⇒ &amp; 0S1 \\
+								  ⇒ &amp; 00S11 \\
+								  ⇒ &amp; 000S111 \\
+								  ⇒ &amp; 000B111 \\
+								  ⇒ &amp; 000\lambda111 \\
+								  ⇒ &amp; 000111
+							\end{align}
+							$$
+						</p>	
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Grammaire</h2>
+						<p>
+							<b>Définition:</b>
+							Une <strong>grammaire</strong> consiste en un quadruplet de la forme $(V, \Sigma, S, R)$ où
+							<ul>
+								<li>$V$ est ensemble fini de <em>variables</em> (symboles non terminaux).</li>
+								<li>$\Sigma$ est <em>l’alphabet</em> (symboles terminaux).</li>
+								<li>$S \in V$ est le <em>symbole de départ</em>.</li>
+								<li>$R$ est un ensemble fini de <em>règles de réécriture</em>.</li>
+							</ul>
+						</p>
+					</section>
+						
+					<section>
+						<h2>Règles de réécriture</h2>
+						<p>
+							Ces règles sont formées d’un terme de gauche, d’une flèche ($\rightarrow$) et d’un terme de droite.					
+						</p>
+						<p>
+							Les termes gauche et droit peuvent être n’importe quelle combinaison de symboles de $V$ ou de $\Sigma$, pourvu qu’il y ait au moins un symbole de $V$ à gauche. Le côté droit peut être vide, ce qui est indiqué par un $\lambda$.
+						</p>
+					</section>
+
+					<section>
+						<h2>Exemple</h2>
+						<p>
+							Voici une grammaire $(V,\Sigma,S,R)$ où
+							$
+							\begin{align}
+								V &amp; = \{S, A, B, C\} \\
+								\Sigma &amp; = \{a, b, c\} \\ 
+								S &amp;\text{est le symbole de départ }
+							\end{align} 
+							$
+						<br/>
+							$
+							\begin{alignat}{2}
+								R = \{ \ &amp; S &amp; \rightarrow &amp; ASC \\
+									     &amp; S &amp; \rightarrow &amp; B \\
+									     &amp; B &amp; \rightarrow &amp; bB \\
+									     &amp; B &amp; \rightarrow &amp; \lambda \\
+									     &amp; A &amp; \rightarrow &amp; a \\
+									     &amp; C &amp; \rightarrow &amp; c \
+									   \}
+							\end{alignat}
+							$
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<h2>Conventions</h2>
+					<p>
+						<ul>
+							<li>Les majuscules sont des symboles non terminaux.</li>
+							<li>Les minuscules sont des symboles terminaux.</li>
+							<li>$S$ est le symbole initial.</li>
+						</ul>
+					</p>
+					<p>
+						Cette convention permet de simplifier la description d’une grammaire en donnant seulement la description de $R$.
+					</p>
+				</section>
+
+				<section>
+					<h2>Notation</h2>
+					<p>
+						$$
+							\begin{align}
+							 	S &amp; \rightarrow ASC &amp;
+								S &amp; \rightarrow B \\
+								B &amp; \rightarrow bB &amp;
+								B &amp; \rightarrow \lambda \\
+								A &amp; \rightarrow a &amp;
+								C &amp; \rightarrow c \
+							\end{align}
+							$$
+					</p>
+					<p>
+						Il est possible de noté les règles de réécriture plus simplement
+					</p>
+					<p>
+						$$
+							\begin{align}
+							 	S &amp; \rightarrow ASC \mid B \\
+								B &amp; \rightarrow bB \mid \lambda \\
+								A &amp; \rightarrow a \\
+								C &amp; \rightarrow c \
+							\end{align}
+							$$
+					</p>
+				</section>
+
+
+				<section>
+					<h2>Production</h2>
+					<p>
+						On nomme <strong>production</strong> l'application d'une régle de de réécriture à une chaîne de symboles terminaux et non terminaux.
+					</p>
+					<p>
+						Soit $u, v, w \in (V \cup \Sigma)^*$, et la régle de de réécriture $A \rightarrow w$.
+						On dit que $uAv$ <em>produit</em> $uwv$, noté
+					</p>
+					<p>
+						$$uAv \Rightarrow uwv$$
+					</p>
+				</section>
+
+				<section>
+					<h2>Dérivation</h2>
+					<p>
+						On nomme <strong>dérivation</strong> l'application d'une ou plusieurs régles de de réécriture à une chaîne de symboles terminaux et non terminaux.
+					</p>
+					<p>
+						Soit $u, v \in (V \cup \Sigma)^*$ on dit $u$ <em>dérive</em> $v$, noté 
+						$$ u \overset{*}{\Rightarrow} v $$
+					</p>
+					<p>
+						si $u = v$ ou s'il existe $u_1,u_2,...,u_k$ pour $k \ge 0$ et
+					</p>
+					<p>
+						$$u⇒u1 ⇒u2 ⇒...⇒uk ⇒v$$
+					</p>
+				</section>
+
+				<section>
+					<h2>Langage généré par $G$</h2>
+					<p>
+						Soit la gramaire $G = (V, \Sigma, S, R)$.
+					</p>
+					<p>
+						$$L(G) = \{ w \in Σ^* \mid S \overset{*}{\Rightarrow} w \}$$
+					</p>
+					<p>
+						On dit que $L(G)$ est le <strong>langage généré par $G$</strong>.
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h2>Example</h2>
+						<p>
+							$$
+							\begin{align}
+							 	S &amp; \rightarrow ASC &amp;
+								S &amp; \rightarrow B \\
+								B &amp; \rightarrow bB &amp;
+								B &amp; \rightarrow \lambda \\
+								A &amp; \rightarrow a &amp;
+								C &amp; \rightarrow c \
+							\end{align}
+							$$
+						</p>
+					</section>
+					<section>
+						<h2>Example</h2>
+						<p>
+							$$
+							\begin{align}
+							 	S &amp; \rightarrow abNSc &amp;
+								bNa &amp; \rightarrow abN \\
+								S &amp; \rightarrow \lambda &amp;
+								bNb &amp; \rightarrow bbN \\
+								 &amp;  &amp;
+								bNc &amp; \rightarrow bc \
+							\end{align}
+							$$
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Grammaire régulière</h2>
+						<p>
+							<b>Définition:</b>
+							Soit $G = (V, \Sigma, S, R)$ une grammaire. $G$ est <strong>régulière</strong> si
+							les <em>règles de réécriture</em> respecte les restrictions suivantes:
+							<ul>
+								<li>
+									Les termes de gauche consistent en un seul symbole <em>non terminal</em>.
+								</li>
+								<li>
+									Les termes de droit consistent en soit
+									<ul>
+										<li>un symbole <em>terminal</em> suivi d’un symbole <em>non terminal</em></li>
+										<li>un seul symbole <em>terminal</em></li>
+										<li>$\lambda$</li>
+									</ul>
+								</li>
+							</ul>
+						</p>
+					</section>
+					<section>
+						<h2>Exemple</h2>
+						<p>
+							$$
+							\begin{align}
+							 	S &amp; \rightarrow bS &amp;
+								S &amp; \rightarrow a &amp;
+								S &amp; \rightarrow \lambda
+							\end{align}
+							$$
+						</p>
+					</section>
+					<section>
+						<h2>Remarque</h2>
+						<p>
+							À cause de ces restrictions, une grammaire régulière permet de générer les symboles de gauche à droite. 
+						</p>
+						<p>
+							Après $k$ applications de règles de production qui ne sont pas des $\lambda$-règles le mot généré est de la forme 
+						</p>
+						<p>
+							$$a_1a_2...a_kA$$
+						</p>
+						<p>
+							où $a_i \in \Sigma$ et $A \in V$
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<h2>Théorème</h2>
+					<p>
+						Soit $G$ une grammaire.
+					</p>
+					<p>
+						$$L(G) \text{ est régulier } \Longleftrightarrow G \text{ est régulière }$$
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h2>Grammaire hors contexte</h2>
+						<p>
+							<b>Définition:</b>
+							Soit $G = (V, \Sigma, S, R)$ une grammaire. $G$ est <strong>hors contexte</strong> si
+							les <em>règles de réécriture</em> respecte les restrictions suivantes:
+							<ul>
+								<li>
+									Les termes de gauche consistent en un seul symbole <em>non terminal</em>.
+								</li>
+							</ul>
+						</p>
+					</section>
+
+					<section>
+						<h2>Exemple</h2>
+						<p>
+							$$
+							\begin{align}
+							 	S &amp; \rightarrow SS &amp;
+								S &amp; \rightarrow aSb \\
+								S &amp; \rightarrow \lambda
+							\end{align}
+							$$
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Forme normale de Chomsky</h2>
+						<p>
+							<b>Définition:</b>
+							Soit $G = (V, \Sigma, S, R)$ une grammaire. $G$ est dans la <strong>forme normale de Chomsky</strong> si
+							les <em>règles de réécriture</em> sont de la forme:
+							<ul>
+								<li>
+									$A \to BC$ pour $A, B, C \in V$ et $B \ne S$ et $C \ne S$
+								</li>
+								<li>
+									$A \to a$ pour $A \in V$, $a \in \Sigma$.
+								</li>
+								<li>
+									$S \to \lambda$ pour le <em>symbole de départ</em> $S$.
+								</li>
+							</ul>
+						</p>
+					</section>
+
+					<section>
+						<h2>Noam Chomsky</h2>
+						<div class="pull-right">
+							<img src="img/Chomsky.jpg" alt="Noam Chomsky">
+						</div>
+						<p>
+							<a href="http://fr.wikipedia.org/wiki/Noam_Chomsky">Noam Chomsky</a> est un linguiste et philosophe américain. Professeur émérite de linguistique au Massachusetts Institute of Technology où il a enseigné toute sa carrière, il a fondé la linguistique générative. Il s'est fait connaître du grand public, à la fois dans son pays et à l'étranger, par son parcours d'intellectuel engagé de sensibilité anarchiste.
+						</p>
+					</section>
+				</section>
+
+				<!-- **************************************************************************************** -->
+
+				<section class="center" data-background="#007777">
+					<h1 class="title">...</h1>
+				</section>
+
+				<section>
+					<h2></h2>
+					<p>
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h2></h2>
+						<p>
+						</p>
+					</section>
+
+					<section>
+						<h2>Exemple</h2>
+						<p>
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2></h2>
+						<p>
+						</p>
+					</section>
+
+					<section>
+						<h2>Exemple</h2>
+						<p>
+						</p>
+					</section>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: 'ift', // available themes are in /css/theme
+				transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				//parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				//parallaxBackgroundSize: '2100px 900px',
+				slideNumber: true,
+
+				math: {
+        			mathjax: 'http://cdn.mathjax.org/mathjax/latest/MathJax.js',
+        			config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+    			},
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/math/math.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

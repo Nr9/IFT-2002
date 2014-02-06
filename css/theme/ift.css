@@ -191,3 +191,8 @@ body {
 .reveal .slides .center {
   text-align: center;
 }
+
+.pull-right 
+{
+  float: right;
+}
