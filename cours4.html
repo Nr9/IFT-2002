@@ -81,14 +81,14 @@
 				<section>
 					<h2>Observation</h2>
 					<p>
-						Soit le langage $L=\{w \mid w \text{ contient le même nombre de 0 et de 1} \}$. Est-ce que $L$ est régulier? 
+						Soit le langage $L=\{w \mid w$ contient le même nombre de $0$ et de $1\}$. Est-ce que $L$ est régulier? 
 					</p>
 				</section>
 
 				<section>
 					<h2>Lemme de pompage</h2>
 					<p>
-						Si $L$ est un langage régulier, alors il existe un entier $p \ge 1$ (appelé longueur de pompage) tel que pour tout mot $w \in L$ avec $\lvert w \rvert \ge p$ il existe des mots $x,y,z$ tels que $w = xyz$ et
+						Si $L$ est un langage régulier, alors il existe un entier $p \ge 1$ (appelé longueur de pompage) tel que pour tout mot $w \in L$ avec $\lvert w \rvert \ge p$, il existe des mots $x,y,z$ tels que $w = xyz$ et
 						<ol>
 							<li>$\lvert xy \rvert \le p$</li>
 							<li>$\lvert y \rvert > 0$</li>
@@ -123,35 +123,35 @@
 				<section>
 					<h2>Exemple</h2>
 					<p>
-						Prouver que le language $L = \{0^n1^n \mid n \in \mathbb N\}$ n'est pas régulier.
+						Prouver que le langage $L = \{0^n1^n \mid n \in \mathbb N\}$ n'est pas régulier.
 					</p>
 				</section>
 
 				<section>
 					<h2>Exemple</h2>
 					<p>
-						Prouver que le language $L=\{w \mid w \text{ contient le même nombre de 0 et de 1} \}$ n'est pas régulier.
+						Prouver que le langage $L=\{w \mid w \text{ contient le même nombre de 0 et de 1} \}$ n'est pas régulier.
 					</p>
 				</section>
 
 				<section>
 					<h2>Exemple</h2>
 					<p>
-						Prouver que le language $L = \{0^i1^j \mid i > j \}$ n'est pas régulier.
+						Prouver que le langage $L = \{0^i1^j \mid i > j \}$ n'est pas régulier.
 					</p>
 				</section>
 
 				<section>
 					<h2>Exemple</h2>
 					<p>
-						Prouver que le language $L = \{0^i1^j \mid i \ne j \}$ n'est pas régulier.
+						Prouver que le langage $L = \{0^i1^j \mid i \ne j \}$ n'est pas régulier.
 					</p>
 				</section>
 
 				<section>
 					<h2>Exemple</h2>
 					<p>
-						Prouver que le language $L = \{1^{n^2} \mid n \in \mathbb N \}$ n'est pas régulier.
+						Prouver que le langage $L = \{1^{n^2} \mid n \in \mathbb N \}$ n'est pas régulier.
 					</p>
 					<p class="fragment roll-in">
 						$$L = \{ 1, 1111, 11111111111, ... \}$$
@@ -161,7 +161,7 @@
 				<section>
 					<h2>Exemple</h2>
 					<p>
-						Est-ce que le language $L = \{w \mid w $ contient le même nombre de sous-chaînes $01$ et $10 \}$ est régulier?
+						Est-ce que le langage $L = \{w \mid w $ contient le même nombre de sous-chaînes $01$ et $10 \}$ est régulier?
 					</p>
 				</section>
 
@@ -186,7 +186,7 @@
 				</section>
 
 				<section class="center" data-background="#007777">
-					<h1 class="title">Grammaire hors contexte</h1>
+					<h1 class="title">Grammaire</h1>
 				</section>
 
 				<section>
@@ -377,7 +377,7 @@
 
 				<section>
 					<section>
-						<h2>Example</h2>
+						<h2>Exemple</h2>
 						<p>
 							$$
 							\begin{align}
@@ -392,7 +392,7 @@
 						</p>
 					</section>
 					<section>
-						<h2>Example</h2>
+						<h2>Exemple</h2>
 						<p>
 							$$
 							\begin{align}
@@ -407,6 +407,20 @@
 						</p>
 					</section>
 				</section>
+
+				<section>
+					<h2>Exemple</h2>
+					<p>
+						Soit $\Sigma=\{0,1\}$. Trouver une grammaire pour les langages suivants:
+						<ul>
+							<li>$\{ w \mid w$ contient trois $1\}$</li>
+							<li>$\{ w \mid w$ commence et finit par le même symbole $\}$</li>
+							<li>$\{ w \mid \lvert w \rvert \ mod \ 2 = 1\}$</li>
+							<li>$\{ w \mid \lvert w \rvert \ mod \ 2 = 1$ et $0$ au centre$\}$</li>
+							<li>$\{ w \mid w = w^R \}$</li>
+						</ul>
+					</p>
+				</section>	
 
 				<section>
 					<section>
@@ -499,6 +513,14 @@
 				</section>
 
 				<section>
+					<h2>Langage hors contexte</h2>
+					<p>
+						<b>Définition:</b>
+						Un langage est dit <strong>hors contexte</strong> (ou <em>non contextuelle</em>) s’il existe une grammaire hors contexte qui le génère.
+					</p>
+				</section>
+
+				<section>
 					<section>
 						<h2>Forme normale de Chomsky</h2>
 						<p>
@@ -528,6 +550,13 @@
 							<a href="http://fr.wikipedia.org/wiki/Noam_Chomsky">Noam Chomsky</a> est un linguiste et philosophe américain. Professeur émérite de linguistique au Massachusetts Institute of Technology où il a enseigné toute sa carrière, il a fondé la linguistique générative. Il s'est fait connaître du grand public, à la fois dans son pays et à l'étranger, par son parcours d'intellectuel engagé de sensibilité anarchiste.
 						</p>
 					</section>
+				</section>
+
+				<section>
+					<h2>Théorème</h2>
+					<p>
+						Tout langage <em>hors contexte</em> est généré par une grammaire la <em>forme normale de Chomsky</em>.
+					</p>
 				</section>
 
 				<!-- **************************************************************************************** -->
