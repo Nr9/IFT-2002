@@ -308,6 +308,111 @@
 						</p>
 					</section>
 				</section>
+	
+				<section>
+					<section>
+						<h2>Grammaire hors contexte</h2>
+						<p>
+							Ce type de grammaire est le plus utilisé en informatique.
+						</p>
+						<p>
+							Les grammaires BNF (Backus-Naur Form), utilisées pour définir la syntaxe des langages de programmation, sont des grammaires équivalentes aux grammaires non contextuelles.
+						</p>
+					</section>
+					
+					<section>
+						<h2>grammaires BNF</h2>
+						<pre><code data-trim>
+&lt;expr&gt; ::= &lt;term&gt; "+" &lt;expr&gt;
+        |  &lt;term&gt;
+
+&lt;term&gt; ::= &lt;factor&gt; "*" &lt;term&gt;
+        |  &lt;factor&gt;
+
+&lt;factor&gt; ::= "(" &lt;expr&gt; ")"
+          |  &lt;const&gt;
+
+&lt;const&gt; ::= integer
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<h2>Remarques</h2>
+					<p>
+						Les grammaires non contextuelles génèrent des chaînes par dérivation tout comme les grammaires régulières.
+					</p>
+					<p>
+						Mais dans le cas des grammaires non contextuelles, au cours du processus de dérivation, la possibilité peut s’offrir à nous de choisir parmi plusieurs non terminaux à remplacer.
+					</p>
+				</section>
+
+				<section>
+					<h2>Exemple</h2>
+					<p>
+						$$
+						\begin{align}
+						 	S \to &amp; zMNz \\
+							M \to &amp; aMa \mid z \\
+							N \to &amp; bNB \mid z
+						\end{align}
+						$$
+					</p>
+					<p>
+						$$ S \overset{*}{\Rightarrow} zazabzbz$$
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h2>Dérivation à gauche</h2>
+						<p>
+							Une <strong>dérivation à gauche</strong> s’effectue en remplaçant toujours, à chaque étape du processus de dérivation, le non terminal le plus à gauche.
+						</p>
+					</section>
+					<section>
+						<h2>Dérivation à droite</h2>
+						<p>
+							Une <strong>dérivation à droite</strong> s’effectue en remplaçant toujours, à chaque étape du processus de dérivation, le non terminal le plus à droite.
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<h2>Arbre de dérivation</h2>
+					<p>
+						La racine de l’arbre de dérivation est l’axiome de la grammaire.
+					</p>
+					<p>
+						Les non terminaux forment les nœuds internes et les terminaux forment les feuilles.
+					</p>
+				</section>
+
+				<section>
+					<h2>Exemple</h2>
+					<p>
+						$$
+						\begin{align}
+						 	S \to &amp; S + S \\
+							S \to &amp; S * S \\
+							S \to &amp; ( S ) \\
+							S \to &amp; S - S \\
+							S \to &amp; S \ / \ S \\
+							S \to &amp; a
+						\end{align}
+						$$
+					</p>
+					<p class="fragment roll-in">
+						$$ S \overset{*}{\Rightarrow} a+a*a$$
+					</p>
+				</section>
+
+				<section>
+					<h2>grammaire ambiguë</h2>
+					<p>
+						Une grammaire est dite <strong>ambiguë</strong> si elle permet plus d’un arbre de dérivation pour une séquence terminale donnée.
+					</p>
+				</section>
 
 				<section>
 					<h2>Langage hors contexte</h2>
@@ -350,10 +455,26 @@
 				</section>
 
 				<section>
-					<h2>Théorème</h2>
-					<p>
-						Tout langage <em>hors contexte</em> est généré par une grammaire la <em>forme normale de Chomsky</em>.
-					</p>
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							Tout langage <em>hors contexte</em> est généré par une grammaire dans la <em>forme normale de Chomsky</em>.
+						</p>
+					</section>
+					<section>
+						<h2>Transformation</h2>
+						<p>
+							Il est possible de transformer un grammaire <em>hors context</em> en grammaire dans la <em>forme normale de Chomsky</em>.
+						</p>
+						<p>
+							<ol>
+								<li>Ajouter une variable $S_0$</li>
+								<li>Remplacer les règles-$\lambda$</li>
+								<li>Remplacer les règles unitaires</li>
+								<li>Ajouter des variables pour les règles trop longue</li>
+							<ol>
+						</p>
+					</section>
 				</section>
 
 				<!-- **************************************************************************************** -->
@@ -370,35 +491,30 @@
 				</section>
 
 				<section>
-					<h1>IMAGES</h1>
+					<h2>Alphabet de la pile</h2>
+					<p>
+						La pile de l’automate à pile a son propre alphabet qui peut être différent de l’alphabet d’entrée.
+					</p>
 				</section>
 
 				<section>
-					<section>
-						<h2>Automate à pile</h2>
-						<p>
-							<b>Définition:</b>
-							Un <strong>automate à pile</strong> consiste en un sixtuplet de la forme $(S, \Sigma, \Gamma, \delta, \iota, F)$ où
-							<ul>
-								<li>$S$ est un ensemble fini d’états.</li>
-								<li>$\Sigma$ est l’alphabet d’entrée (alphabet du ruban).</li>
-								<li>$\Gamma$ est l’alphabet de la pile.</li>
-								<li>$\delta : S \times \Sigma_\lambda \times \Gamma_\lambda \to \mathcal P(S \times \Sigma_\lambda)$ est la <em>fonction de transition</em>.</li>
-								<li>$\iota \in S$ est l’<em>état initial</em>.</li>
-								<li>$F \subseteq S$ est l’ensemble des <em>états finaux</em> (ou <em>accepteurs</em> ou <em>acceptants</em>).</li>
-							</ul>
-						</p>
-					</section>
-
-					<section>
-						<h2>Exemple</h2>
-						<p>
-						</p>
-					</section>
+					<h2>Automate à pile</h2>
+					<p>
+						<b>Définition:</b>
+						Un <strong>automate à pile</strong> consiste en un sixtuplet de la forme $(S, \Sigma, \Gamma, \delta, \iota, F)$ où
+						<ul>
+							<li>$S$ est un ensemble fini d’états.</li>
+							<li>$\Sigma$ est l’alphabet d’entrée (alphabet du ruban).</li>
+							<li>$\Gamma$ est l’alphabet de la pile.</li>
+							<li>$\delta : S \times \Sigma_\lambda \times \Gamma_\lambda \to \mathcal P(S \times \Sigma_\lambda)$ est la <em>fonction de transition</em>.</li>
+							<li>$\iota \in S$ est l’<em>état initial</em>.</li>
+							<li>$F \subseteq S$ est l’ensemble des <em>états finaux</em> (ou <em>accepteurs</em> ou <em>acceptants</em>).</li>
+						</ul>
+					</p>
 				</section>
 
 				<section>
-					<h2>Opérations de <br>l’automate à pile</h2>
+					<h2>Opérations</h2>
 					<p>
 						Les opérations que peut effectuer un automate à pile sont les suivantes:
 						<ul>
@@ -415,25 +531,112 @@
 
 				<section>
 					<section>
-						<h2></h2>
+						<h2>Transition</h2>
 						<p>
+							On décrit une transtion de l'automate à pile par 
+						</p>
+						<p>
+							$$p, x, y \to q, z$$
+						</p>
+						<p>
+							<ul>
+								<li>$p$ l'état courant</li>
+								<li>$x$ est le symbole à l’entrée</li>
+								<li>$y$ est le symbole dépilé</li>
+								<li>$q$ est le nouvel état</li>
+								<li>$z$ est le symbole empilé</li>
+							</ul>
+						</p>
+
+					</section>	
+					<section>
+						<h2>Remarques</h2>
+						<p>
+							<ul>
+								<li>Le $y$ est dépilé avant que le $z$ ne soit empilé.</li>
+								<li>Si aucun symbole n’est lu, on met un $\lambda$ à la place du $x$.</li>
+								<li>Si aucun symbole n’est dépilé, on met un $\lambda$ à la place du $y$.</li> 
+								<li>Si aucun symbole n’est empilé, on met un $\lambda$ à la place du $z$.</li>
+							</ul>
 						</p>
 					</section>
+				</section>
+				
+				<section>
+					<h2>Exemple</h2>
+					<p>
+						Soit l'automate à pile suivant $M = (S, \Sigma, \Gamma, \delta, \iota, F)$ tel que
+					</p>
+					<p>
+					$$
+					\begin{align}
+						S = &amp; \{s_1, s_2, s_3, s_4 \} \\
+						\Sigma = &amp; \{0, 1 \} \\
+						\Gamma = &amp; \{0, $ \} \\
+						\iota = &amp; s_1 \\
+						F =  &amp; \{s_1, s_4 \}
+					\end{align}
+					$$
+					</p>
+					<p>
+					$$ 
+					\begin{align}
+					\delta = \{ &amp; (s_1, \lambda, \lambda \to s_2, $), (s_2, 0, \lambda \to s_2, 0), \\
+								&amp; (s_2, 1, 0 \to s_3, \lambda), (s_3, 1, 0 \to s_3, \lambda), \\
+								&amp; (s_3, \lambda, $ \to s_4, \lambda) \} 
+					\end{align}					
+					$$
+					</p>
+				</section>
 
+				<section>
+					<h2>Diagrame de transitions</h2>
+					<p>
+						Les diagrammes de transitions des automates à pile sont comme ceux des automates finis sauf que l’étiquette d’un arc est plus complexe.
+					</p>
+					<p>
+						Ces étiquettes ont la forme $x, y \to z$, où 
+						<ul>
+							<li>$x$ est le symbole lu sur le ruban,</li>
+							<li>$y$ est le symbole dépilé et</li>	
+							<li>$z$ est le symbole empilé.</li>
+						</ul>
+					</p>
+				</section>
+
+				<section>
+					<h2>Exemple</h2>
+					<p>
+						<img src="img/pda1.png" alt="Diagrammes de transitions">
+					</p>
+				</section>
+
+				<section>
 					<section>
-						<h2>Exemple</h2>
+						<h2>Exercice</h2>
 						<p>
+							Donner un automate à pile qui accepte $L= \{ ww^R \mid w \in \{0,1\}^* \}$.
+						</p>
+					</section>
+					<section>
+						<h2>Exercice</h2>
+						<p>
+							Donner un automate à pile qui accepte $L= \{a^ib^jc^k \mid i,j,k ≥ 0 \text{ et } i = j \text{ ou } i = k \}$.
 						</p>
 					</section>
 				</section>
 
 				<section>
-					<h2>Automate à pile</h2>
+					<h2>Théorème</h2>
 					<p>
-						La pile de l’automate à pile a son propre alphabet qui peut être différent de l’alphabet d’entrée.
+						Soit $M = (S, \Lambda, \Gamma, \delta, \iota, F)$ un automate à pile qui peut accepter des séquences sans vider sa pile. Il existe un automate à pile $M' = (S', \Lambda', \Gamma', \delta', \iota', F')$ qui vide toujours sa pile avant d’accepter et tel que $L(M) = L(M')$.
 					</p>
+				</section>
+
+				<section>
+					<h2>Théorème</h2>
 					<p>
-						À part la pile, l’automate à pile est comme l’automate fini.
+						$L$ est un language <em>hors context</em> si et seulement si un automate à pile accepte $L$.
 					</p>
 				</section>
 
