@@ -79,19 +79,12 @@
 				</section>
 
 				<section>
-					<h2>Deuxième problème</h2>
+					<h2>Deuxième problème de Hilbert</h2>
 					<p>
 						Peut-on prouver la <em>cohérence</em> de l'arithmétique? 
 					</p>
 					<p>
 						En d'autres termes, peut-on démontrer que les <em>axiomes</em> de l'arithmétique ne sont pas contradictoires?
-					</p>
-				</section>
-
-				<section>
-					<h2>Dixième problème</h2>
-					<p>
-						Trouver un <em>algorithme</em> déterminant si une équation diophantienne a des solutions.
 					</p>
 				</section>
 
@@ -135,6 +128,143 @@
 					<p>
 						Church démontre en 1936 l'existence d'un problème insoluble pen utilisant le <strong>lambda-calcul</strong>.
 					</p>
+				</section>
+
+				<section>
+					<section>			
+						<h2>Emil Leon Post <small>1897-1954</small></h2>
+						<div class="pull-right">
+							<img src="img/Post.jpg" alt="Emil Leon Post">
+						</div>
+						<p>
+							<a href="http://fr.wikipedia.org/wiki/Emil_Post">Emil Leon Post</a> introduit en 1946 le <a href="http://fr.wikipedia.org/wiki/Problème_de_correspondance_de_Post">problème de correspondance de Post</a> qui est <strong>indécidable</strong>.
+						</p>
+					</section>
+					<section>
+						<h2>Problème de correspondance de Post</h2>
+						<p>
+							
+						</p>
+						<p>
+							Soit $\alpha_1, \cdots, \alpha_n$ et $\beta_1, \cdots, \beta_n$ des mots d'un alphabet $\Sigma$.
+						</p>
+						<p>
+							Par exemple:
+<table>
+<tr>
+<td bgcolor="#55FF83" width="40">$\alpha_1$</td>
+<td bgcolor="#55FF83" width="40">$\alpha_2$</td>
+<td bgcolor="" width="40">$\cdots$</td>
+<td bgcolor="#55FF83" width="40">$\alpha_n$</td>
+</tr>
+<tr>
+<td bgcolor="#87E6FF" width="40">$\beta_1$</td>
+<td bgcolor="#87E6FF" width="40">$\beta_2$</td>
+<td bgcolor="" width="40">$\cdots$</td>
+<td bgcolor="#87E6FF" width="40">$\beta_1$</td>
+</tr>
+</table>
+						</p>
+
+						<p>
+							Par exemple:
+<table>
+<tr>
+<td bgcolor="#55FF83" width="40">a</td>
+<td bgcolor="#55FF83" width="40">ab</td>
+<td bgcolor="#55FF83" width="40">bba</td>
+</tr>
+<tr>
+<td bgcolor="#87E6FF" width="40">baa</td>
+<td bgcolor="#87E6FF" width="40">aa</td>
+<td bgcolor="#87E6FF" width="40">bb</td>
+</tr>
+</table>
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Dixième problème de Hilbert</h2>
+						<p>
+							Trouver un <em>algorithme</em> déterminant si une <a href="http://fr.wikipedia.org/wiki/Équation_diophantienne">équation diophantienne</a> a des solutions.
+						</p>
+						<P>
+							Par example, est-ce que
+							$$
+							\begin{eqnarray}
+							3x^2y - 7y^2z^3 &amp; = &amp; 18 \\
+							-7y^2 - 8z^2 &amp; = &amp; 0
+							\end{eqnarray}
+							$$
+							as des solutions entières? 
+						</P>	
+					</section>
+					<section>
+						<h2>Dixième problème de Hilbert</h2>
+						<p>
+							En 1970, Youri Matiiassevitch démontre qu'un tel algorithme ne peut exister : le dixième problème de Hilbert n'a pas de solution!
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Conjecture de Syracuse</h2>
+						<p>
+							Soit l fonction $f$ tel que
+							$$
+							f(n) = \Bigg\{
+							\begin{array}{}
+							n / 2 &amp; \text{si } n \text{ est paire} \\
+							3n+1 &amp; \text{si } n \text{ est impaire}
+							\end{array}
+							$$
+						</p>
+						<p>
+							Pour une valeur de $n$ il est possible de produire une séquence de $a_i$ tel que
+						</p>
+						<p>
+							$$
+							a_i = \Bigg\{
+							\begin{array}{}
+							n &amp; \text{si } i=0 \\
+							f(a_{i-1}) &amp; \text{si } i > 0
+							\end{array}
+							$$
+						</p>
+					</section>
+					<section>
+						<h2>Example</h2>
+						<p>
+							Pour $n=6$ la séquence est:
+						</p>
+						<p>
+							6, 3, 10, 5, 16, 8, 4, 2, 1
+						</p>
+						<p>
+							Pour $n=11$ la séquence est:
+						</p>
+						<p>
+							11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1
+						</p>
+					</section>
+					<section>
+						<h2>Example</h2>
+						<p>
+							Pour $n=27$ la séquence est:
+						</p>
+						<p>
+							27, 82, 41, 124, 62, 31, 94, 47, 142, 71, 214, 107, 322, 161, 484, 242, 121, 364, 182, 91, 274, 137, 412, 206, 103, 310, 155, 466, 233, 700, 350, 175, 526, 263, 790, 395, 1186, 593, 1780, 890, 445, 1336, 668, 334, 167, 502, 251, 754, 377, 1132, 566, 283, 850, 425, 1276, 638, 319, 958, 479, 1438, 719, 2158, 1079, 3238, 1619, 4858, 2429, 7288, 3644, 1822, 911, 2734, 1367, 4102, 2051, 6154, 3077, 9232, 4616, 2308, 1154, 577, 1732, 866, 433, 1300, 650, 325, 976, 488, 244, 122, 61, 184, 92, 46, 23, 70, 35, 106, 53, 160, 80, 40, 20, 10, 5, 16, 8, 4, 2, 1
+						</p>
+					</section>
+					<section>
+						<h2>Conjecture de Syracuse</h2>
+						<p>
+							La conjecture affirme que, pour tout $n>0$ , il existe un indice $k$ tel que $a_k = 1$.
+						</p>
+					</section>
 				</section>
 
 				<!-- **************************************************************************************** -->
