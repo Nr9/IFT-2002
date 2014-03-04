@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Informatique Théorique - Hiver 2014</title>
+
+		<meta name="description" content="Informatique Théorique - Hiver 2014">
+		<meta name="author" content="Julien Marcil">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/ift.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section class="center">
+					<h2>IFT-2002</h2>
+					<h1>Informatique Théorique</h1>
+					<h4>H14 - cours 7</h4>
+					<br/>
+					<p>
+						<small>Julien Marcil - <a href="mailto:julien.marcil@ift.ulaval.ca">julien.marcil@ift.ulaval.ca</a></small>
+					</p>
+				</section>
+
+				<section class="center" data-background="img/paris1900.jpg" data-background-transition="slide">
+					<h1 class="title fragment grow">Paris, 1900</h1>
+				</section>				
+
+				<section class="center" data-background="img/paris_1900_machinery.jpg" data-background-transition="slide">
+					<h1 class="title fragment"><b>Exposition<br/> Universelle</b></h1>
+				</section>	
+
+				<section class="center">
+					<h1>2<sup>ième</sup> Congrès<br/> international des mathématiciens<br/></h1>
+				</section>
+
+				<section>
+					<h2>David Hilbert <small>1862-1943</small></h2>
+					<div class="pull-right">
+						<img src="img/Hilbert.jpg" alt="David Hilbert">
+					</div>
+					<div>
+						<p>
+							<a href="http://fr.wikipedia.org/wiki/David_Hilbert">David Hilbert</a> présente une liste de <strong>10&nbsp;problèmes</strong> qui tenaient jusqu'alors les mathématiciens en échec.
+						</p>
+						<p>
+							Publiée après la tenue du congrès, la liste définitive comprendra 23 problèmes, aujourd'hui appelés les <a href="http://fr.wikipedia.org/wiki/Probl%C3%A8mes_de_Hilbert">problèmes de Hilbert</a>.
+						</p>
+						<p>
+							Ces problèmes vont influencer le cours des mathématiques du xx<sup>e</sup> siècle. Certains sont encore non résolus.
+						</p>
+					</div>
+				</section>
+
+				<section>
+					<h2>Deuxième problème de Hilbert</h2>
+					<p>
+						Peut-on prouver la <em>cohérence</em> de l'arithmétique? 
+					</p>
+					<p>
+						En d'autres termes, peut-on démontrer que les <em>axiomes</em> de l'arithmétique ne sont pas contradictoires?
+					</p>
+				</section>
+
+				<section>
+					<h2>Kurt Gödel <small>1906-1978</small></h2>
+					<div class="pull-right">
+						<img src="img/Godel.png" alt="Kurt Gödel">
+					</div>
+					<p>
+						En 1931, <a href="http://fr.wikipedia.org/wiki/Kurt_Gödel">Kurt Gödel</a> publie son <a href="http://fr.wikipedia.org/wiki/Th%C3%A9or%C3%A8me_d%27incompl%C3%A9tude">théorème d'incomplétude</a>.
+					</p>
+					<p>		
+						Toute formalization des mathématiques contient des énoncés qui ne peut être ni <em>prouvé</em> ni <em>réfuté</em>.
+					</p>
+				</section>
+
+				<section>
+					<h2>Alan Turing <small>1912-1954</small></h2>
+					<div class="pull-right">
+						<img src="img/Turing.jpg" alt="Alan Turing">
+					</div>
+					<p>
+						<a href="http://fr.wikipedia.org/wiki/Alan_Turing">Alan Turing</a> est l'auteur en 1936 d'un article de logique mathématique, qui présente une expérience de pensée, que l'on nommera ensuite <strong>machine de Turing</strong> et des concepts de programmation et de programme. 
+					</p>
+					<p>	
+						Ses travaux permettent résoudre le problème fondamental de la <strong>décidabilité</strong> en arithmétique.
+					</p>
+				</section>
+
+				<section>
+					<h2>Alonzo Church <small>1903-1995</small></h2>
+					<div class="pull-right">
+						<img src="img/Church.jpg" alt="Alonzo Church">
+					</div>
+					<p>
+						Les travaux de <a href="">Alonzo Church</a> précèdent le travail d'Alan Turing sur le problème de l'arrêt. 
+					</p>
+					<p>
+						C'est Church qui le premier a l'idée que l'on peut définir le concept de fonction calculable dans un sens très large. 
+					</p>
+					<p>
+						Church démontre en 1936 l'existence d'un problème insoluble pen utilisant le <strong>lambda-calcul</strong>.
+					</p>
+				</section>
+
+				<section>
+					<section>			
+						<h2>Emil Leon Post <small>1897-1954</small></h2>
+						<div class="pull-right">
+							<img src="img/Post.jpg" alt="Emil Leon Post">
+						</div>
+						<p>
+							<a href="http://fr.wikipedia.org/wiki/Emil_Post">Emil Leon Post</a> introduit en 1946 le <a href="http://fr.wikipedia.org/wiki/Problème_de_correspondance_de_Post">problème de correspondance de Post</a> qui est <strong>indécidable</strong>.
+						</p>
+					</section>
+					<section>
+						<h2>Problème de correspondance de Post</h2>
+						<p>
+							
+						</p>
+						<p>
+							Soit $\alpha_1, \cdots, \alpha_n$ et $\beta_1, \cdots, \beta_n$ des mots d'un alphabet $\Sigma$.
+						</p>
+						<p>
+							Par exemple:
+<table>
+<tr>
+<td bgcolor="#55FF83" width="40">$\alpha_1$</td>
+<td bgcolor="#55FF83" width="40">$\alpha_2$</td>
+<td bgcolor="" width="40">$\cdots$</td>
+<td bgcolor="#55FF83" width="40">$\alpha_n$</td>
+</tr>
+<tr>
+<td bgcolor="#87E6FF" width="40">$\beta_1$</td>
+<td bgcolor="#87E6FF" width="40">$\beta_2$</td>
+<td bgcolor="" width="40">$\cdots$</td>
+<td bgcolor="#87E6FF" width="40">$\beta_1$</td>
+</tr>
+</table>
+						</p>
+
+						<p>
+							Par exemple:
+<table>
+<tr>
+<td bgcolor="#55FF83" width="40">a</td>
+<td bgcolor="#55FF83" width="40">ab</td>
+<td bgcolor="#55FF83" width="40">bba</td>
+</tr>
+<tr>
+<td bgcolor="#87E6FF" width="40">baa</td>
+<td bgcolor="#87E6FF" width="40">aa</td>
+<td bgcolor="#87E6FF" width="40">bb</td>
+</tr>
+</table>
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Dixième problème de Hilbert</h2>
+						<p>
+							Trouver un <em>algorithme</em> déterminant si une <a href="http://fr.wikipedia.org/wiki/Équation_diophantienne">équation diophantienne</a> a des solutions.
+						</p>
+						<P>
+							Par example, est-ce que
+							$$
+							\begin{eqnarray}
+							3x^2y - 7y^2z^3 &amp; = &amp; 18 \\
+							-7y^2 - 8z^2 &amp; = &amp; 0
+							\end{eqnarray}
+							$$
+							as des solutions entières? 
+						</P>	
+					</section>
+					<section>
+						<h2>Dixième problème de Hilbert</h2>
+						<p>
+							En 1970, Youri Matiiassevitch démontre qu'un tel algorithme ne peut exister : le dixième problème de Hilbert n'a pas de solution!
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Conjecture de Syracuse</h2>
+						<p>
+							Soit l fonction $f$ tel que
+							$$
+							f(n) = \Bigg\{
+							\begin{array}{}
+							n / 2 &amp; \text{si } n \text{ est paire} \\
+							3n+1 &amp; \text{si } n \text{ est impaire}
+							\end{array}
+							$$
+						</p>
+						<p>
+							Pour une valeur de $n$ il est possible de produire une séquence de $a_i$ tel que
+						</p>
+						<p>
+							$$
+							a_i = \Bigg\{
+							\begin{array}{}
+							n &amp; \text{si } i=0 \\
+							f(a_{i-1}) &amp; \text{si } i > 0
+							\end{array}
+							$$
+						</p>
+					</section>
+					<section>
+						<h2>Example</h2>
+						<p>
+							Pour $n=6$ la séquence est:
+						</p>
+						<p>
+							6, 3, 10, 5, 16, 8, 4, 2, 1
+						</p>
+						<p>
+							Pour $n=11$ la séquence est:
+						</p>
+						<p>
+							11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1
+						</p>
+					</section>
+					<section>
+						<h2>Example</h2>
+						<p>
+							Pour $n=27$ la séquence est:
+						</p>
+						<p>
+							27, 82, 41, 124, 62, 31, 94, 47, 142, 71, 214, 107, 322, 161, 484, 242, 121, 364, 182, 91, 274, 137, 412, 206, 103, 310, 155, 466, 233, 700, 350, 175, 526, 263, 790, 395, 1186, 593, 1780, 890, 445, 1336, 668, 334, 167, 502, 251, 754, 377, 1132, 566, 283, 850, 425, 1276, 638, 319, 958, 479, 1438, 719, 2158, 1079, 3238, 1619, 4858, 2429, 7288, 3644, 1822, 911, 2734, 1367, 4102, 2051, 6154, 3077, 9232, 4616, 2308, 1154, 577, 1732, 866, 433, 1300, 650, 325, 976, 488, 244, 122, 61, 184, 92, 46, 23, 70, 35, 106, 53, 160, 80, 40, 20, 10, 5, 16, 8, 4, 2, 1
+						</p>
+					</section>
+					<section>
+						<h2>Conjecture de Syracuse</h2>
+						<p>
+							La conjecture affirme que, pour tout $n>0$ , il existe un indice $k$ tel que $a_k = 1$.
+						</p>
+					</section>
+				</section>
+
+				<!-- **************************************************************************************** -->
+
+				<section class="center" data-background="#007777">
+					<h1 class="title">...</h1>
+				</section>
+
+				<section>
+					<h2></h2>
+					<p>
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h2></h2>
+						<p>
+						</p>
+					</section>
+
+					<section>
+						<h2>Exemple</h2>
+						<p>
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2></h2>
+						<p>
+						</p>
+					</section>
+
+					<section>
+						<h2>Exemple</h2>
+						<p>
+						</p>
+					</section>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: 'ift', // available themes are in /css/theme
+				transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				//parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				//parallaxBackgroundSize: '2100px 900px',
+				slideNumber: true,
+
+				math: {
+        			mathjax: 'http://cdn.mathjax.org/mathjax/latest/MathJax.js',
+        			config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+    			},
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/math/math.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
