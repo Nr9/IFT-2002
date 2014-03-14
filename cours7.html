@@ -25,8 +25,6 @@
 			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
 		</script>
 
-		<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
-
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
@@ -141,7 +139,7 @@
 						</p>
 					</section>
 					<section>
-						<h2>Problème de correspondance de Post</h2>
+						<h2>Problème de <br/> correspondance de Post</h2>
 						<p>
 							
 						</p>
@@ -149,38 +147,72 @@
 							Soit $\alpha_1, \cdots, \alpha_n$ et $\beta_1, \cdots, \beta_n$ des mots d'un alphabet $\Sigma$.
 						</p>
 						<p>
-							Par exemple:
-<table>
+							Ces mots forments des paires:
+<table class="post">
 <tr>
-<td bgcolor="#55FF83" width="40">$\alpha_1$</td>
-<td bgcolor="#55FF83" width="40">$\alpha_2$</td>
-<td bgcolor="" width="40">$\cdots$</td>
-<td bgcolor="#55FF83" width="40">$\alpha_n$</td>
+<td class="alpha">$\alpha_1$</td>
+<td class="alpha">$\alpha_2$</td>
+<td class="alpha">$\cdots$</td>
+<td class="alpha">$\alpha_n$</td>
 </tr>
 <tr>
-<td bgcolor="#87E6FF" width="40">$\beta_1$</td>
-<td bgcolor="#87E6FF" width="40">$\beta_2$</td>
-<td bgcolor="" width="40">$\cdots$</td>
-<td bgcolor="#87E6FF" width="40">$\beta_1$</td>
+<td class="beta">$\beta_1$</td>
+<td class="beta">$\beta_2$</td>
+<td class="beta">$\cdots$</td>
+<td class="beta">$\beta_1$</td>
 </tr>
 </table>
 						</p>
 
 						<p>
+							Exist-il une séquence de ces paires tel que
+						</p>
+						<p>
+							$$ \alpha_{i_1}\alpha_{i_2} \cdots \alpha_{i_k} = \beta_{i_1}\beta_{i_2} \cdots \beta_{i_k} $$
+						</p>
+
+					</section>
+					<section>
+						<h2>Problème de <br/> correspondance de Post</h2>
+						<p>
 							Par exemple:
-<table>
+<table class="post">
 <tr>
-<td bgcolor="#55FF83" width="40">a</td>
-<td bgcolor="#55FF83" width="40">ab</td>
-<td bgcolor="#55FF83" width="40">bba</td>
+<td class="alpha">a</td>
+<td class="alpha">ab</td>
+<td class="alpha">bba</td>
 </tr>
 <tr>
-<td bgcolor="#87E6FF" width="40">baa</td>
-<td bgcolor="#87E6FF" width="40">aa</td>
-<td bgcolor="#87E6FF" width="40">bb</td>
+<td class="beta">baa</td>
+<td class="beta">aa</td>
+<td class="beta">bb</td>
 </tr>
 </table>
 						</p>
+						<p>
+							Il existe la solution suivante:
+<table class="post">
+<tr>
+<td class="alpha">bba</td>
+<td class="alpha">ab</td>
+<td class="alpha">bba</td>
+<td class="alpha">a</td>
+</tr>
+<tr>
+<td class="beta">bb</td>
+<td class="beta">aa</td>
+<td class="beta">bb</td>
+<td class="beta">baa</td>
+</tr>
+<tr>
+<td>$i_1 = 3$</td>
+<td>$i_2 = 3$</td>
+<td>$i_3 = 3$</td>
+<td>$i_4 = 3$</td>
+</tr>
+</table>							
+						</p>
+
 					</section>
 				</section>
 
@@ -265,6 +297,136 @@
 							La conjecture affirme que, pour tout $n>0$ , il existe un indice $k$ tel que $a_k = 1$.
 						</p>
 					</section>
+				</section>
+
+				<!--Revision -->
+
+				<section class="center" data-background="#007777">
+					<h1 class="title">Cours précédents</h1>
+				</section>
+
+				<section>
+					<section>
+						<h2>Grammaire</h2>
+						<p>
+							<b>Définition:</b>
+							Une <strong>grammaire</strong> consiste en un quadruplet de la forme $(V, \Sigma, S, R)$ où
+							<ul>
+								<li>$V$ est ensemble fini de <em>variables</em> (symboles non terminaux).</li>
+								<li>$\Sigma$ est <em>l’alphabet</em> (symboles terminaux).</li>
+								<li>$S \in V$ est le <em>symbole de départ</em>.</li>
+								<li>$R$ est un ensemble fini de <em>règles de réécriture</em>.</li>
+							</ul>
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<h2>Grammaire hors contexte</h2>
+					<p>
+						<b>Définition:</b>
+						Soit $G = (V, \Sigma, S, R)$ une grammaire. $G$ est <strong>hors contexte</strong> si
+						les <em>règles de réécriture</em> respecte les restrictions suivantes:
+						<ul>
+							<li>
+								Les termes de gauche consistent en un seul symbole <em>non terminal</em>.
+							</li>
+						</ul>
+					</p>
+				</section>
+
+				<section>
+					<h2>Langage hors contexte</h2>
+					<p>
+						<b>Définition:</b>
+						Un langage est dit <strong>hors contexte</strong> (ou <em>non contextuelle</em>) s’il existe une grammaire hors contexte qui le génère.
+					</p>
+				</section>
+
+				<!-- **************************************************************************************** -->
+
+				<section class="center" data-background="#007777">
+					<h1 class="title">Langage non hors contexte</h1>
+				</section>
+
+				<section>
+					<h2>Observation</h2>
+					<p>
+						Soit le langage $L=\{w \mid w$ contient le même nombre de $a$, de $b$ et de $c\}$. Est-ce que $L$ est hors contexte? 
+					</p>
+				</section>
+
+				<section>
+					<h2>Lemme de pompage</h2>
+					<p>
+						Si $L$ est un langage hors contexte, alors il existe un entier $p \ge 1$ (appelé longueur de pompage) tel que pour tout mot $w \in L$ avec $\lvert w \rvert \ge p$, il existe des mots $u,v,x,y,z$ tels que $w = uvxyz$ et
+						<ol>
+							<li>$\lvert vxy \rvert \le p$</li>
+							<li>$\lvert vy \rvert > 0$</li>
+							<li>pour tout entier $i \ge 0$ on a $uv^ixy^iz \in L$</li>
+						</ol>
+					</p>
+				</section>
+
+				<section>
+					<h2>Preuve qu’un langage $L$ est non hors contexte</h2>
+					<p>
+						Pour prouver qu’un langage est non hors contexte, on fait une preuve par contradiction.
+						<ul>
+							<li class="fragment roll-in">
+								On suppose que $L$ est hors contexte. 
+							</li>
+							<li class="fragment roll-in">
+								Donc il existe $p$ la longueur de pompage de $L$.
+							</li>
+							<li class="fragment roll-in">
+								On <em>choisi</em> un mot $w \in L$, avec $\lvert w \rvert \ge p$ (qu'il ne sera pas possible de pomper).
+							</li>
+							<li class="fragment roll-in">
+								On montre qu'en pompant $w$, on génère des mots qui ne sont pas dans $L$.
+							</li>
+						</ul>
+						 
+
+					</p>
+				</section>
+
+				<section>
+					<h2>Exemple</h2>
+					<p>
+						Prouver que le langage $L = \{a^nb^nc^n \mid n \ge 0 \}$ n'est pas hors contexte.
+					</p>
+				</section>
+
+				<section>
+					<h2>Exemple</h2>
+					<p>
+						Prouver que le langage $L = \{a^ib^jc^k \mid 0 ≤ i ≤ j ≤ k\}$ n'est pas hors contexte.
+					</p>
+				</section>
+
+				<section>
+					<h2>Exemple</h2>
+					<p>
+						Prouver que le langage $L = \{1^n0^n1^n0^n \mid n \ge 0 \}$ n'est pas hors contexte.
+					</p>
+				</section>
+
+				<section>
+					<h2>Exemple</h2>
+					<p>
+						Prouver que le langage $$L = \{w\#t \mid w \text{ est un sous-chaîne de } t, \text{ où } w, t \in \{a, b\}^*\}$$ n'est pas hors contexte.
+					</p>
+				</section>
+
+				<section>
+					<h2>Exemple</h2>
+					<p>
+						Soit $L_1 = \{ w \mid w$ est un palindrome $\}$ et soit $L_2 = \{w \mid w$ contient le même nombre de $0$ et de $1\}$.
+					</p>
+					<p>
+						Prouver que le langage $L_1 \cap L_2$ n'est pas hors contexte.
+					</p>
 				</section>
 
 				<!-- **************************************************************************************** -->

@@ -184,6 +184,26 @@ body {
   color: #ff7d00;
 }
 
+.reveal .slides .post th,
+.reveal .slides .post td
+{
+  padding:5px 10px;
+  vertical-align: middle;
+  width: 40px;
+}
+
+.reveal .slides .post td.alpha
+{
+  background-color: #55FF83;
+  font-size: 1.25em;
+}
+
+.reveal .slides .post td.beta
+{
+  background-color: #87E6FF;
+  font-size: 1.25em;
+}
+
 .reveal .slides .transition th,
 .reveal .slides .transition td
 {
