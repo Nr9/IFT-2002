@@ -15,7 +15,20 @@ var RevealMath = window.RevealMath || (function(){
 		MathJax.Hub.Config({
 			messageStyle: 'none',
 			tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] },
-			skipStartupTypeset: true
+			skipStartupTypeset: true,
+			TeX: {
+				Macros: {
+			    	rrinc: ['{\\mathtt{inc}(#1)}', 1],
+			    	rrset: ['{#1 \\leftarrow #2}', 2],
+			    	rrmacro: ['{\\mathtt{#1}(#2)}', 2],
+			    	rrrep: ['\\mathtt{répéter}~#1~\\mathtt{fois}~', 1],
+			    	rrwhile: ['\\mathtt{tant~que}~#1~\\mathtt{faire}~', 1],
+			    	rrif: ['\\mathtt{si}~#1~\\mathtt{alors}~', 1],
+			    	rrinvoke: ['{#1 \\leftarrow \\rrmacro{#2}{#3}}', 3],
+			    	rrtrue: ['{\\mathtt{vrai}}', 0],
+			    	rrfalse: ['{\\mathtt{faux}}', 0],
+			  	}
+			}
 		});
 
 		// Typeset followed by an immediate reveal.js layout since

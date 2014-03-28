@@ -65,6 +65,11 @@ body {
   vertical-align: baseline;
 }
 
+.reveal tt
+{
+  font-family: monospace;
+}
+
 .reveal h1 {
   text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2); 
 }
@@ -73,6 +78,51 @@ body {
 {
   color: white;
   line-height: 145px;
+}
+
+/*********************************************
+ * Smaller text
+ *********************************************/
+
+.reveal p.small1,
+.reveal td.small1
+{
+    font-size: 90%;
+}
+
+.reveal p.small2,
+.reveal td.small2
+{
+    font-size: 80%;
+}
+
+.reveal p.small3,
+.reveal td.small3
+{
+    font-size: 70%;
+}
+
+.reveal p.small4,
+.reveal td.small4
+{
+    font-size: 60%;
+}
+
+/*********************************************
+ * Definition list
+ *********************************************/
+
+.reveal dl {
+ width:100%;
+ overflow:hidden;
+}
+.reveal dt {
+ float:left;
+ width:25%; /* adjust the width; make sure the total of both is 100% */
+}
+.reveal dd {
+ float:left;
+ width:75%; /* adjust the width; make sure the total of both is 100% */
 }
 
 /*********************************************

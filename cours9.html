@@ -1,0 +1,1080 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Informatique Théorique - Hiver 2014</title>
+
+		<meta name="description" content="Informatique Théorique - Hiver 2014">
+		<meta name="author" content="Julien Marcil">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/ift.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/<html5shiv class="j"></html5shiv>s"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section class="center">
+					<h2>IFT-2002</h2>
+					<h1>Informatique Théorique</h1>
+					<h4>H14 - cours 9</h4>
+					<br/>
+					<p>
+						<small>Julien Marcil - <a href="mailto:julien.marcil@ift.ulaval.ca">julien.marcil@ift.ulaval.ca</a></small>
+					</p>
+				</section>
+
+				<!--Revision -->
+
+				<section class="center" data-background="#007777">
+					<h1 class="title">Cours précédents</h1>
+				</section>
+
+				<section>
+					<h2>Machine de Turing</h2>
+					<p>
+						<b>Définition:</b>
+						Une <strong>machine de Turing</strong> consiste en un 7-tuple de la forme $(S, \Sigma, \Gamma, \delta, \iota, s_{\text{accepte}}, s_{\text{rejete}})$ où
+						<ul>
+							<li>$S$ est un <em>ensemble fini d’états</em>.</li>
+							<li>$\Sigma$ est <em>l’alphabet</em> d'entré.</li>
+							<li>$\Gamma$ est l’alphabet du ruban tel que $␣ \in \Gamma$ et $\Sigma \subseteq \Gamma$.</li>
+							<li>$\delta : S \times \Gamma \to S \times \Gamma \times \{L,R\}$ est la <em>fonction de transition</em>.</li>
+							<li>$\iota \in S$ est l’<em>état initial</em>.</li>
+							<li>$s_{\text{accepte}} \in S$ est l’<em>état final acceptant</em>.</li>
+							<li>$s_{\text{rejete}} \in S$ est l’<em>état final rejetant</em> et $s_{\text{accepte}} \neq s_{\text{rejete}}$</li>
+						</ul>
+					</p>
+				</section>
+
+				<section>
+					<h2>La thèse de Church-Turing</h2>
+					<p>
+						Les machines de Turing <em>formalisent</em> correctement la notion d'algorithme.
+					</p>
+				</section>
+
+				<section>
+					<h2>Aujourd'hui</h2>
+					<ul>
+						<li>
+							Deux modèles calculatoires simples
+							<ul>
+								<li>Les programmes <tt>RÉPÉTER</tt></li>
+								<li>Les programmes <tt>TANTQUE</tt></li>
+							</ul>
+						</li>
+						<li>La fonction d’Ackermann</li>
+					</ul>
+				</section>
+
+				<!-- **************************************************************************************** -->
+
+				<section class="center" data-background="#007777">
+					<h1 class="title">Les programmes <tt>RÉPÉTER</tt></h1>
+				</section>
+
+				<section>
+					<section>
+						<h2>Les programmes <tt>RÉPÉTER</tt></h2>
+						<p>
+							<ul>
+								<li>Un nombre arbitrairement grand de registres est disponible: $r_0, r_1, \dots$</li>
+								<li>Chaque registre contient un entier positif ou nul</li>
+								<li>les registres sont implicitement initialisés à $0$ avant utilisation</li>
+							</ul>
+						</p>
+					</section>
+
+					<section>
+						<h2>Les instructions d'un<br/> programmes <tt>RÉPÉTER</tt></h2>
+						<p>
+							<ul>
+								<li class="fragment roll-in">l’instruction $\rrset{r_i}{r_j}$ remplace le contenu du registre $r_i$ par celui de $r_j$</li>
+								<li class="fragment roll-in">l’instruction $\rrinc{r_i}$ incrémente de $1$ le registre $r_i$</li>
+								<li class="fragment roll-in">l’instruction $\rrrep{r_i}[\langle\mathtt{BLOC}\rangle]$ répète l'éxécution d’un bloc d’instructions $r_i$ fois</li>
+								<ul>
+								<li class="fragment roll-in">le nombre d’exécution de $\langle\mathtt{BLOC}\rangle$ est ﬁxe une fois pour toutes avant l’entrée dans la boucle, que $r_i$ y soit modifié ou non</li>
+								</ul>
+							</ul>
+						</p>
+					</section>
+
+					<section>
+						<h2>Les programmes <tt>RÉPÉTER</tt></h2>
+						<p>
+							Un programme <tt>RÉPÉTER</tt> implante une fonction
+						</p>
+						<p>
+							$$ 
+							\begin{eqnarray}
+								f : &amp; \mathbb N \times \mathbb N \times \cdots \times \mathbb N &amp; \to &amp; \mathbb N \\
+								&amp; (r_1, \ r_2, \ \dots, \ r_k) &amp; \mapsto &amp; r_0 
+							\end{eqnarray}
+							$$	
+						</p>
+						<p>
+							Au debut de l’exécution, les registres $r_1$ à $r_k$ contiennent les arguments de $f$, et à la fin, $r_0$ contient $f(r_1, \dots, r_k)$.
+						</p>
+					</section>
+					<section>
+						<h2>Grammaire</h2>
+						<p class="small2">
+							$$ 
+							\begin{aligned}
+								S \to &amp; \langle\mathtt{INCRÉMENTATION}\rangle S \mid \lambda \mid \\
+								      &amp; \langle\mathtt{AFFECTATION}\rangle S \mid \langle\mathtt{RÉPÉTER}\rangle S \\
+
+								\langle\mathtt{INCRÉMENTATION}\rangle \to &amp; \rrinc{V} \\
+								\langle\mathtt{AFFECTATION}\rangle \to &amp; \rrset{V}{V} \\
+								\langle\mathtt{RÉPÉTER}\rangle \to &amp; \rrrep{V}[S] \\
+								V \to &amp; r_N \\
+								N \to &amp; C \mid CN \\
+								C \to &amp; 0 \mid 1 \mid 2 \mid 3 \mid 4 \mid 5 \mid 6 \mid 7 \mid 8 \mid 9
+
+							\end{aligned}
+							$$	
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Opérations Arithmétiques</h2>
+						<p>
+							Il est assez facile de faire des programmes <tt>RÉPÉTER</tt> pour des opérations arithmétiques simples.
+						</p>
+					</section>
+
+					<section>
+						<h2>Addition</h2>
+						<p>
+							$\rrmacro{PLUS}{r_1, r_2} = r_1 + r_2$
+						</p>
+						<p class="fragment">
+							$
+							\rrset{r_0}{r_1} \\
+							\rrrep{r_2}[ \\
+							\quad \rrinc{r_0} \\
+							]
+							$
+						</p>
+					</section>
+
+					<section>
+						<h2>Multiplication</h2>
+						<p>
+							$\rrmacro{MULT}{r_1, r_2} = r_1 \times r_2$
+						</p>
+						<p class="fragment">
+							$
+							\rrrep{r_1}[ \\
+							\quad \rrrep{r_2}[ \\
+							\quad\quad \rrinc{r_0} \\
+							\quad ] \\
+							]
+							$
+						</p>
+					</section>
+
+					<section>
+						<h2>Exponentiation</h2>
+						<p>
+							$\rrmacro{EXP}{r_1, r_2} = r_1^{r_2}$
+						</p>
+						<p class="small2 fragment">
+							$
+							\rrinc{r_0} \\
+							\rrrep{r_2}[ \\
+							\quad \rrset{r_3}{r_4} \\
+							\quad \rrrep{r_0}[ \\
+							\quad\quad \rrrep{r_1}[ \\
+							\quad\quad\quad \rrinc{r_3} \\
+							\quad\quad ] \\
+							\quad ] \\
+							\quad \rrset{r_0}{r_3} \\
+							]
+							$
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Sucre syntaxique</h2>
+						<p>
+							L'instruction $\rrinvoke{r_i}{PROC}{r_{j_1}, \dots, r_{j_k}}$ signiﬁe que l’on doit substituer à cette ligne un bloc d’instructions qui a pour effet de remplacer le contenu du registre $r_i$ par la valeur calculee par $\rrmacro{PROC}{r_{j_1}, \dots, r_{j_k}}$, en renommant au besoin les variables qui apparaissent dans le code de la procédure $\mathtt{PROC}$.
+						</p>
+						<p>
+							Les appels recursifs ne sont pas permis.
+						</p>
+					</section>
+
+					<section>
+						<h2>Sucre syntaxique</h2>
+						<p>
+							L’instruction $\rrset{r_i}{k}$ signiﬁe que l’on doit substituer à cette ligne $k$ incrémentations, ce qui aura pour effet d’affecter la constante $k$ au registre $r_i$
+						</p>
+						<p>
+							Partout, on peut mettre une constante $k$ au lieu d’utiliser une variable auxiliaire qu’on aurait incrémentée $k$ fois.
+						</p>
+					</section>
+					<section>
+						<h2>Exponentiation</h2>
+						<p>
+							$\rrmacro{EXP}{r_1, r_2} = r_1^{r_2}$
+						</p>
+						<p class="small2">
+							$
+							\rrset{r_0}{1} \\
+							\rrrep{r_2}[ \\
+							\quad \rrinvoke{r_0}{MULT}{r_0,r_1} \\
+							]
+							$
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Opérations Arithmétiques</h2>
+						<p>
+							Est-il possible de faire n'importequel opérations arithmétiques avec des programmes <tt>RÉPÉTER</tt>?
+						</p>
+					</section>
+
+					<section>
+						<h2>Décrémentation</h2>
+						<p>
+							$\rrmacro{DEC}{r_1} = \max(0, r_1-1)$
+						</p>
+						<p class="fragment">
+							$
+							\rrrep{r_1}[ \\
+							\quad \rrset{r_0}{r_2} \\
+							\quad \rrinc{r_2} \\
+							]
+							$
+						</p>
+					</section>
+
+					<section>
+						<h2>Soustraction</h2>
+						<p>
+							$\rrmacro{MOINS}{r_1, r_2} = \max(0, r_1-r_2)$
+						</p>
+						<p class="fragment">
+							$
+							\rrset{r_0}{r_1} \\
+							\rrrep{r_2}[ \\
+							\quad \rrinvoke{r_0}{DEC}{r_0} \\
+							]
+							$
+						</p>
+					</section>
+
+					<section>
+						<h2>Factorielle</h2>
+						<p>
+							$\rrmacro{FACT}{r_1} = r_1 !$
+						</p>
+						<p class="fragment">
+							$
+							\rrset{r_0}{1} \\
+							\rrrep{r_1}[ \\
+							\quad \rrinc{r_2} \\
+							\quad \rrinvoke{r_0}{MULT}{r_0, r_2} \\
+							]
+							$
+						</p>
+					</section>
+				</section>
+
+
+				<section>
+					<section>
+						<h2>Variables Booléennes</h2>
+						<p>
+							Nous adoptons les conventions syntaxiques suivantes :
+							<ul>
+								<li>$\rrtrue$ pour la constante $1$</li>
+								<li>$\rrfalse$ pour la constante $0$</li>
+							</ul>
+						</p>
+						<p>
+							Pour évaluer $\langle\mathtt{BLOC}\rangle$ conditionnellement à la valeur booléennes $r_i$ on répète $\langle\mathtt{BLOC}\rangle$ $r_i$ fois.
+						</p>
+						<p>
+							L’instruction $\rrif{r_i}[\langle\mathtt{BLOC}\rangle]$ sera mise pour $\rrrep{r_i}[\langle\mathtt{BLOC}\rangle]$.
+						</p>
+					</section>
+
+					<section>
+						<h2>Et</h2>
+						<p>
+							$\rrmacro{ET}{r_1, r_2} = r_1 \land r_2$
+						</p>
+						<p class="fragment">
+							$
+							\rrinvoke{r_0}{MULT}{r_1, r_2}
+							$
+						</p>
+					</section>
+
+					<section>
+						<h2>Negation</h2>
+						<p>
+							$\rrmacro{NEG}{r_1} = \neg r_1$
+						</p>
+						<p class="fragment">
+							$
+							\rrinvoke{r_0}{MOINS}{1, r_1}
+							$
+						</p>
+					</section>
+
+					<section>
+						<h2>Ou</h2>
+						<p>
+							$\rrmacro{OU}{r_1, r_2} = r_1 \lor r_2$ <span class="fragment">$= \neg(\neg r_1 \land \neg r_2)$</span>
+						</p>
+						<p class="fragment">
+							$
+							\rrinvoke{r_1}{NEG}{r_1} \\
+							\rrinvoke{r_2}{NEG}{r_2} \\
+							\rrinvoke{r_0}{ET}{r_1, r_2} \\
+							\rrinvoke{r_0}{NEG}{r_0} \\
+							$
+						</p>
+					</section>
+
+					<section>
+						<h2>Plus grand que</h2>
+						<p>
+							$\rrmacro{PG?}{r_1, r_2} = (r_1 \gt r_2)$
+						</p>
+						<p class="fragment">
+							$
+							\rrinvoke{r_3}{MOINS}{r_1, r_2} \\
+							\rrrep{r_3}[ \\
+							\quad \rrset{r_0}{\rrtrue} \\
+							]
+							$
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Opérations Arithmétiques</h2>
+						<p>
+							Regardons d'autres opérations arithmétiques plus complèxes.
+						</p>
+					</section>
+
+					<section>
+						<h2>Division</h2>
+						<p>
+							$\rrmacro{DIV}{r_1, r_2} = \big\lfloor \frac{r_1}{r_2} \big\rfloor$
+						</p>
+						<p class="small2 fragment">
+							$
+							\rrrep{r_1}[ \\
+							\quad \rrinvoke{r_3}{PLUS}{r_3, r_2} \\
+							\quad \rrinvoke{r_4}{PG?}{r_3, r_1} \\
+							\quad \rrinvoke{r_4}{NEG}{r_4} \\
+							\quad \rrif{r_4} [ \\
+							\quad\quad \rrinc{r_0} \\
+							\quad ] \\
+							]
+							$
+						</p>
+					</section>
+
+					<section>
+						<h2>Modulo</h2>
+						<p>
+							$\rrmacro{MOD}{r_1, r_2} = r_1~\text{mod}~r_2$
+						</p>
+						<p class="fragment">
+							$
+							\rrinvoke{r_0}{DIV}{r_1, r_2} \\
+							\rrinvoke{r_0}{MULT}{r_0, r_2} \\
+							\rrinvoke{r_0}{MOINS}{r_1, r_0}
+							$
+						</p>
+					</section>
+
+					<section>
+						<h2>Test de primalité</h2>
+						<p>
+							$\rrmacro{PREMIER?}{r_1} = (r_1 \in \mathbb P$)
+						</p>
+						<p class="small4 fragment">
+							$
+							\rrset{r_0}{\rrfalse} \\
+							\rrinvoke{r_5}{PG?}{r_1, 1} \\
+							\rrif{r_5} [\\
+
+							\quad \rrset{r_0}{\rrtrue} \\
+							\quad \rrset{r_3}{1} \\
+							\quad \rrinvoke{r_2}{MOINS}{r_1, 2} \\
+							\quad \rrrep{r_2} [\\
+
+							\quad\quad \rrinc{r_3} \\
+							\quad\quad \rrinvoke{r_4}{MOD}{r_1, r_3} \\
+							\quad\quad \rrinvoke{r_5}{PG?}{1, r_4} \\
+							\quad\quad \rrif{r_5} [ \rrset{r_0}{\rrfalse} ] \\
+
+							\quad ] \\
+							]
+							$
+						</p>
+					</section>
+
+					<section>
+						<h2>Prochain nombre premier</h2>
+						<p>
+							$\rrmacro{PREMIERSUIV}{r_1} =$ le plus petit nombre premier plus grand que $r_1$
+						</p>
+						<p class="small4 fragment">
+							$
+							\rrinvoke{r_2}{PLUS}{r_1, 1} \\
+							\rrinvoke{r_2}{MULT}{r_2, 2} \\
+							\rrset{r_3}{\rrtrue} \\
+							\rrrep{r_2} [\\
+
+							\quad \rrinc{r_1} \\
+							\quad \rrinvoke{r_4}{PREMIER?}{r_1} \\
+							\quad \rrinvoke{r_4}{ET}{r_3, r_4} \\
+							\quad \rrif{r_4} [\\
+
+							\quad\quad \rrset{r_0}{r_1} \\
+							\quad\quad \rrset{r_3}{\rrfalse} \\
+
+							\quad ] \\
+							]
+							$
+						</p>
+					</section>
+
+					<section>
+						<h2>$k$-ème nombre premier</h2>
+						<p>
+							$\rrmacro{PREMIERK}{r_1} =$ le $r_1$-ème nombre premier
+						</p>
+						<p class="fragment">
+							$
+							\rrrep{r_1} [\\
+							\quad \rrinvoke{r_0}{PREMIERSUIV}{r_0} \\
+							]
+							$
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2><tt>tableau</tt></h2>
+						<p>
+							Un tableau d’entiers est un $k$-tuple $(a_1, a_2, \dots, a_k)$ que nous stockons dans un registre $r_j$.
+						</p>
+					</section>
+
+					<section>
+						<h2>Codage de Gödel</h2>
+						<p>
+							Il est possible d'encoder le $k$-tuple $(a_1, a_2, \dots, a_k)$ où $a_i \in \mathbb N$ dans un entier. 
+						</p>
+						<p>
+							Soit $p_n$ le $n$-ième nombre premier. Le $k$-tuple $(a_1, a_2, \dots, a_k)$ est représenté sant ambiguïté par l'entier 
+						</p>
+						<p>
+							$$p_1^{a_1}p_2^{a_2} \cdots p_k^{a_k}$$
+						</p>
+					</section>
+
+					<section>
+						<h2>Exemples</h2>
+						<p>
+							$
+							\begin{eqnarray}
+							(1, 1, 1)  &amp; = &amp; 2^1 3^1 5^1 &amp; = &amp; 30 \\
+							(2, 1, 1, 1)  &amp; = &amp; 2^2 3^1 5^1 7^1 &amp; = &amp; 420 \\
+							(2, 0, 4, 3, 0, 3) &amp; = &amp; 2^2 3^0 5^4 7^3 11^0 13^3 &amp; = &amp; 1883927500
+
+							\end{eqnarray}
+							$
+						</p>
+					</section>
+
+					<section>
+						<h2>Extraction d’un élément d’un <tt>tableau</tt></h2>
+						<p>
+							$\rrmacro{TABLVAL}{r_1,r_2} =$ le $r_2$-ème élément du <tt>tableau</tt> $r_1$
+						</p>
+						<p class="small3 fragment">
+							$
+							\rrinvoke{r_3}{PREMIERK}{r_2} \\
+							\rrset{r_4}{r_3} \\
+							\rrrep{r_1} [\\
+
+							\quad \rrinvoke{r_5}{MOD}{r_1, r_4} \\
+							\quad \rrinvoke{r_5}{PG?}{1, r_5} \\
+							\quad \rrif{r_5} [\\
+
+							\quad\quad \rrinc{r_0} \\
+							\quad\quad \rrinvoke{r_4}{MULT}{r_3, r_4} \\
+
+							\quad ] \\
+							]
+							$
+						</p>
+					</section>
+
+					<section>
+						<h2>Assignation d’un élément dans un <tt>tableau</tt></h2>
+						<p>
+							$\rrmacro{TABLASS}{r_1,r_2,r_3} =$ le <tt>tableau</tt> $r_1$ où $r_2$-ème élément est remplacé par $r_3$
+						</p>
+						<p class="small1 fragment">
+							$
+							\rrinvoke{r_4}{TABLVAL}{r_1,r_2} \\
+							\rrinvoke{r_5}{PREMIERK}{r_2} \\
+							\rrinvoke{r_6}{EXP}{r_5,r_4} \\
+							\rrinvoke{r_0}{DIV}{r_1,r_6} \\
+							\rrinvoke{r_7}{EXP}{r_5,r_3} \\
+							\rrinvoke{r_0}{MULT}{r_0,r_7}
+							$
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Puissance des programmes <tt>RÉPÉTER</tt></h2>
+						<p>
+							Il semble que les programmes <tt>RÉPÉTER</tt> peuvent calculer des fonctions complexes.
+						</p>
+						<p>
+							Peut-on calculer toutes les fonctions à valeurs entières avec un programme <tt>RÉPÉTER</tt>?
+						</p>
+					</section>
+
+					<section>
+						<h2>Primitives Récursives</h2>
+						<p>
+							<b>Définition:</b>
+							Les fonctions calculables par un programme <tt>RÉPÉTER</tt> sont appelées <strong>primitives récursives</strong>.
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Notation</h2>
+						<p>
+							Pour une fonction $f : \mathbb N \to \mathbb N$, et un entier $n$, on note :
+						</p>
+						<p>
+							$$
+							\begin{align}
+								f^{\langle 0 \rangle}(x) &amp; = x \\
+								f^{\langle 1 \rangle}(x) &amp; = f(x) \\
+								f^{\langle 2 \rangle}(x) &amp; = f(f(x)) \\
+														 &amp; \vdots \\
+								f^{\langle n \rangle}(x) &amp; = \underbrace{f(f(\cdots f(x) \cdots))}_{n~\text{fois}} \\
+
+							\end{align}
+							$$
+						</p>
+					</section>
+
+					<section>
+						<h2>Remarque</h2>
+						<p>
+							Soit $k, n \in \mathbb N$ et $k \le n$
+						</p>
+						<p>
+							$$f^{\langle n \rangle}(x) = f^{\langle n-k \rangle}\big(f^{\langle k \rangle}(x)\big)$$
+						</p>
+					</section>
+
+					<section>
+						<h2>Remarque</h2>
+						<p>
+							Soit $n, u \in \mathbb N$.
+						</p>
+						<p>
+							$$\big(f^{\langle n \rangle}\big)^{\langle u \rangle}(x) = f^{\langle nu \rangle}(x)$$
+						</p>
+					</section>
+
+				</section>
+
+				<section>
+					<section>
+						<h2>Boucles imbriquées</h2>
+						<p>
+							<b>Définition:</b>
+							Soit la fonction $B_i : \mathbb N \to \mathbb N$ pour $i \ge 0$
+						</p>
+						
+						<p>
+    						$$
+    						B_i(x) = 
+   							\begin{cases}
+    							1 &amp; \text{si}~i=0, x=0 \\
+    							2 &amp; \text{si}~i=0, x=1 \\
+    							x+2 &amp; \text{si}~i=0, x \gt 1 \\
+								{B_{i-1}}^{\langle x \rangle}(1) &amp; \text{si}~i \gt 0
+  							\end{cases}
+   							$$
+						</p>
+					</section>
+
+					<section>
+						<h2>Exemples</h2>
+						<p>
+							$$
+    						
+   							\begin{eqnarray}{}
+    							B_0(x) &amp; = &amp; x+2 \quad &amp; \text{si}~x \gt 1 \\
+    							B_1(x) &amp; = &amp; 2x &amp; \text{si}~x \gt 0 \\
+    							B_2(x) &amp; = &amp; 2^x &amp; \text{si}~x \ge 0 \\
+    							B_3(x) &amp; = &amp; \underbrace{2^{2^{2^{\cdots}}}}_{n~\text{fois}} &amp; \text{si}~x \gt 0 \\
+
+  							\end{eqnarray}
+   							$$
+						</p>
+					</section>
+					<section>
+						<h2>Remarques</h2>
+						<p>
+							Il est clair que plus $i$ est grand, plus $B_i$ est une fonction qui croît rapidement.
+						</p>
+						<ul>
+							<li class="fragment roll-in">
+								La valeur de $B_3(5)$ compte 19729 chiffres.
+							</li>
+							<li class="fragment roll-in">
+								La valeur de $B_3(6)$ compte plus de chiffres que le nombre d’atomes dans l’univers.
+							</li>
+							<li class="fragment roll-in">
+								La fonction $B_3$ croît très rapidement, mais ce n’est rien si on la compare à $B_4$.
+							</li>
+							<li class="fragment roll-in">
+								Le taux de croissance de la fonction $B_{100}$ dépasse l’entendement...
+							</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Lemme</h2>
+						<p>
+							Pour tout $i \gt 0$, $B_i$ est calculables par un programme <tt>RÉPÉTER</tt>.
+						</p>
+					</section>
+
+					<section>
+						<h2>Preuve</h2>
+						<p>
+							$\rrmacro{B[0]}{r_1} = B_0(r_1)$
+						</p>
+						<p>
+							$
+							\rrinvoke{r_0}{PLUS}{r_1,1} \\
+							\rrinvoke{r_2}{PG?}{r_0,2} \\
+							\rrif{r_2} [\\
+							\quad \rrinc{r_0} \\
+							]
+							$
+						</p>
+					</section>
+
+					<section>
+						<h2>Preuve (suite)</h2>
+						<p>
+							Pour un $i > 0$ fixé, 
+							$\rrmacro{B[i]}{r_1} = B_i(r_1)$
+						</p>
+						<p>
+							$
+							\rrinc{r_0} \\
+							\rrrep{r_1} [\\
+							\quad \rrinvoke{r_0}{B[i-1]}{r_0} \\
+							]
+							$
+						</p>
+					</section>
+
+					<section>
+						<h2>Remarques</h2>
+						<p>
+							On remarque que le programme $\mathtt{B[i]}$ compte exactement $i$ boucles $\mathtt{répéter}$ et la profondeur d’imbrication est aussi $i$.
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<h2>Théorème</h2>
+					<p>
+						Propriétés de la famille des fonctions $B_i$
+					</p>
+					<ol>
+						<li>
+							${B_i}^{\langle k \rangle}(x)$ est croissant en $i$, $x$ et $k$. 
+						</li>
+						<li>
+							${B_i}(2x) \le {B_i}^{\langle 2 \rangle}(x) \quad$ pour $i \gt 0$, $x \ge 0$. 
+						</li>
+						<li>
+							${B_0}^{\langle \lceil \frac{y}{2} \rceil + 1 \rangle}(x) \ge y+x \quad$ pour $i, x, y \ge 0$.
+						</li>
+						<li>
+							${B_i}^{\langle y \rangle}(x) \le B_{i+1}(y+x) \quad$ pour $i, x, y \ge 0$. 
+						</li>
+					</ol>
+					<br/>
+					<br/>
+					<p class="fragment roll-in">
+						<b>Preuve:</b> Tous les énoncés du théorème peuvent être facilement prouvés par induction sur $i$.
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h2>Nombre maximal<br/> d’imbrications</h2>
+						<p>
+							<b>Définition:</b>
+							Pour tout programme <tt>RÉPÉTER</tt>, $\mathcal B(\mathtt{P})$ est le <strong>nombre maximal d’imbrications des boucles</strong> de $\mathtt{P}$.
+						</p>
+					</section>
+
+					<section>
+						<h2>Valeur maximale<br/> des registres</h2>
+						<p>
+							<b>Définition:</b>
+							On note $\mathcal M(\mathtt{P}, r_1, \dots, r_k)$ la <strong>valeur maximale des registres</strong> $r_1, \dots, r_k$ après l'exécution de $\mathtt{P}$.
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<h2>Théorème</h2>
+					<p>
+						 Pour tout programme <tt>RÉPÉTER</tt>, si $\mathcal B(\mathtt{P}) = i$, alors il existe un entier $s$ tel que
+					</p>
+					<p>
+						$$
+						\forall_{r_1, \dots, r_k \in \mathbb N} \ \mathcal M(\mathtt{P}, r_1, \dots, r_k) \le {B_i}^{\langle s \rangle}\big(\max(r_1, \dots, r_k)\big)
+						$$
+					</p>
+				</section>
+
+				<section>
+					<h2>Corollaire</h2>
+					<p>
+						Pour tout $i \ge 0$ il existe une fonction qui n’est pas calculable par un programme <tt>RÉPÉTER</tt> avec une profondeur de boucle $i$, mais qui est calculable par un programme avec une profondeur de boucle $i + 1$.
+					</p>
+				</section>
+
+				<section>
+					<h2>La fonction d’Ackermann</h2>
+					<p>
+						<b>Définition:</b>
+						En 1926, <a href="http://fr.wikipedia.org/wiki/Wilhelm_Ackermann">Wilhelm Ackermann</a> déﬁnit la fonction à deux variables suivante
+					</p>
+					<p>
+						$$
+						A(i,x) = 
+							\begin{cases}
+							1 &amp; \text{si}~x=0 \\
+							2 &amp; \text{si}~i=0, x=1 \\
+							x+2 &amp; \text{si}~i=0, x \gt 1 \\
+							A(i-1,A(i,x-1)) &amp; \text{si}~i \gt 0, x \gt 0
+							\end{cases}
+							$$
+					</p>
+				</section>
+
+				<section>
+					<h2>Lemme</h2>
+					<p>
+						$$
+						\forall_{i \in \mathbb N} \ \forall_{x \in \mathbb N} \ A(i,x) = B_i(x)
+						$$
+					</p>
+					<p>
+						<b>Preuve</b>. Le lemme sera prouvé par induction d’abord sur $i$ et en suite sur $x$.
+					</p>
+				</section>
+
+				<section>
+					<h2>Théorème</h2>
+					<p>
+						La fonction d’Ackermann n’est pas calculable par un programme <tt>RÉPÉTER</tt>.
+					</p>
+					<p>
+						Donc Ackermann n’est pas primitive récursive.
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h2>Remarque</h2>
+						<p>
+							 La fonction $F(x) = A(x, x)$ croît plus rapidement que n’importe quelle des fonctions $B_i(x)$.
+						</p>
+					</section>
+
+					<section>
+						<h2>Remarque</h2>
+						<p>
+							Un programme <tt>RÉPÉTER</tt> ne peut pas entrer dans une boucle inﬁnie, son execution se termine toujours.
+						</p>
+					</section>
+				</section>
+
+				<section class="center" data-background="#007777">
+					<h1 class="title">Les programmes <tt>TANTQUE</tt></h1>
+				</section>
+
+				<section>
+					<section>
+						<h2>Les programmes <tt>TANTQUE</tt></h2>
+						<p>
+							Les programmes <tt>TANTQUE</tt> sont semblables aux programmes <tt>RÉPÉTER</tt>
+							<ul>
+								<li>Un nombre arbitrairement grand de registres est disponible: $r_0, r_1, \dots$</li>
+								<li>Chaque registre contient un entier positif ou nul</li>
+								<li>les registres sont implicitement initialisés à $0$ avant utilisation</li>
+								<li>l’instruction $\rrset{r_i}{r_j}$ remplace le contenu du registre $r_i$ par celui de $r_j$</li>
+								<li>l’instruction $\rrinc{r_i}$ incrémente de $1$ le registre $r_i$</li>
+							</ul>
+						</p>
+					</section>
+
+					<section>
+						<h2>Les instructions d'un<br/> programmes <tt>TANTQUE</tt></h2>
+						<p>
+							Les programmes <tt>TANTQUE</tt> sont semblables aux programmes <tt>RÉPÉTER</tt>, mais les boucles sont differentes:
+							<ul>
+								<li>l’instruction $\rrwhile{r_i \ne r_j}[\langle\mathtt{BLOC}\rangle]$ répète l'éxécution d’un bloc d’instructions tant que les valeurs des registres $r_i$ et $r_j$ diffèrent</li>
+								<ul>
+								<li>l’inegalité est réévaluée à chaque itération et les valeurs de $r_i$ et $r_j$ peuvent changer</li></ul>
+							</ul>
+						</p>
+					</section>
+
+					<section>
+						<h2>Les programmes <tt>TANTQUE</tt></h2>
+						<p>
+							Un programme <tt>TANTQUE</tt> implante une fonction
+						</p>
+						<p>
+							$$ 
+							\begin{eqnarray}
+								f : &amp; \mathbb N \times \mathbb N \times \cdots \times \mathbb N &amp; \to &amp; \mathbb N \cup \{ \uparrow \} \\
+								&amp; (r_1, \ r_2, \ \dots, \ r_k) &amp; \mapsto &amp; 
+									\begin{cases}
+										r_0 &amp; \text{si le programme s’arrête} \\
+										\uparrow &amp; \text{si le programme boucle a l’inﬁni} \\
+									\end{cases} 
+							\end{eqnarray}
+							$$	
+						</p>
+						<p>
+							Au debut de l’exécution, les registres $r_1$ à $r_k$ contiennent les arguments de $f$, et à la fin, $r_0$ contient $f(r_1, \dots, r_k)$.
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<h2>Remarque</h2>
+					<p>
+						Contrairement aux programmes <tt>RÉPÉTER</tt>, un programme <tt>TANTQUE</tt> peut ne jamais s’arrêter, par exemple :
+					</p>
+					<p>
+						$\rrmacro{BOUCLE}{r_1} = \uparrow$
+					</p>
+					<p class="small1">
+							$
+							\rrinc{r_1} \\
+							\rrwhile{r_1 \ne r_0}[\ ] \\
+							$
+					</p>
+				</section>		
+
+				<section>
+					<section>
+						<h2>Lemme</h2>
+						<p>
+							Tout programme <tt>RÉPÉTER</tt> peut être simulé par un programme <tt>TANTQUE</tt>.
+						</p>
+					</section>	
+					<section>
+						<h2>Preuve</h2>
+						<p>
+							Il sufﬁt de remplacer les boucles de la forme
+						</p>
+						<p>
+							$\rrrep{r_i} [\dots]$
+						</p>
+						<p> 
+							par (où $r_j$ et $r_k$ sont des registres non utilisés)
+						</p>
+						<p>
+							$
+							\rrset{r_k}{r_i} \\
+							\rrwhile{r_j \ne r_k} [ \\
+							\quad \dots \\
+							\quad \rrinc{r_j} \\
+							]
+							$
+						</p>
+					</section>	
+					<section>
+						<h2>Sucre syntaxique</h2>
+						<p>
+							On se permettra d’utiliser les instructions $\mathtt{répéter}$ dans les programmes <tt>TANTQUE</tt>.
+						</p>
+						<p>
+							On peut donc recycler comme des programmes <tt>TANTQUE</tt> tous les programmes <tt>RÉPÉTER</tt> que nous avons vus.
+						</p>
+					</section>
+				</section>
+			
+				<section>
+					<section>
+						<h2>Ackermann est calculable par un programme <tt>TANTQUE</tt></h2>
+						<p>
+							Nous allons exhiber un programme <tt>TANTQUE</tt> qui implante la fonction d’Ackermann
+						</p>
+					</section>
+
+					<section>
+						<p>
+							$\rrmacro{ACKERMANN}{r_1, r_2} = A(r_1, r_2)$
+						</p>
+						<p>
+							<table>
+								<tr>
+									<td class="small4">
+										$
+										\rrset{r_3}{1} \\
+										\rrinc{r4} \quad \rrinvoke{r_3}{TABLASS}{r_3, r_4, r_1} \\
+										\rrinc{r4} \quad \rrinvoke{r_3}{TABLASS}{r_3, r_4, r_2} \\
+										\rrwhile{r_4 \ne 1} [ \\
+										\quad \rrinvoke{r_5}{DEC}{r_4} \quad \rrinvoke{r_7}{TABLEVAL}{r_3, r_5} \\
+										\quad \rrset{r_6}{r_4} \quad\quad\quad \rrinvoke{r_8}{TABLEVAL}{r_3, r_6} \\
+										\quad \rrinvoke{r_9}{PG?}{r_8, 0} \quad \rrinvoke{r_{10}}{NEG}{r_9} \\
+										\quad \rrinvoke{r_{11}}{PG?}{r_7, 0} \quad \rrinvoke{r_{12}}{NEG}{r_{11}} \\
+										\quad \rrinvoke{r_{13}}{PG?}{r_8, 1} \quad \rrinvoke{r_{14}}{NEG}{r_{13}} \\
+										\quad \rrif{r_{10}} [\\
+										\quad\quad \rrinvoke{r_4}{DEC}{r_4} \\
+										\quad\quad \rrinvoke{r_3}{TABLASS}{r_3, r_4, 1} \\
+										\quad ] \\
+										$
+									</td>
+									<td class="small4">
+										$
+										\quad \rrif{r_{9}} [\\
+										
+										\quad\quad \rrif{r_{12}} [\\
+										\quad\quad\quad \rrif{r_{14}} [ \rrinvoke{r_4}{DEC}{r_4} \ \rrinvoke{r_3}{TABLASS}{r_3, r_4, 2} ] \\
+										\quad\quad\quad \rrif{r_{15}} [ \\
+										\quad\quad\quad\quad \rrinvoke{r_{15}}{PLUS}{r_8,2} \quad \rrinvoke{r_4}{DEC}{r_4} \\
+										\quad\quad\quad\quad \rrinvoke{r_3}{TABLASS}{r_3, r_4, r_{15}} \\
+										\quad\quad\quad ] \\
+
+										\quad\quad ] \\
+
+										\quad\quad \rrif{r_{11}} [\\
+										\quad\quad\quad \rrinvoke{r_{15}}{DEC}{r_7} \quad \rrinvoke{r_3}{TABLASS}{r_3, r_5, r_{15}} \\
+										\quad\quad\quad \rrinvoke{r_3}{TABLASS}{r_3, r_6, r_{7}} \quad \rrinvoke{r_{15}}{DEC}{r_8} \\
+										\quad\quad\quad \rrinc{r_4} \quad \rrinvoke{r_3}{TABLASS}{r_3, r_4, r_{15}} \\
+										\quad\quad ] \\
+										
+
+										\quad ] \\
+										] \\
+										\rrinvoke{r_0}{TABLVAL}{r_3, r_4}
+										$
+									</td>
+								</tr>
+							</table>
+						</p>
+					</section>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: 'ift', // available themes are in /css/theme
+				transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				//parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				//parallaxBackgroundSize: '2100px 900px',
+				slideNumber: true,
+
+				math: {
+        			mathjax: 'http://cdn.mathjax.org/mathjax/latest/MathJax.js',
+        			config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+    			},
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/math/math.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
