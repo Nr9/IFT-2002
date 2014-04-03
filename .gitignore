@@ -2,3 +2,5 @@ node_modules
 *.log
 *.aux
 *.synctex.gz
+*.fdb_latexmk
+Latex/*.pdf
