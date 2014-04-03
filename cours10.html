@@ -1,0 +1,1128 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Informatique Théorique - Hiver 2014</title>
+
+		<meta name="description" content="Informatique Théorique - Hiver 2014">
+		<meta name="author" content="Julien Marcil">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/ift.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+		<!--[if lt IE 9]>
+		<script src="lib/js/<html5shiv class="j"></html5shiv>s"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section class="center">
+					<h2>IFT-2002</h2>
+					<h1>Informatique Théorique</h1>
+					<h4>H14 - cours 10</h4>
+					<br/>
+					<p>
+						<small>Julien Marcil - <a href="mailto:julien.marcil@ift.ulaval.ca">julien.marcil@ift.ulaval.ca</a></small>
+					</p>
+				</section>
+
+				<!--Revision -->
+
+				<section class="center" data-background="#007777">
+					<h1 class="title">Cours précédents</h1>
+				</section>
+
+				<section>
+					<h2>Turing-acceptable</h2>
+					<p>
+						<b>Définition:</b>
+						Un langage $L$ est dit <strong>Turing-acceptable</strong> (ou <em>récursivement énumérable</em>)s’il existe une machine de Turing qui accepte les mots de $L$.
+					</p>
+					<p>
+						Étant donnée une entrée $w$
+						<ul>
+							<li>Si $w \in L$ alors $M$ s’arrête et accepte $w$</li>
+							<li>Si $w \notin L$ alors $M$ s’arrête et rejette $w$ ou ne s’arrête pas</li>	
+						</ul>
+					</p>
+				</section>
+
+				<section>
+					<h2>Turing-décidable</h2>
+					<p>
+						<b>Définition:</b>
+						Un langage $L$ est dit <strong>Turing-décidable</strong> (ou <em>décidable</em>)s’il existe une machine de Turing $M$ qui accepte les mots de $L$ et rejette les autres mots.
+					</p>
+					<p>
+						Étant donnée une entrée $w$
+						<ul>
+							<li>Si $w \in L$ alors $M$ s’arrête et accepte $w$</li>
+							<li>Si $w \notin L$ alors $M$ s’arrête et rejette $w$</li>	
+						</ul>
+					</p>
+				</section>
+
+				<section>
+					<h2>Théorème</h2>
+					<p>
+						Soit un le langage $L$. Si $L$ est <em>Turing-décidable</em>, alors $\overline{L}$ est <em>Turing-décidable</em>.
+					</p>
+				</section>
+
+				<section>
+					<h2>Théorème</h2>
+					<p>
+						Soit un le langage $L$. Si $L$ et $\overline{L}$ sont <em>Turing-acceptable</em>, alors $L$ est <em>Turing-décidable</em>.
+					</p>
+				</section>
+
+				<section>
+					<h2>Aujourd'hui</h2>
+					<ul>
+						<li>Décidabilité</li>
+						<li>Réduction</li>
+					</ul>
+				</section>
+
+				<!-- **************************************************************************************** -->
+
+				<section class="center" data-background="#007777">
+					<h1 class="title">Décidabilité</h1>
+				</section>
+
+
+				<section>
+					<section>
+						<h2>Notation</h2>
+						<p>
+							Soit un programme $M$, alors on note $\langle M \rangle$ la chaîne de symboles qui représente $M$.
+						</p>
+					</section>
+					<section>
+						<h2>Différence entre $M$ et $\langle M \rangle$</h2>
+						<p>
+							Lorsque l’on parle d’un «&nbsp;programme&nbsp;» on ne fait souvent pas la distinction entre le code source du programme et l’exécutable qui lui correspond.
+						</p>
+						<p>
+							La différence entre $M$ et $\langle M \rangle$ est de la même nature. 
+							<ul>
+								<li>
+									$M$ est une «&nbsp;machine&nbsp;» donc un processus automatique, un exécutable, quelque chose qui reçoit une entrée et retourne (peut-être) une sortie.
+								</li>
+								<li>
+									 $\langle M \rangle$ est une suite de 0 et de 1. On choisit d’interpréter cette suite de 0 et de 1 comme ayant un sens précis, celui de l’encodage de $M$. 
+								</li>
+							</ul>
+						</p>
+					</section>
+					<section>
+						<img src="http://upload.wikimedia.org/wikipedia/en/b/b9/MagrittePipe.jpg">
+						<p><a href="http://fr.wikipedia.org/wiki/La_Trahison_des_images">La Trahison des images</a> (1929, huile sur toile, 59&nbsp;×&nbsp;65&nbsp;cm), <a href="http://fr.wikipedia.org/wiki/Ren%C3%A9_Magritte">René Magritte</a></p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>$A_{\text{AFD}}$</h2>
+						<br/>
+						<p>
+							$$A_{\text{AFD}} = \{\langle B, w\rangle \mid B \text{ est un AFD qui accepte } w\}$$
+						</p>
+						<p class="small3">
+							$\text{AFD}$: automate fini déterminite
+						</p>
+					</section>
+
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							$A_{\text{AFD}}$ est un langage décidable.
+						</p>
+					</section>
+					<section>
+						<h2>Démonstration</h2>
+						<p>
+							Soit la machine de Turing $M_{A_{\text{AFD}}}$ qui décide $A_{\text{AFD}}$.
+						</p>
+						<p class="code">
+							$M_{A_{\text{AFD}}} = $ Avec $\langle B, w\rangle$
+							<ol class="code">
+								<li>
+									Simuler $B$ sur $w$.
+								</li>
+								<li>
+									Si la simulation termine sur un état accepteur alors $\mathtt{ACCEPTE}$. Si la simulation termine sur un état non-accepteur alors $\mathtt{REJETTE}$.
+								</li>
+							</ol>
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>$A_{\text{AFN}}$</h2>
+						<br/>
+						<p>
+							$$A_{\text{AFN}} = \{\langle B, w\rangle \mid B \text{ est un AFN qui accepte } w\}s$$
+						</p>
+						<p class="small3">
+							$\text{AFN}$: automate fini non déterminite
+						</p>
+					</section>
+
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							$A_{\text{AFN}}$ est un langage décidable.
+						</p>
+					</section>
+					<section>
+						<h2>Démonstration</h2>
+						<p>
+							Soit la machine de Turing $M_{A_{\text{AFN}}}$ qui décide $A_{\text{AFN}}$.
+						</p>
+						<p class="code">
+							$M_{A_{\text{AFN}}} = $ Avec $\langle B, w\rangle$
+							<ol class="code">
+								<li>
+									Covertir $B$ en $C$ un $\text{AFD}$ équivalent. 
+								</li>
+								<li>
+									Executer $M_{A_{\text{AFD}}}$ sur $\langle C, w\rangle$
+								</li>
+								<li>
+									Si $M_{A_{\text{AFD}}}$ accepte alors $\mathtt{ACCEPTE}$ sinon $\mathtt{REJETTE}$.
+								</li>
+							</ol>
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>$E_{\text{AFD}}$</h2>
+						<br/>
+						<p>
+							$$E_{\text{AFD}} = \{\langle B \rangle \mid B \text{ est un AFD et } L(B) = \emptyset\}$$
+						</p>
+					</section>
+
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							$E_{\text{AFD}}$ est un langage décidable.
+						</p>
+					</section>
+					<section>
+						<h2>Démonstration</h2>
+						<p>
+							Soit la machine de Turing $M_{E_{\text{AFD}}}$ qui décide $E_{\text{AFD}}$.
+						</p>
+						<p class="code">
+							$M_{E_{\text{AFD}}} = $ Avec $\langle B \rangle$
+							<ol class="code">
+								<li>
+									Marquer l'état initial de $B$.
+								</li>
+								<li>
+									Répéter jusqu'à ce qu'il n'y est plus d'état à marquer
+									<ol>
+										<li>
+											Marquer un état pour lequel il existe une transition venant d'un état déjà marqué.
+										</li>
+									</ol>
+								</li>
+								<li>
+									Si aucun état accepteur de $B$ n'est marqué alors $\mathtt{ACCEPTE}$ sinon $\mathtt{REJETTE}$.
+								</li>
+							</ol>
+						</p>
+					</section>
+				</section>	
+
+				<section>
+					<section>
+						<h2>$EQ_{\text{AFD}}$</h2>
+						<br/>
+						<p>
+							$$EQ_{\text{AFD}} = \{\langle A, B \rangle \mid A  \text{ et } B \text{ sont des AFD et } L(A) = L(B) \}$$
+						</p>
+					</section>
+
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							$EQ_{\text{AFD}}$ est un langage décidable.
+						</p>
+					</section>
+					<section>
+						<h2>Théorie des ensembles</h2>
+						<p>
+							Soit $C$ un $\text{AFD}$ tel que
+							$$L(C) = \big( L(A) \cap \overline{L(B)} \big) \cup \big( \overline{L(A)} \cap L(B) \big)$$
+						</p>
+						<p class="fragment">
+							$$L(A) = L(B) \ \Leftrightarrow \ L(C) = \emptyset$$
+						</p>
+					</section>
+					<section>
+						<h2>Démonstration</h2>
+						<p>
+							Soit la machine de Turing $M_{EQ_{\text{AFD}}}$ qui décide $EQ_{\text{AFD}}$.
+						</p>
+						<p class="code">
+							$M_{EQ_{\text{AFD}}} = $ Avec $\langle A, B \rangle$
+							<ol class="code">
+								<li>
+									Construire l'automate fini déterministe $C$ à partir de $A$ et $B$.
+								</li>
+								<li>
+									Executer $M_{E_{\text{AFD}}}$ sur $\langle C \rangle$
+								</li>
+								<li>
+									Si $M_{E_{\text{AFD}}}$ accepte alors $\mathtt{ACCEPTE}$ sinon $\mathtt{REJETTE}$.
+								</li>
+							</ol>
+						</p>
+					</section>
+				</section>				
+
+				<section>
+					<section>
+						<h2>$A_{\text{GHC}}$</h2>
+						<br/>
+						<p>
+							$$A_{\text{GHC}} = \{\langle G, w\rangle \mid G \text{ est une GHC qui génère } w\}$$
+						</p>
+						<p class="small3">
+							$\text{GHC}$: grammaire hors context
+						</p>
+					</section>
+
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							$A_{\text{GHC}}$ est un langage décidable.
+						</p>
+					</section>
+					<section>
+						<h2>Forme normale de Chomsky</h2>
+						<p>
+							<b>Définition:</b>
+							Soit $G = (V, \Sigma, S, R)$ une grammaire. $G$ est dans la <strong>forme normale de Chomsky</strong> si
+							les <em>règles de réécriture</em> sont de la forme:
+							<ul>
+								<li>
+									$A \to BC$ pour $A, B, C \in V$ et $B \ne S$ et $C \ne S$
+								</li>
+								<li>
+									$A \to a$ pour $A \in V$, $a \in \Sigma$.
+								</li>
+								<li>
+									$S \to \lambda$ pour le <em>symbole de départ</em> $S$.
+								</li>
+							</ul>
+						</p>
+					</section>
+					<section>
+						<h2>Démonstration</h2>
+						<p>
+							Soit la machine de Turing $M_{A_{\text{GHC}}}$ qui décide $A_{\text{GHC}}$.
+						</p>
+						<p class="code">
+							$M_{A_{\text{GHC}}} = $ Avec $\langle G, w\rangle$
+							<ol class="code">
+								<li>
+									Convertir $G$ à une grammaire équivalente dans la forme normale de Chomsky 
+								</li>
+								<li>
+									Lister toutes les dérivations de $2n-1$ productions (ou de seulement une production si $w = \lambda$)
+								</li>
+								<li>
+									Si un des mots générés est $w$ alors $\mathtt{ACCEPTE}$ sinon $\mathtt{REJETTE}$.
+								</li>
+							</ol>
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>$E_{\text{GHC}}$</h2>
+						<br/>
+						<p>
+							$$E_{\text{GHC}} = \{\langle G \rangle \mid G \text{ est une GHC et } L(G) = \emptyset\}$$
+						</p>
+					</section>
+
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							$E_{\text{GHC}}$ est un langage décidable.
+						</p>
+					</section>
+					<section>
+						<h2>Démonstration</h2>
+						<p>
+							Soit la machine de Turing $M_{E_{\text{GHC}}}$ qui décide $E_{\text{GHC}}$.
+						</p>
+						<p class="code">
+							$M_{E_{\text{GHC}}} = $ Avec $\langle G \rangle$
+							<ol class="code">
+								<li>
+									Marquer tous les symboles terminaux de $G$.
+								</li>
+								<li>
+									Répéter jusqu'à ce qu'il n'y est plus de variables à marquer
+									<ol>
+										<li>
+											Marquer une variable $A$ tel que $G$ a une règle $A \to U_1 \cdots U_k$ et que les symboles $U_1, \dots, U_k$ sont tous marqués.
+										</li>
+									</ol>
+								</li>
+								<li>
+									Si la variable initiale est marquée alors $\mathtt{ACCEPTE}$ sinon $\mathtt{REJETTE}$.
+								</li>
+							</ol>
+						</p>
+					</section>
+				</section>	
+
+				<section>
+					<section>
+						<h2>$EQ_{\text{GHC}}$</h2>
+						<br/>
+						<p>
+							$$EQ_{\text{GHC}} = \{\langle G, H \rangle \mid G \text{ et } H \text{ sont des GHC et } L(G) = L(H) \}$$
+						</p>
+					</section>
+
+					<section>
+						<h2>Problème</h2>
+						<p>
+							Les langages hors contexte ne sont pas fermés sur les opérations <em>complément</em> et <em>intersection</em>.
+						</p>
+					</section>
+				</section>	
+
+				<section>
+					<section>
+						<h2>Théorème</h2>
+						<p>Soit le langage $L$.</p>
+						<p>
+							$$L \text{ est hors contexte} \Rightarrow L \text{ est décidable}$$
+						</p>
+					</section>
+					<section>
+						<h2>Démonstration</h2>
+						<p>
+							$L$ est hors contexte si il exite une grammaire $G$ qui génère $L$.
+						</p>
+						<p>
+							Soit la machine de Turing $M_{G}$ qui décide $L(G)$.
+						</p>
+						<p class="code">
+							$M_{G} = $ Avec $\langle w \rangle$
+							<ol class="code">
+								<li>
+									Exécuter $M_{A_{\text{GHC}}}$ sur $\langle G, w \rangle$
+								</li>
+								<li>
+									Si $M_{A_{\text{GHC}}}$ accepte alors $\mathtt{ACCEPTE}$ sinon $\mathtt{REJETTE}$.
+								</li>
+							</ol>
+						</p>
+					</section>
+				</section>	
+
+				<section class="center" data-background="#007777">
+					<h1 class="title">Indécidabilité</h1>
+				</section>
+
+				<section>
+					<section>
+						<h2>$A_{\text{MT}}$</h2>
+						<br/>
+						<p>
+							$$A_{\text{MT}} = \{\langle M, w\rangle \mid M \text{ est une machine de Turing qui accepte } w\}$$
+						</p>
+						<p class="small3">
+							$\text{MT}$: machine de Turing
+						</p>
+					</section>
+
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							$A_{\text{TM}}$ est un langage <em>Turing-acceptable</em>.
+						</p>
+					</section>
+
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							$A_{\text{TM}}$ n'est pas un langage décidable.
+						</p>
+					</section>
+
+					<section>
+						<h2>Corrolaire</h2>
+						<p>
+							$\overline{A_{\text{TM}}}$ n'est pas un langage <em>Turing-acceptable</em>.
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>$HALT_{\text{MT}}$</h2>
+						<br/>
+						<p>
+							$$HALT_{\text{MT}} = \{\langle M, w \rangle \mid M \text{ est une MT et } M \text{ s'arrête sur } w \}$$
+						</p>
+					</section>
+
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							$HALT_{\text{MT}}$ n'est pas un langage décidable.
+						</p>
+					</section>
+				</section>		
+
+				<!-- **************************************************************************************** -->
+
+				<section class="center" data-background="#007777">
+					<h1 class="title">Réduction</h1>
+				</section>
+
+				<section>
+					<h2>Réduction</h2>
+					<p>
+						Une <strong>réduction</strong> est un algorithme transformant un problème en un autre.
+					</p>
+					<p>
+						Si un problème $A$ peut être réduit à (i.e. transformé en) un problème $B$, et que le problème $A$ est difficile alors le problème $B$ est au moins aussi difficile. On écrit alors $A \le_m B$.
+					</p>
+				</section>
+
+				<section>
+					<h2>Réduction</h2>
+					<p>
+						Un language $L$ se réduit au language $K$, noté $L \le_m K$ si il existe $f: \Sigma^* \to \Sigma^*$ une fonction calculable tel que
+					</p>
+					<p>
+						$$\forall_{w \in \Sigma^*} \quad w \in L \ \Leftrightarrow \ f(w) \in K$$
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							Si $A \le_m B$ et $B$ est décidable, alors $A$ est décidable.
+						</p>
+					</section>
+
+					<section>
+						<h2>Corrolaire</h2>
+						<p>
+							Si $A \le_m B$ et $A$ n'est pas décidable, alors $B$ n'est pas décidable.
+						</p>
+					</section>					
+				</section>
+
+				<section>
+					<h2>Théorème</h2>
+					<p>
+						$A_{\text{MT}} \le_m HALT_{\text{MT}}$
+					</p>
+					<p>
+						Ceci implique que $HALT_{\text{MT}}$ n'est pas un langage décidable.
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h2>$E_{\text{MT}}$</h2>
+						<br/>
+						<p>
+							$$E_{\text{MT}} = \{\langle M \rangle \mid M \text{ est une MT et } L(M) = \emptyset \}$$
+						</p>
+					</section>
+
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							$A_{\text{MT}} \le_m E_{\text{MT}}$
+						</p>
+						<p>
+							Ceci implique que $E_{\text{MT}}$ n'est pas un langage décidable.
+						</p>
+					</section>
+				</section>	
+
+				<section>
+					<section>
+						<h2>$REGULIER_{\text{MT}}$</h2>
+						<br/>
+						<p>
+							$$REGULIER_{\text{MT}} = \{\langle M \rangle \mid M \text{ est une MT et } L(M) \text{ est régulier} \}$$
+						</p>
+					</section>
+
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							$A_{\text{MT}} \le_m REGULIER_{\text{MT}}$
+						</p>
+						<p>
+							Ceci implique que $REGULIER_{\text{MT}}$ n'est pas un langage décidable.
+						</p>
+					</section>
+				</section>	
+
+				<section>
+					<section>
+						<h2>$EQ_{\text{MT}}$</h2>
+						<br/>
+						<p>
+							$$EQ_{\text{MT}} = \{\langle M_1, M_2 \rangle \mid M_1 \text{ et } M_2 \text{ sont des MT et } L(M_1) = L(M_2) \}$$
+						</p>
+					</section>
+
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							$E_{\text{MT}} \le_m EQ_{\text{MT}}$
+						</p>
+						<p>
+							Ceci implique que $EQ_{\text{MT}}$ n'est pas un langage décidable.
+						</p>
+					</section>
+				</section>	
+
+				<section>
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							Si $A \le_m B$ et $B$ est <em>Turing-acceptable</em>, alors $A$ est <em>Turing-acceptable</em>.
+						</p>
+					</section>
+
+					<section>
+						<h2>Corrolaire</h2>
+						<p>
+							Si $A \le_m B$ et $A$ n'est pas <em>Turing-acceptable</em>, alors $B$ n'est pas <em>Turing-acceptable</em>.
+						</p>
+					</section>
+
+					<section>
+						<h2>Corrolaire</h2>
+						<p>
+							Si $A \le_m B$ et $\overline{A}$ n'est pas <em>Turing-acceptable</em>, alors $\overline{B}$ n'est pas <em>Turing-acceptable</em>.
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>co-Turing-acceptable</h2>
+						<p>
+							<b>Définition:</b>
+							Un langage $L$ est dit <strong>co-Turing-acceptable</strong> si $\overline{L}$ est <em>Turing-acceptable</em>.
+						</p>
+					</section>
+					<section>
+						<h2>Example</h2>
+						<p>
+							$A_{\text{MT}}$ est <em>Turing-acceptable</em>.
+						</p>
+						<p>
+							$A_{\text{MT}}$ n'est pas <em>co-Turing-acceptable</em>.
+						</p>
+					</section>
+					<section>
+						<h2>Corrolaire</h2>
+						<p>
+							Si $A \le_m B$ et $A$ n'est pas <em>co-Turing-acceptable</em>, alors $B$ n'est pas <em>co-Turing-acceptable</em>.
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							$E_{\text{MT}}$ n'est ni <em>Turing-acceptable</em> ni <em>co-Turing-acceptable</em>
+						</p>
+					</section>
+					<section>
+						<h2>Démonstration</h2>
+						<p>
+							$$A_{\text{MT}} \le_m EQ_{\text{MT}} \ \Rightarrow \ EQ_{\text{MT}} \text{ n'est pas co-Turing-acceptable}$$
+						</p>
+						<p>
+							$$A_{\text{MT}} \le_m \overline{EQ_{\text{MT}}} \ \Rightarrow \ EQ_{\text{MT}} \text{ n'est pas Turing-acceptable}$$
+						</p>
+					</section>
+
+				</section>
+
+				<!-- **************************************************************************************** -->
+
+				<section class="center" data-background="#007777">
+					<h1 class="title">...</h1>
+				</section>
+
+				<section>
+					<h2>Exercice</h2>
+					<p>
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h2></h2>
+						<p>
+						</p>
+					</section>
+
+					<section>
+						<h2>Exemple</h2>
+						<p>
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2></h2>
+						<p>
+						</p>
+					</section>
+
+					<section>
+						<h2>Exemple</h2>
+						<p>
+						</p>
+					</section>
+				</section>
+
+				<section class="center" data-background="#007777">
+					<h1 class="title">Décidabilité</h1>
+				</section>
+
+				<section>
+					<section>
+						<h2>Machine de Turing</h2>
+						<p>
+							<img src="img/Turing_machine.jpg">
+						</p>
+					</section>
+					<section>
+						<h2>Différences avec les<br/> automates finis</h2>
+						<ul>
+							<li>La tête peut se déplacer dans les deux sens.</li>
+							<li>C’est une tête de lecture/écriture.</li>
+							<li>Le ruban est infini.</li>
+							<li>Il y a deux états finaux, qui sont des états d’arrêt (aussitôt que la machine en atteint un, elle s’arrête).
+						</ul>
+					</section>
+					<section>
+						<h2>À chaque étape</h2>
+						<ol>
+							<li>lit le symbole sur le ruban</li>
+							<li>fait une transition d’état</li>
+							<li>écri un symbole sur le ruban</li>
+							<li>déplace la tête vers la droite ou vers la gauche</li>
+						</ol>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Machine de Turing</h2>
+						<p>
+							<b>Définition:</b>
+							Une <strong>machine de Turing</strong> consiste en un 7-tuple de la forme $(S, \Sigma, \Gamma, \delta, \iota, s_{\text{accepte}}, s_{\text{rejete}})$ où
+							<ul>
+								<li>$S$ est un <em>ensemble fini d’états</em>.</li>
+								<li>$\Sigma$ est <em>l’alphabet</em> d'entré.</li>
+								<li>$\Gamma$ est l’alphabet du ruban tel que $␣ \in \Gamma$ et $\Sigma \subseteq \Gamma$.</li>
+								<li>$\delta : S \times \Gamma \to S \times \Gamma \times \{L,R\}$ est la <em>fonction de transition</em>.</li>
+								<li>$\iota \in S$ est l’<em>état initial</em>.</li>
+								<li>$s_{\text{accepte}} \in S$ est l’<em>état final acceptant</em>.</li>
+								<li>$s_{\text{rejete}} \in S$ est l’<em>état final rejetant</em> et $s_{\text{accepte}} \neq s_{\text{rejete}}$</li>
+							</ul>
+						</p>
+					</section>
+					<section>
+						<h2>Remarque</h2>
+						<ul>
+							<li>␣ représente une case inoccupée du ruban: initialement, toutes les cases autres que celles qui contiennent la séquence d’entrée contiennent un ␣.</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Example</h2>
+						<p>
+							Donner une machine de Turing $M$ qui accepte le langage $\{ 0^{2^n} \mid n \ge 0 \}$.
+						</p>
+					</section>
+					<section>
+						<h2>Algorithme</h2>
+						<p>
+							Sur l'entré $w$
+							<ol>
+								<li>Déplacer la tête vers la droite jusqu'à la fin du mot en remplacant un $0$ sur deux par un $X$.</li>
+								<li>Si dans l'épape 1, le ruban ne contient qu'un seul $0$ accepter $w$</li>	
+								<li>Si dans l'épape 1, le ruban ne contient un nombre impaire de $0$ (plus qu'un) alors rejetter $w$</li>	
+								<li>Déplacer la tête vers la gauche jusqu'au début du mot.</li>
+								<li>retourner l'étape 1.</li>
+							</ol>
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<h2>Example</h2>
+					<p>
+						Donner une machine de Turing $M$ qui accepte le langage $\{ w\#w \mid w \in \{0,1\}^* \}$.
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h2>Configuration</h2>
+						<p>
+							<b>Définition:</b>
+							Une <strong>configuration</strong> d’une machine de Turing est donnée par 
+							<ul>
+								<li>son état</li>
+								<li>le contenu de son ruban</li>
+								<li>la position de sa tête de lecture</li>
+							</ul>
+						</p>
+					</section>
+					<section>
+						<h2>Notation</h2>
+						<p>
+							La description du ruban se fait en donnant la séquence de symboles du ruban en commençant par la première case. 
+						</p>
+						<p>
+							Le symbole sous la tête de lecture/écriture est souligné. 
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<h2>Arrêt du machine de Turing</h2>
+					<p>
+						Une machine de turing peut:
+						<ul>
+							<li>se rendre à un état final et arrêter</li>
+							<li>boucler indéfiniment</li>
+						</ul>
+					</p>
+				</section>
+
+				<section>
+					<h2>Turing-acceptable</h2>
+					<p>
+						<b>Définition:</b>
+						Un langage $L$ est dit <strong>Turing-acceptable</strong> (ou <em>récursivement énumérable</em>)s’il existe une machine de Turing qui accepte les mots de $L$.
+					</p>
+					<p>
+						Étant donnée une entrée $w$
+						<ul>
+							<li>Si $w \in L$ alors $M$ s’arrête et accepte $w$</li>
+							<li>Si $w \notin L$ alors $M$ s’arrête et rejette $w$ ou ne s’arrête pas</li>	
+						</ul>
+					</p>
+				</section>
+
+				<section>
+					<h2>Turing-décidable</h2>
+					<p>
+						<b>Définition:</b>
+						Un langage $L$ est dit <strong>Turing-décidable</strong> (ou <em>décidable</em>)s’il existe une machine de Turing $M$ qui accepte les mots de $L$ et rejette les autres mots.
+					</p>
+					<p>
+						Étant donnée une entrée $w$
+						<ul>
+							<li>Si $w \in L$ alors $M$ s’arrête et accepte $w$</li>
+							<li>Si $w \notin L$ alors $M$ s’arrête et rejette $w$</li>	
+						</ul>
+					</p>
+				</section>
+
+				<section>
+					<h2>Remarque</h2>
+					<p>Par définition, tout les langages décidables sont également des langages Turing-acceptables.</p>
+				</section>
+
+				<section>
+					<h2>Théorème</h2>
+					<p>
+						Soit un le langage $L$. Si $L$ et $\overline{L}$ sont <em>Turing-acceptable</em>, alors $L$ est <em>Turing-décidable</em>.
+					</p>
+				</section>
+
+				<section>
+					<h2>Variantes de<br/> machine de Turing</h2>
+					<p>
+						Il existe plusieurs variantes sur les machines de Turing:
+						<ul>
+							<li>Machine de Turing à plusieurs rubans</li>
+							<li>Machine de Turing à acceptation par message</li>
+							<li>Machine de Turing non déterministe</li>
+						</ul>
+					</p>
+				</section>
+				
+				<section>
+					<h2>Machine de Turing<br/> universelle</h2>
+					<p>
+						Une machine de Turing universelle est une machine de Turing qui peut simuler n'importe quelle machine de Turing sur n'importe quelle donnée d'entrée. La machine universelle réalise cela en lisant de son propre ruban la description de la machine à simuler et la donnée d'entrée de celle-ci.
+					</p>
+					<p>
+						Les plus petites machines de Turing universelles connues ont les tailles suivantes : 2×18, 3×10, 4×6, 5×5, 7×4, 10×3, 22×2.
+					</p>
+				</section>
+
+				<section>
+					<h2>Simulateurs</h2>
+					<ul>
+						<li><a href="http://morphett.info/turing/turing.html" target="_blank">http://morphett.info/turing/turing.html</a></li>
+						<li><a href="http://db.ing.puc.cl/turingmachine/" target="_blank">http://db.ing.puc.cl/turingmachine/</a></li>
+					</ul>
+				</section>
+
+				<section>
+   					<iframe src="//player.vimeo.com/video/44202270" width="1000" height="410" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></p>
+				</section>
+
+				<section>
+   					<iframe width="960" height="720" src="//www.youtube.com/embed/cYw2ewoO6c4" frameborder="0" allowfullscreen></iframe>
+				</section>
+
+				<!-- **************************************************************************************** -->
+
+				<section class="center" data-background="#007777">
+					<h1 class="title">La thèse de Church-Turing</h1>
+				</section>
+
+				<section>
+					<h2>Qu’est-ce qu’un algorithme?</h2>
+					<ul>
+						<li>
+							Quelque chose qui peut être programmé. (Mais que veut dire “programmer”?)
+						</li>
+						<li>
+							Un ensemble fini d’instructions permettant d’effectuer une tâche donnée.
+						</li>
+						<li>
+							Une recette finie que l’on peut suivre pour obtenir en temps fini une réponse à une question donnée.
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Quelques algorithmes</h2>
+					<ul>
+						<li>
+							Comment additionner/multiplier deux entiers avec plus que 1 chiffre.
+						</li>
+						<li>
+							Algorithme d’Euclide (300 av. J.C) pour calculer le plus grand diviseur commun de deux entiers.
+						</li>
+						<li>
+							Algorithme pour déterminer si une équation $ax^2 + bx + c = 0$ admet une solution.
+						</li>
+						<li>
+							Historiquement, les algorithmes ont d’abord été des façons systématiques d’effectuer une série de calculs afin de résoudre une question mathématique.
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<section>
+						<h2>Propriétés</h2>
+						<p>
+							Une notion formelle d’algorithme devrait répondre aux critères suivants:
+							<ul>
+								<li>
+									La description d’un algorithme est finie. On peut également désirer que cette description soit une liste d’instructions.
+								</li>
+								<li>
+									Chaque étape d’exécution peut être effectuée en temps fini.
+								</li>
+								<li>
+									Un algorithme reçoit une entrée finie et retourne une réponse de longueur finie.
+								</li>
+								<li>
+									L’exécution d’un algorithme se termine toujours après un nombre fini d’étapes.
+								</li>
+							</ul>
+						</p>
+					</section>
+					<section>
+						<h2>Propriétés</h2>
+						<p>
+							Une notion formelle d’algorithme devrait répondre aux critères suivants:
+							<ul>
+								<li>
+									L'algorithme peut en principe être suivi par un humain avec seulement du papier et un crayon
+								</li>
+								<li>
+									L'exécution de l'algorithme ne requiert pas d'intelligence de l'humain sauf celle qui est nécessaire pour comprendre et exécuter les instructions.
+								</li>
+							</ul>
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<h2>La thèse de Church-Turing</h2>
+					<p>
+						Les règles formelles de calcul (machines de Turing, le λ-calcul, les fonctions récursives...) <em>formalisent</em> correctement la notion d'algorithme.
+					</p>
+				</section>
+
+				<section>
+					<h2>Turing-complet</h2>
+					<p>
+						Un langage informatique est dit <strong>Turing-complet</strong> s'il permet de représenter toutes les fonctions calculables au sens de Turing et Church.
+					</p>
+					<p>
+						Dans un tel langage, il est possible de programmer n'importe quelle machine de Turing, mais également tout ce que l'on peut programmer dans une machine de Turing. 
+					</p>
+				</section>
+
+				<section>
+					<h2>Turing-complet</h2>
+					<p>
+						La plus part des langages de programation sont <em>Turing-complet</em>: C, Pascal, Java, Smalltalk, Lisp, Haskell, Prolog.
+					</p>
+					<p>
+						D'autre système sont aussi <em>Turing-complet</em>:
+						<ul>
+							<li><a href="http://fr.wikipedia.org/wiki/Jeu_de_la_vie" target="_blank">Conway's Game of Life</a></li>
+							<li><a href="http://en.wikipedia.org/wiki/Rule_110" target="_blank">Rule 110 cellular automaton (<a href="http://www.xanxys.net/ecax/" target="_blank">exemple 1</a></a> <a href="http://eli.fox-epste.in/rule110-full.html" target="_blank">exemple 2</a>)</li>
+							<li>C++ Template</li>
+							<li><a href="http://beza1e1.tuxen.de/articles/accidentally_turing_complete.html" target="_blank">et plusieurs autres...</a>
+						</ul>
+
+					</p>
+				</section>
+
+				<!-- **************************************************************************************** -->
+
+				<section class="center" data-background="#007777">
+					<h1 class="title">...</h1>
+				</section>
+
+				<section>
+					<h2>Exercice</h2>
+					<p>
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h2></h2>
+						<p>
+						</p>
+					</section>
+
+					<section>
+						<h2>Exemple</h2>
+						<p>
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2></h2>
+						<p>
+						</p>
+					</section>
+
+					<section>
+						<h2>Exemple</h2>
+						<p>
+						</p>
+					</section>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: 'ift', // available themes are in /css/theme
+				transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				//parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				//parallaxBackgroundSize: '2100px 900px',
+				slideNumber: true,
+
+				math: {
+        			mathjax: 'http://cdn.mathjax.org/mathjax/latest/MathJax.js',
+        			config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+    			},
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/math/math.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

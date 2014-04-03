@@ -111,6 +111,29 @@ body {
 /*********************************************
  * Definition list
  *********************************************/
+.reveal div.def
+{
+  float:left;
+  display: inline-block;
+  padding-right: 10px;
+}
+
+.reveal div.code,
+.reveal p.code,
+.reveal ol.code
+{
+  font-family: monospace;
+}
+
+.reveal ol.code
+{
+  padding-left: 100px;
+  font-family: monospace;
+}
+
+/*********************************************
+ * Definition list
+ *********************************************/
 
 .reveal dl {
  width:100%;
