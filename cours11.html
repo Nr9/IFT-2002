@@ -1,0 +1,920 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Informatique Théorique - Hiver 2014</title>
+
+		<meta name="description" content="Informatique Théorique - Hiver 2014">
+		<meta name="author" content="Julien Marcil">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/ift.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/<html5shiv class="j"></html5shiv>s"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section class="center">
+					<h2>IFT-2002</h2>
+					<h1>Informatique Théorique</h1>
+					<h4>H14 - cours 11</h4>
+					<br/>
+					<p>
+						<small>Julien Marcil - <a href="mailto:julien.marcil@ift.ulaval.ca">julien.marcil@ift.ulaval.ca</a></small>
+					</p>
+				</section>
+
+				<!--Revision -->
+
+				<section class="center" data-background="#007777">
+					<h1 class="title">Cours précédents</h1>
+				</section>
+
+				<section>
+					<h2>Machine de Turing</h2>
+					<p>
+						<b>Définition:</b>
+						Une <strong>machine de Turing</strong> consiste en un 7-tuple de la forme $(S, \Sigma, \Gamma, \delta, \iota, s_{\text{accepte}}, s_{\text{rejete}})$ où
+						<ul>
+							<li>$S$ est un <em>ensemble fini d’états</em>.</li>
+							<li>$\Sigma$ est <em>l’alphabet</em> d'entré.</li>
+							<li>$\Gamma$ est l’alphabet du ruban tel que $␣ \in \Gamma$ et $\Sigma \subseteq \Gamma$.</li>
+							<li>$\delta : S \times \Gamma \to S \times \Gamma \times \{L,R\}$ est la <em>fonction de transition</em>.</li>
+							<li>$\iota \in S$ est l’<em>état initial</em>.</li>
+							<li>$s_{\text{accepte}} \in S$ est l’<em>état final acceptant</em>.</li>
+							<li>$s_{\text{rejete}} \in S$ est l’<em>état final rejetant</em> et $s_{\text{accepte}} \neq s_{\text{rejete}}$</li>
+						</ul>
+					</p>
+				</section>
+
+				<section>
+					<h2>Machine de Turing<br/> non déterministe</h2>
+					<p>
+						<b>Définition:</b>
+						Une <strong>machine de Turing non déterministe</strong> consiste en un 7-tuple de la forme $(S, \Sigma, \Gamma, \delta, \iota, s_{\text{accepte}}, s_{\text{rejete}})$ où
+						<ul>
+							<li>$S$ est un <em>ensemble fini d’états</em>.</li>
+							<li>$\Sigma$ est <em>l’alphabet</em> d'entré.</li>
+							<li>$\Gamma$ est l’alphabet du ruban tel que $␣ \in \Gamma$ et $\Sigma \subseteq \Gamma$.</li>
+							<li>$\delta : S \times \Gamma \to \mathcal P(S \times \Gamma \times \{L,R\})$ est la <em>fonction de transition</em>.</li>
+							<li>$\iota \in S$ est l’<em>état initial</em>.</li>
+							<li>$s_{\text{accepte}} \in S$ est l’<em>état final acceptant</em>.</li>
+							<li>$s_{\text{rejete}} \in S$ est l’<em>état final rejetant</em> et $s_{\text{accepte}} \neq s_{\text{rejete}}$</li>
+						</ul>
+					</p>
+				</section>
+
+				<section>
+					<h2>Aujourd'hui</h2>
+					<ul>
+						<li>Complexité</li>
+						<li>P et NP</li>
+					</ul>
+				</section>
+
+				<!-- **************************************************************************************** -->
+
+				<section class="center" data-background="#007777">
+					<h1 class="title">Complexité</h1>
+				</section>
+
+				<section>
+					<section>
+						<h2>Temps de calcul</h2>
+						<p>
+							Soit $M$ une <em>machine de Turing</em> qui s’arrête sur toutes les entrées possibles.
+						</p>
+						<p>
+							Une deﬁnition naturelle du temps de calcul de $M$ sur le mot $w$ est le nombre de transitions avant l’arrêt de $M$.
+						</p>
+					</section>
+
+					<section>
+						<h2>Exemple</h2>
+						<p>
+							<b>Définition:</b>
+							Le <strong>temps de calcul</strong> de $M$ est la fonction
+						</p>
+						<p>
+							$$
+							\begin{aligned}
+								f : \mathbb N &amp; \to \mathbb N \\
+								    n &amp; \mapsto \max_{\lvert w \rvert = n}\{ \text{ temps de calcul de } M \text{ sur } w \}
+							\end{aligned}
+							$$
+						</p>
+						<p>
+							On dit que $M$ <em>fonctionne en temps</em> $f(n)$, ou que sa <em>complexité de temps</em> est $f(n)$.
+						</p>
+
+						<aside class="notes">
+        					Example: $A = \{0^k 1^k \mid k \ge 0\}$
+    					</aside>
+					</section>
+				</section>
+
+				<section>
+					<h2>Classe de complexité</h2>
+					<p>
+						On défini $\mathsf{TIME}(t(n))$, la <strong>classe de complexité des langages</strong>, comme
+					</p>
+					<p>
+						$$
+						\begin{aligned}
+						\{ L \mid &amp; L \text{ est un language décidé par une MT } \\
+						          &amp; \text{en temps } O(t(n)) \}
+						\end{aligned}
+						$$
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h2>La classe P</h2>
+						<p>
+							La classe de complexité <strong>$\mathsf{P}$</strong> est déﬁnie comme
+						</p>
+						<p>
+							$$
+							\bigcup_{k \ge 0} \mathsf{TIME}(n^k)
+							$$
+						</p>
+						<p>
+							La classe P correspond aux langages décidables en pratique en un temps raisonnable.
+						</p>
+					</section>
+					<section>
+						<h2>Remarque</h2>
+						<p>
+							La classe P est robuste par rapport à un changement raisonnable dans le modele de calcul: les MT avec un ruban, $k$ rubans, $k$ têtes de lecture/écriture, et plusieurs autres modèles déﬁnissent la même classe de langages P.
+						</p>
+					</section>
+					<section>
+						<h2>Exemples</h2>
+						<p>
+						Voici quelques problèmes dans P
+						</p>
+						<ul>
+							<li>
+								Décider si $A + B = C$ pour $A$, $B$ et $C$ des matrices d’entiers.
+							</li>
+							<li>
+								Décider si il existe un chemin entre deux sommets $s$ et $t$ dans un graphe $G$ dont le coût est moins de $c$.
+							</li>
+							<li>
+								Décider si une liste $l$ est en ordre lexicographique.
+							</li>
+							<li>
+								Décider si un nombre $n$ est premier.
+							</li>
+							<li>
+								Décider si un graphe $G$ est coloriable avec deux couleurs, de telle sorte que deux sommets adjacents ne seront jamais de la même couleur. 
+							</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Coloration de graphe</h2>
+						<p>
+							Un graphe $G$ est $k$-coloriable s’il est possible d’assigner à chaque sommet de $G$ une couleur choisie parmi $k$ couleurs données, de telle sorte qu’il n’existe aucune paire de sommets adjacents de la même couleur.
+						</p>
+					</section>
+
+					<section>
+						<h2>Exemple</h2>
+						<p>
+							Soit le langage $3\mathsf{-COL} = \{ \langle G \rangle \mid G \text { est un graphe } 3\text{-coloriable} \}$
+						</p>
+						<p>
+							Clairement $3\mathsf{-COL}$ est décidable.
+						</p>
+					</section>
+					<section data-background="img/g1.png" data-background-transition="zoom">
+					</section>
+					<section data-background="img/g2.png" data-background-transition="none">
+					</section>
+					<section data-background="img/g3.png" data-background-transition="zoom">
+					</section>
+					<section data-background="img/g4.png" data-background-transition="none">
+					</section>
+
+					<section>
+						<h2>Exemple</h2>
+						<p>
+							Est-ce que $3\mathsf{-COL} \in \mathsf{P}$ ? 
+						</p>
+						<p>
+							<img width='45%' src="img/g1.png"><img width='45%' src="img/g3.png">
+						</p>
+						<aside class="notes">
+        					Un algorithme qui décide 3-COL nécessite en pire cas l’examen de $3^s$ coloriages, où $s$ est le nombre de sommets.
+    					</aside>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Vériﬁcateur</h2>
+						<p>
+							<b>Définition:</b>
+							Un <strong>vériﬁcateur polynômial</strong> pour un langage $L$ est une machine de Turing $V$ tel que pour tout $w \in \Sigma^*$:
+						</p>
+						<ul>
+							<li>
+								si $w \in L$ alors il existe un mot $c$ tel que $\langle w, c \rangle \in L(V)$
+							</li>
+							<li>
+								si $w \notin L$ alors pour tout $c$ on a $\langle w, c \rangle \notin L(V)$
+							</li>
+						</ul>
+						<p>
+							le temps de calcul de $V$ sur $\langle w, c \rangle$ est polynômial en la taille de $w$.
+						</p>
+						<br/>
+						<p>
+							Un $c$ tel que $\langle w, c \rangle \in L(V)$ est appelé <em>certiﬁcat</em> ou <em>preuve</em> ou <em>temoin</em> de l’appartenance de $w$ au langage $L$.
+						</p>
+					</section>
+
+					<section>
+						<h2>La classe NP</h2>
+						<p>
+							La classe de complexité <strong>$\mathsf{NP}$</strong> est l’ensemble des langages qui possèdent un vériﬁcateur polynômial.
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Classe de complexité<br/> non déterministe</h2>
+						<p>
+							On défini $\mathsf{NTIME}(t(n))$, la <strong>classe de complexité non déterministe des langages</strong>, comme
+						</p>
+						<p>
+							$$
+							\begin{aligned}
+							\{ L \mid &amp; L \text{ est un language décidé par une MT } \\
+							          &amp; \text{non déterministe en temps } O(t(n)) \}
+							\end{aligned}
+							$$
+						</p>
+
+					</section>
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							$$
+							\mathsf{NP} = \bigcup_{k \ge 0} \mathsf{NTIME}(n^k)
+							$$
+						</p>
+					</section>
+				</section>
+
+				<!-- **************************************************************************************** -->
+				<!-- **************************************************************************************** -->
+
+				<section>
+					<section>
+						<h2>Exemples de langages dans NP</h2>
+						<p>
+							Voici quelques exemples de langages dans NP.
+						</p>
+					</section>
+
+					<section>
+						<h2>Graphe Hamiltonien</h2>
+						<p>
+							Un <strong>graphe hamiltonien</strong> est un graphe possédant au moins un cycle passant par tous les sommets une fois et une seule.
+						</p>
+						<br/>
+						<p>
+							<img src="img/HamiltonianPath.png">
+						</p>
+					</section>
+
+					<section>
+						<h2>HAMGRAPH</h2>
+						<p>
+							$$\{ \langle G \rangle \mid G \text{ est un graphe hamiltonien } \}$$
+						</p>
+						<br/>
+						<p>
+							$$\mathsf{HAMGRAPH} \in \mathsf{NP}$$
+						</p>
+					</section>
+
+					<section>
+						<h2>SUBSET-SUM</h2>
+						<br/>
+						<p>
+							$$
+
+							\begin{aligned}
+							\{ &amp;  \langle \{x_1, \dots, x_m\}, t \rangle \mid (x_1, \dots, x_m) \in \mathbb N^m \\  &amp; \exists_{\{y_1, \dots,y_k\} \subseteq \{x_1, \dots, x_m\}} 
+							 \sum y_i = t \}
+							\end{aligned}
+							$$
+						</p>
+						<br/>
+						<p>
+							$$\mathsf{SUBSET-SUM} \in \mathsf{NP}$$
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<h2>coNP</h2>
+					<p>
+						Remarquez que $\overline{\mathsf{HAMGRAPH}} \notin \mathsf{NP}$ et $\overline{\mathsf{SUBSET-SUM}} \notin \mathsf{NP}$.
+					</p>
+					<p>
+						On dit que $\overline{\mathsf{HAMGRAPH}}$ et $\overline{\mathsf{SUBSET-SUM}}$ sont dans $\mathsf{coNP}$
+					</p>
+				</section>
+
+				<!-- **************************************************************************************** -->
+
+				<section>
+					<section>
+						<h2>P vs NP</h2>
+						<ul>
+							<li>P: les langages <em>décidables</em> efﬁcacement.</li>
+							<li>NP: les langages <em>vériﬁables</em> efﬁcacement.</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>P = NP ?</h2>
+						<p>
+							Le <a href="http://www.claymath.org/" target="_blank">Clay Mathematical Institute</a> offre un <a href="http://www.claymath.org/millenium-problems/p-vs-np-problem" target="_blank">prix de un million de dollars</a> à quiconque répondra à la question: 
+						</p>
+						<p>							
+							$$
+							\mathsf{P} = \mathsf{NP}
+							$$
+						</p>
+					</section>
+				</section>				
+
+				<section>
+					<section>
+						<h2>La classe EXPTIME</h2>
+						<p>
+							La classe de complexité <strong>$\mathsf{EXPTIME}$</strong> est déﬁnie comme
+						</p>
+						<p>
+							$$
+							\bigcup_{k \ge 0} \mathsf{TIME}(2^{n^k})
+							$$
+						</p>
+					</section>
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							$$
+							\mathsf{NP} \subseteq \mathsf{EXPTIME}
+							$$
+						</p>
+						<p>
+							$$
+							\mathsf{coNP} \subseteq \mathsf{EXPTIME}
+							$$
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<h2>Réduction</h2>
+					<p>
+						Une <strong>réduction</strong> est un algorithme transformant un problème en un autre.
+					</p>
+					<p>
+						Si un problème $A$ peut être réduit à (i.e. transformé en) un problème $B$, et que le problème $A$ est difficile alors le problème $B$ est au moins aussi difficile. On écrit alors $A \le_m B$.
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h2>Réduction polynômiales</h2>
+						<p>
+							Un language $L$ se réduit au language $K$, noté $L \le_p K$ si il existe $f: \Sigma^* \to \Sigma^*$ une fonction calculable en temps polynômiales tel que
+						</p>
+						<p>
+							$$\forall_{w \in \Sigma^*} \quad w \in L \ \Leftrightarrow \ f(w) \in K$$
+						</p>
+					</section>
+
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							Si $A \le_p B$ et $B \in \mathsf{P}$, alors $A \in \mathsf{P}$.
+						</p>
+					</section>
+
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							Si $A \le_p B$ et $B \in \mathsf{NP}$, alors $A \in \mathsf{NP}$.
+						</p>
+					</section>
+
+
+				</section>
+
+				<section>
+					<section>
+						<h2>NP-difﬁcile</h2>
+						<p>
+							<b>Définition:</b>
+							Le langage $L$ est <strong>NP-difﬁcile</strong> si pour tout $L' \in \mathsf{NP}$ on a
+							$$
+							L' \le_p L
+							$$
+						</p>
+						<p>
+							un langage <em>NP-difﬁcile</em> est aussi difﬁcile à décider, ou plus difﬁcile, que n’importe quel langage de NP.
+						</p>
+					</section>
+
+					<section>
+						<h2>NP-complet</h2>
+						<p>
+							<b>Définition:</b>
+							Le langage $L$ est <strong>NP-complet</strong> si 
+						</p>
+						<ul>
+							<li>$L \in \mathsf{NP}$</li>
+							<li>$L$ est NP-difﬁcile</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Remaques</h2>
+						<p>
+							Soit $L$ un langage NP-complet.
+						</p>
+						<ul>
+							<li>
+								$L$ est au moins aussi difﬁcile à décider que n’importe quel langage de NP.
+							</li>
+							<li>
+								$L$ n’est pas trop difﬁcile car il est dans NP.
+							</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<h2>Théorème</h2>
+					<p>
+						Si $L$ est un langage NP-complet et $L \in \mathsf{P}$, alors 
+					</p>
+					<p>
+						$$\mathsf{P} = \mathsf{NP}$$
+					</p>
+					<br/>
+					<p>
+						Si l’on peut résoudre un seul problème NP-complet efﬁcacement, alors on aura résolu efﬁcacement tous les problèmes de NP.
+					</p>
+				</section>
+
+				<section>
+					<h2>Corollaire</h2>
+					<p>
+						Si $A \le_p B$ et $A \in$ NP-complet et $B \in $ NP, alors $B$ est NP-complet.
+					</p>
+					<br/>
+					<p>
+						Pour montrer qu'un problème $B$ est NP-complet il faut réduire un problème $A$ NP-complet à ce problème. 
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h2>Théorème de Cook-Levin</h2>
+						<br/>
+						<p>
+							$\mathsf{SAT}$ est NP-complet
+						</p>
+					</section>
+					<section>
+						<h2>SAT</h2>
+						<p>
+							$$
+							\begin{aligned}
+							\mathsf{SAT} = \{⟨φ⟩\mid &amp; φ \text{ est une expression booléenne } \\
+							&amp; \text{satisfaisable} \}
+							\end{aligned}
+							$$
+						</p>
+					</section>		
+					<section>
+						<h2>Exemple</h2>
+						<p>
+							$$φ = (\overline{x}∧y) ∨ (x∧\overline{z})$$
+						</p>
+						<p class="fragment">
+							$$
+							\begin{aligned}
+							x  &amp; = 0 \\
+							y  &amp; = 1 \\
+							z  &amp; = 0
+							\end{aligned}
+							$$
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Forme normale conjonctive</h2>
+						<p>
+							Un <strong>terme</strong> est soit une variable booléenne ou la négation d’une variable booléenne.
+						</p>
+						<p>
+							Une <strong>clause</strong> est une somme booléenne de termes.
+						</p>
+						<p>
+							Une expression booléenne est en <strong>forme normale conjonctive (FNC)</strong> si il s’agit d’un produit booléen de clauses.
+						</p>
+					</section>
+
+					<section>
+						<h2>Exemple</h2>
+						<p>
+							L’expression booleenne suivante est en FNC
+						</p>
+						<p>
+							$$(x_1 ∨ \overline{x_2} ∨ \overline{x_3} ∨ x_4) ∧ (x_3 ∨ \overline{x_5} ∨ x_6) ∧ (x_3 ∨ \overline{x_6})$$
+						</p>
+					</section>
+
+					<section>
+						<h2>3-FNC</h2>
+						<p>
+							Une expression booléenne est en <strong>3-FNC</strong> si elle est en FNC et si chaque clause est une somme booléenne d’exactement 3 termes qui comprennent 3 variables distinctes.
+						</p>
+					</section>
+
+					<section>
+						<h2>Exemple</h2>
+						<p>
+							$$(x_1 ∨ \overline{x_2} ∨ \overline{x_3}) ∧ (x_3 ∨ \overline{x_5} ∨ x_6) ∧ (x_3 ∨ \overline{x_6} ∨ x_4)$$
+						</p>
+					</section>
+
+					<section>
+						<h2>3SAT</h2>
+						<p>
+							$$
+							\begin{aligned}
+							\{⟨φ⟩\mid &amp; φ \text{ est une expression booléenne } \\
+							&amp; \text{en } 3\mathsf{-FNC} \text{ satisfaisable} \}
+							\end{aligned}
+							$$
+						</p>
+					</section>
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							3SAT est NP-complet 
+						</p>
+					</section>
+					<section>
+						<h2>Preuve</h2>
+						<ul>
+							<li>3SAT $\in$ NP</li>
+							<li>SAT $\le_p$ 3SAT</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Clique</h2>
+						<p>
+							Une <strong>clique</strong> d'un graphe est un sous-ensemble des sommets de ce graphe dont le sous-graphe est complet, c'est-à-dire que deux sommets quelconques de la clique sont toujours adjacents.
+						</p>
+					</section>
+
+					<section>
+						<h2>Exemple</h2>
+						<p>
+							<img src="img/g4.png">
+						</p>
+					</section>
+
+					<section>
+						<h2>CLIQUE</h2>
+						<p>
+							$$
+							\begin{aligned}
+							\{ \langle G, k \rangle \mid &amp; G \text{ est un graphe qui contient} \\ 
+							 &amp; \text{un sous-graphe complet de taille } k \}
+							\end{aligned}
+							$$
+						</p>
+					</section>
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							CLIQUE est NP-complet 
+						</p>
+					</section>
+					<section>
+						<h2>Preuve</h2>
+						<ul>
+							<li>CLIQUE $\in$ NP</li>
+							<li>3SAT $\le_p$ CLIQUE</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<h2>langages NP-complets</h2>
+					<p>
+						De nombreux problème ont été démontrer comme NP-complet
+					</p>
+					<p>
+						<a href="http://fr.wikipedia.org/wiki/Liste_de_probl%C3%A8mes_NP-complets" target="_blank">http://fr.wikipedia.org/wiki/Liste_de_problèmes_NP-complets</a>
+					</p>
+				</section>
+
+				<section class="center" data-background="#007777">
+					<h1 class="title">Complexité d’espace</h1>
+				</section>
+
+				<section>
+					<section>
+						<h2>Complexité d’espace</h2>
+						<p>
+							<ul>
+								<li>
+									l’espace logarithmique
+								</li>
+								<li>l’espace polynômial</li>
+								<li>l’espace exponentiel</li>
+							</ul>
+						</p>
+					</section>
+
+					<section>
+						<h2>Espace logarithmique</h2>
+						<p>
+							Pour deﬁnir un espace de calcul inférieur à la taille de l’input, nous considérons que l’input réside sur un ruban en lecture seule, et qu’un autre ruban est utilisé pour faire le calcul.
+						</p>
+					</section>
+
+					<section>
+						<h2>Espace de calcul</h2>
+						<p>
+							Soit $M$ une <em>machine de Turing</em> qui s’arrête sur toutes les entrées possibles.
+						</p>
+						<p>
+							Une deﬁnition naturelle de l'espace de calcul de $M$ sur le mot $w$ la position la plus à droite que la tête de lecture atteint.
+						</p>
+					</section>
+					<section>
+						<h2>Espace de calcul</h2>
+						<p>
+							<b>Définition:</b>
+							Le <strong>espace de calcul</strong> de $M$ est la fonction
+						</p>
+						<p>
+							$$
+							\begin{aligned}
+								f : \mathbb N &amp; \to \mathbb N \\
+								    n &amp; \mapsto \max_{\lvert w \rvert = n}\{ \text{ espace de calcul de } M \text{ sur } w \}
+							\end{aligned}
+							$$
+						</p>
+
+						<aside class="notes">
+        					Example: $A = \{0^k 1^k \mid k \ge 0\}$
+    					</aside>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Classe de complexité</h2>
+						<p>
+							On défini $\mathsf{SPACE}(t(n))$, la <strong>classe de complexité des langages</strong>, comme
+						</p>
+						<p>
+							$$
+							\begin{aligned}
+							\{ L \mid &amp; L \text{ est un language décidé par une MT } \\
+							          &amp; \text{en espace } O(t(n)) \}
+							\end{aligned}
+							$$
+						</p>
+					</section>
+					<section>
+						<h2>Classe de complexité</h2>
+						<p>
+							$$
+							\begin{aligned}
+							L = &amp; \mathsf{SPACE}(log n) \\
+							PSPACE =  &amp; \bigcup_{k \ge 0} \mathsf{SPACE}(n^k) \\
+							EXPSPACE =  &amp; \bigcup_{k \ge 0} \mathsf{SPACE}(2^{n^k}) \\
+							\end{aligned}
+							$$
+						</p>
+					</section>
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							$$\mathsf{TIME}(f(n)) \subseteq \mathsf{SPACE}(f(n))$$
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Classe de complexité<br/>non déterministe</h2>
+						<p>
+							On défini $\mathsf{NSPACE}(t(n))$, la <strong>classe de complexité des langages non déterministe</strong>, comme
+						</p>
+						<p>
+							$$
+							\begin{aligned}
+							\{ L \mid &amp; L \text{ est un language décidé par une MT } \\
+							          &amp; \text{non déterministe en espace } O(t(n)) \}
+							\end{aligned}
+							$$
+						</p>
+					</section>
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							Soit un fonction $f$ tel que $f(n) ≥ n$
+						</p>
+						<p>
+							$$\mathsf{NSPACE}(f(n)) \subseteq \mathsf{SPACE}(f^2(n))$$
+						</p>
+					</section>
+					<section>
+						<h2>Corollaire</h2>
+						<p>
+							$$\mathsf{PSPACE} = \mathsf{NPSPACE}$$
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Hiérarchie</h2>
+						<p>
+							P ⊆ NP ⊆ PSPACE = NPSPACE ⊆ EXPTIME
+						</p>
+					</section>
+					<section>
+						<h2>Question ouverte</h2>
+						<p>
+							PSPACE $\stackrel{?}{=}$ EXPTIME
+						</p>
+					</section>
+					<section>
+						<h2>Question ouverte</h2>
+						<p>
+							NP $\stackrel{?}{=}$ PSPACE
+						</p>
+					</section>
+					<section>
+						<h2>Zoo</h2>
+						<p>
+							<a href="https://complexityzoo.uwaterloo.ca/Complexity_Zoo" target="_blank">https://complexityzoo.uwaterloo.ca/Complexity_Zoo</a>
+						</p>
+						
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>PSPACE-difﬁcile</h2>
+						<p>
+							<b>Définition:</b>
+							Le langage $L$ est <strong>PSPACE-difﬁcile</strong> si pour tout $L' \in \mathsf{PSPACE}$ on a
+							$$
+							L' \le_p L
+							$$
+						</p>
+						<p>
+							un langage <em>PSPACE-difﬁcile</em> est aussi difﬁcile à décider, ou plus difﬁcile, que n’importe quel langage de PSPACE.
+						</p>
+					</section>
+					<section>
+						<h2>PSPACE-complet</h2>
+						<p>
+							<b>Définition:</b>
+							Le langage $L$ est <strong>PSPACE-complet</strong> si 
+						</p>
+						<ul>
+							<li>$L \in \mathsf{PSPACE}$</li>
+							<li>$L$ est PSPACE-difﬁcile</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Jeu de géographie</h2>
+						<p>
+						Soit un liste de pays: Argentine, Bolivie, Brésil, Canada, Chili, Colombie, Costa Rica, Cuba, Équateur, États-Unis, Guatemala, Haïti, Honduras, Mexique, Nicaragua, Panama, Paraguay, Pérou, République dominicaine, Salvador, Uruguay, Venezuela.
+						</p>
+						<p>
+							Jeux à deux joueurs: un joueur choisi un pays. L'aute joueur doit choisir un pays qui n'est pas encore été choisi tel que la première lettre du pays est la même que la dernière lettre du pays choisi précédemment. Un joueur gagne quand l'autre joueur ne peut plus nommer de pays. 
+						</p>
+					</section>
+
+					<section>
+						<h2>Jeu de géographie</h2>
+						<p>
+							Étant donner une liste de noms: $w_1, \dots, w_n$. Exist-il une statégie gagnante pour le pour le premier joueur?
+						</p>
+					</section>				
+
+					<section>
+						<img src="http://upload.wikimedia.org/wikipedia/en/thumb/1/13/Generalized_geography_1.svg/1000px-Generalized_geography_1.svg.png">
+					</section>
+
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							Jeu de géographie est PSPACE-complet
+						</p>
+					</section>
+				</section>
+
+				<!-- **************************************************************************************** -->
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: 'ift', // available themes are in /css/theme
+				transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				//parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				//parallaxBackgroundSize: '2100px 900px',
+				slideNumber: true,
+
+				math: {
+        			mathjax: 'http://cdn.mathjax.org/mathjax/latest/MathJax.js',
+        			config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+    			},
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/math/math.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
