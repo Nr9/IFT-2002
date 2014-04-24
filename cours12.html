@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Informatique Théorique - Hiver 2014</title>
+
+		<meta name="description" content="Informatique Théorique - Hiver 2014">
+		<meta name="author" content="Julien Marcil">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/ift.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+        <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/<html5shiv class="j"></html5shiv>s"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section class="center">
+					<h2>IFT-2002</h2>
+					<h1>Informatique Théorique</h1>
+					<h4>H14 - cours 12</h4>
+					<br/>
+					<p>
+						<small>Julien Marcil - <a href="mailto:julien.marcil@ift.ulaval.ca">julien.marcil@ift.ulaval.ca</a></small>
+					</p>
+				</section>
+
+				<!--Revision -->
+
+				<section class="center" data-background="#007777">
+					<h1 class="title">Révision</h1>
+				</section>
+
+				<section>
+					<h2>Langage régulier</h2>
+					<p>
+						<b>Définition:</b>
+						Un langage est dit <strong>régulier</strong> s’il existe un automate fini déterministe qui le reconnaît.
+					</p>
+					<p>
+						Une façon de montrer qu’un langage est régulier est de construire un automate qui reconnaît ce langage.
+					</p>
+				</section>
+
+				<section>
+					<h2>Lemme de pompage</h2>
+					<p>
+						Si $L$ est un langage régulier, alors il existe un entier $p \ge 1$ (appelé longueur de pompage) tel que pour tout mot $w \in L$ avec $\lvert w \rvert \ge p$, il existe des mots $x,y,z$ tels que $w = xyz$ et
+						<ol>
+							<li>$\lvert xy \rvert \le p$</li>
+							<li>$\lvert y \rvert > 0$</li>
+							<li>pour tout entier $i \ge 0$ on a $xy^iz \in L$</li>
+						</ol>
+					</p>
+				</section>
+
+				<section>
+					<h2>Preuve qu’un langage $L$ est non régulier </h2>
+					<p>
+						Pour prouver qu’un langage est non régulier, on fait une preuve par contradiction.
+						<ul>
+							<li class="fragment roll-in">
+								On suppose que $L$ est régulier. 
+							</li>
+							<li class="fragment roll-in">
+								Donc il existe $p$ la longueur de pompage de $L$.
+							</li>
+							<li class="fragment roll-in">
+								On <em>choisi</em> un mot $w \in L$, avec $\lvert w \rvert \ge p$ (qu'il ne sera pas possible de pomper).
+							</li>
+							<li class="fragment roll-in">
+								On montre qu'il n'existe pas de valeurs $x,y,z$ parce qu'en pompant $y$, on génère des mots $xy^iz$ qui ne sont pas dans $L$.
+							</li>
+						</ul>
+					</p>
+				</section>
+
+				<section>
+					<h2>Exemple</h2>
+					<p>
+						Soit $\Sigma = \{0,1\}$. Prouver que le langage $L=\{w \mid w \text{ contient le même nombre de 0 et de 1} \}$ n'est pas régulier.
+					</p>
+				</section>
+
+				<section>
+					<h2>Langage hors contexte</h2>
+					<p>
+						<b>Définition:</b>
+						Un langage est dit <strong>hors contexte</strong> (ou <em>non contextuelle</em>) s’il existe une grammaire hors contexte qui le génère.
+					</p>
+				</section>
+
+				<section>
+					<h2>Lemme de pompage</h2>
+					<p>
+						Si $L$ est un langage hors contexte, alors il existe un entier $p \ge 1$ (appelé longueur de pompage) tel que pour tout mot $w \in L$ avec $\lvert w \rvert \ge p$, il existe des mots $u,v,x,y,z$ tels que $w = uvxyz$ et
+						<ol>
+							<li>$\lvert vxy \rvert \le p$</li>
+							<li>$\lvert vy \rvert > 0$</li>
+							<li>pour tout entier $i \ge 0$ on a $uv^ixy^iz \in L$</li>
+						</ol>
+					</p>
+				</section>
+
+				<section>
+					<h2>Preuve qu’un langage $L$ est non hors contexte</h2>
+					<p>
+						Pour prouver qu’un langage est non hors contexte, on fait une preuve par contradiction.
+						<ul>
+							<li class="fragment roll-in">
+								On suppose que $L$ est hors contexte. 
+							</li>
+							<li class="fragment roll-in">
+								Donc il existe $p$ la longueur de pompage de $L$.
+							</li>
+							<li class="fragment roll-in">
+								On <em>choisi</em> un mot $w \in L$, avec $\lvert w \rvert \ge p$ (qu'il ne sera pas possible de pomper).
+							</li>
+							<li class="fragment roll-in">
+								On montre qu'il n'existe pas de valeurs $u,v,x,y,z$ parce qu'en pompant $v$ et $y$, on génère des mots $uv^ixy^iz$ qui ne sont pas dans $L$.
+							</li>
+						</ul>
+					</p>
+				</section>
+
+				<section>
+					<h2>Exemple</h2>
+					<p>
+						Soit $\Sigma = \{a,b,c\}$. Prouver que le langage $L=\{w \mid w \text{ contient le même nombre de } $a$, $b$ \text{ et } $c$ \}$ n'est pas régulier.
+					</p>
+				</section>
+
+				<section>
+					<h2>Arrêt d'une<br/> machine de Turing</h2>
+					<p>
+						Une machine de turing peut:
+						<ul>
+							<li>se rendre à un état final et arrêter</li>
+							<li>boucler indéfiniment</li>
+						</ul>
+					</p>
+				</section>
+
+				<section>
+					<h2>Turing-acceptable</h2>
+					<p>
+						<b>Définition:</b>
+						Un langage $L$ est dit <strong>Turing-acceptable</strong> (ou <em>récursivement énumérable</em>)s’il existe une machine de Turing qui accepte les mots de $L$.
+					</p>
+					<p>
+						Étant donnée une entrée $w$
+						<ul>
+							<li>Si $w \in L$ alors $M$ s’arrête et accepte $w$</li>
+							<li>Si $w \notin L$ alors $M$ s’arrête et rejette $w$ ou ne s’arrête pas</li>	
+						</ul>
+					</p>
+				</section>
+
+				<section>
+					<h2>Turing-décidable</h2>
+					<p>
+						<b>Définition:</b>
+						Un langage $L$ est dit <strong>Turing-décidable</strong> (ou <em>décidable</em>)s’il existe une machine de Turing $M$ qui accepte les mots de $L$ et rejette les autres mots.
+					</p>
+					<p>
+						Étant donnée une entrée $w$
+						<ul>
+							<li>Si $w \in L$ alors $M$ s’arrête et accepte $w$</li>
+							<li>Si $w \notin L$ alors $M$ s’arrête et rejette $w$</li>	
+						</ul>
+					</p>
+				</section>
+
+				<section>
+					<h2>Théorème</h2>
+					<p>
+						Soit un le langage $L$. Si $L$ est <em>Turing-décidable</em>, alors $\overline{L}$ est <em>Turing-décidable</em>.
+					</p>
+				</section>
+
+				<section>
+					<h2>Théorème</h2>
+					<p>
+						Soit un le langage $L$. Si $L$ et $\overline{L}$ sont <em>Turing-acceptable</em>, alors $L$ est <em>Turing-décidable</em>.
+					</p>
+				</section>
+
+				<section>
+					<h2>La thèse de Church-Turing</h2>
+					<p>
+						Les règles formelles de calcul (machines de Turing, le λ-calcul, les fonctions récursives...) <em>formalisent</em> correctement la notion d'algorithme.
+					</p>
+				</section>
+
+				<section>
+					<h2>Turing-complet</h2>
+					<p>
+						Un langage informatique est dit <strong>Turing-complet</strong> s'il permet de représenter toutes les fonctions calculables au sens de Turing et Church.
+					</p>
+					<p>
+						Dans un tel langage, il est possible de programmer n'importe quelle machine de Turing, mais également tout ce que l'on peut programmer dans une machine de Turing. 
+					</p>
+				</section>
+
+				<section>
+					<h2>Réduction</h2>
+					<p>
+						Un language $L$ se réduit au language $K$, noté $L \le_m K$ si il existe $f: \Sigma^* \to \Sigma^*$ une fonction calculable tel que
+					</p>
+					<p>
+						$$\forall_{w \in \Sigma^*} \quad w \in L \ \Leftrightarrow \ f(w) \in K$$
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							Si $A \le_m B$ et $B$ est décidable, alors $A$ est décidable.
+						</p>
+					</section>
+
+					<section>
+						<h2>Corrolaire</h2>
+						<p>
+							Si $A \le_m B$ et $A$ n'est pas décidable, alors $B$ n'est pas décidable.
+						</p>
+					</section>					
+				</section>
+
+				<section>
+					<section>
+						<h2>$E_{\text{AFD}}$</h2>
+						<br/>
+						<p>
+							$$E_{\text{AFD}} = \{\langle B \rangle \mid B \text{ est un AFD et } L(B) = \emptyset\}$$
+						</p>
+					</section>
+
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							$E_{\text{AFD}}$ est un langage décidable.
+						</p>
+					</section>
+				</section>	
+
+				<section>
+					<section>
+						<h2>$EQ_{\text{AFD}}$</h2>
+						<br/>
+						<p>
+							$$EQ_{\text{AFD}} = \{\langle A, B \rangle \mid A  \text{ et } B \text{ sont des AFD et } L(A) = L(B) \}$$
+						</p>
+					</section>
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							$EQ_{\text{AFD}}$ est un langage décidable.
+						</p>
+					</section>
+					<section>
+						<h2>Théorie des ensembles</h2>
+						<p>
+							Soit $C$ un $\text{AFD}$ tel que
+							$$L(C) = \big( L(A) \cap \overline{L(B)} \big) \cup \big( \overline{L(A)} \cap L(B) \big)$$
+						</p>
+						<p class="fragment">
+							$$L(A) = L(B) \ \Leftrightarrow \ L(C) = \emptyset$$
+						</p>
+					</section>
+				</section>	
+
+				<section>
+					<section>
+						<h2>$A_{\text{MT}}$</h2>
+						<br/>
+						<p>
+							$$A_{\text{MT}} = \{\langle M, w\rangle \mid M \text{ est une MT qui accepte } w\}$$
+						</p>
+						<p class="small3">
+							$\text{MT}$: machine de Turing
+						</p>
+					</section>
+
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							$A_{\text{TM}}$ est un langage <em>Turing-acceptable</em>.
+						</p>
+					</section>
+
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							$A_{\text{TM}}$ n'est pas un langage décidable.
+						</p>
+					</section>
+
+					<section>
+						<h2>Corrolaire</h2>
+						<p>
+							$\overline{A_{\text{TM}}}$ n'est pas un langage <em>Turing-acceptable</em>.
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>$HALT_{\text{MT}}$</h2>
+						<br/>
+						<p>
+							$$HALT_{\text{MT}} = \{\langle M, w \rangle \mid M \text{ est une MT et } M \text{ s'arrête sur } w \}$$
+						</p>
+					</section>
+
+					<section>
+						<h2>Théorème</h2>
+						<p>
+							$HALT_{\text{MT}}$ n'est pas un langage décidable.
+						</p>
+					</section>
+				</section>		
+
+
+				<section>
+					<h2>Addition</h2>
+					<p>
+						$\rrmacro{PLUS}{r_1, r_2} = r_1 + r_2$
+					</p>
+					<p>
+						$
+						\rrset{r_0}{r_1} \\
+						\rrrep{r_2}[ \\
+						\quad \rrinc{r_0} \\
+						]
+						$
+					</p>
+				</section>
+
+				<section>
+					<h2>Multiplication</h2>
+					<p>
+						$\rrmacro{MULT}{r_1, r_2} = r_1 \times r_2$
+					</p>
+					<p>
+						$
+						\rrrep{r_1}[ \\
+						\quad \rrrep{r_2}[ \\
+						\quad\quad \rrinc{r_0} \\
+						\quad ] \\
+						]
+						$
+					</p>
+				</section>
+
+				<section>
+					<h2>Exponentiation</h2>
+					<p>
+						$\rrmacro{EXP}{r_1, r_2} = r_1^{r_2}$
+					</p>
+					<p>
+						$
+						\rrset{r_0}{1} \\
+						\rrrep{r_2}[ \\
+						\quad \rrinvoke{r_0}{MULT}{r_0,r_1} \\
+						]
+						$
+					</p>
+				</section>
+
+				<section>
+					<h2>La classe P</h2>
+					<p>
+						La classe de complexité <strong>$\mathsf{P}$</strong> est déﬁnie comme
+					</p>
+					<p>
+						$$
+						\bigcup_{k \ge 0} \mathsf{TIME}(n^k)
+						$$
+					</p>
+					<p>
+						La classe P correspond aux langages décidables en pratique en un temps raisonnable.
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h2>Vériﬁcateur</h2>
+						<p>
+							<b>Définition:</b>
+							Un <strong>vériﬁcateur polynômial</strong> pour un langage $L$ est une machine de Turing $V$ tel que pour tout $w \in \Sigma^*$:
+						</p>
+						<ul>
+							<li>
+								si $w \in L$ alors il existe un mot $c$ tel que $\langle w, c \rangle \in L(V)$
+							</li>
+							<li>
+								si $w \notin L$ alors pour tout $c$ on a $\langle w, c \rangle \notin L(V)$
+							</li>
+						</ul>
+						<p>
+							le temps de calcul de $V$ sur $\langle w, c \rangle$ est polynômial en la taille de $w$.
+						</p>
+						<br/>
+						<p>
+							Un $c$ tel que $\langle w, c \rangle \in L(V)$ est appelé <em>certiﬁcat</em> ou <em>preuve</em> ou <em>temoin</em> de l’appartenance de $w$ au langage $L$.
+						</p>
+					</section>
+
+					<section>
+						<h2>La classe NP</h2>
+						<p>
+							La classe de complexité <strong>$\mathsf{NP}$</strong> est l’ensemble des langages qui possèdent un vériﬁcateur polynômial.
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<h2>P vs NP</h2>
+					<ul>
+						<li>P: les langages <em>décidables</em> efﬁcacement.</li>
+						<li>NP: les langages <em>vériﬁables</em> efﬁcacement.</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Réduction polynômiales</h2>
+					<p>
+						Un language $L$ se réduit au language $K$, noté $L \le_p K$ si il existe $f: \Sigma^* \to \Sigma^*$ une fonction calculable en temps polynômiales tel que
+					</p>
+					<p>
+						$$\forall_{w \in \Sigma^*} \quad w \in L \ \Leftrightarrow \ f(w) \in K$$
+					</p>
+				</section>
+
+				<section>
+					<h2>NP-difﬁcile</h2>
+					<p>
+						<b>Définition:</b>
+						Le langage $L$ est <strong>NP-difﬁcile</strong> si pour tout $L' \in \mathsf{NP}$ on a
+						$$
+						L' \le_p L
+						$$
+					</p>
+					<p>
+						un langage <em>NP-difﬁcile</em> est aussi difﬁcile à décider, ou plus difﬁcile, que n’importe quel langage de NP.
+					</p>
+				</section>
+
+				<section>
+					<h2>NP-complet</h2>
+					<p>
+						<b>Définition:</b>
+						Le langage $L$ est <strong>NP-complet</strong> si 
+					</p>
+					<ul>
+						<li>$L \in \mathsf{NP}$</li>
+						<li>$L$ est NP-difﬁcile</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Théorème</h2>
+					<p>
+						Si $L$ est un langage NP-complet et $L \in \mathsf{P}$, alors 
+					</p>
+					<p>
+						$$\mathsf{P} = \mathsf{NP}$$
+					</p>
+					<br/>
+					<p>
+						Si l’on peut résoudre un seul problème NP-complet efﬁcacement, alors on aura résolu efﬁcacement tous les problèmes de NP.
+					</p>
+				</section>
+
+				<!-- **************************************************************************************** -->
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: 'ift', // available themes are in /css/theme
+				transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				//parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				//parallaxBackgroundSize: '2100px 900px',
+				slideNumber: true,
+
+				math: {
+        			mathjax: 'http://cdn.mathjax.org/mathjax/latest/MathJax.js',
+        			config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+    			},
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/math/math.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
